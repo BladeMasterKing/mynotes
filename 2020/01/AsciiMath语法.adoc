@@ -1,0 +1,17 @@
+= AsciiMath语法
+BladeMasterKing <wangjiansheng@hotmail.com>
+v1.0,2020-01-15
+:hardbreaks:
+
+|===
+|语法|TEX语法|显示
+|+
+|
+|stem:[+]
+|-
+|
+|stem:[-]
+|*
+|
+|stem:[*]
+|===
