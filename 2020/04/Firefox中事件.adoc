@@ -1,0 +1,15 @@
+/**
+     * 处理Firefox中window.event不可用问题
+     */
+    if(typeof(window.event) == "undefined")
+    {
+        var $E = function(){
+            var c = $E.caller;
+            console.log(c.caller);
+            while(c.caller) {
+                c = c.caller;
+            }
+            return c.arguments[0]
+        };
+        window.__defineGetter__("event", $E);
+    }
