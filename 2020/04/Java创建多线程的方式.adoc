@@ -267,3 +267,11 @@ FutureTask<Integer> futureTask = new FutureTask<>(new C());
 是啊，那我们之前脱口而出的这些又是干嘛的呢？经过我们上面的分析，我想大家应该有看到，无论是继承Thread类还是实现Runnbale，又或者其实其他方式，好像目的就是为了去实现那个run方法（callable的不是），准确来说就是去执行我们真正要做的任务，也就是执行任务，也就是说啊，我们创建线程只有一种方式那就是new Thread的方式，但是你想啊，我们创建线程是让他干活的，那干啥活嘞，我们可以通过继承Thread类，然后重写run方法告诉线程该干嘛，又或者我们整一个Runnable，然后实现其中的run方法，然后把这个Runnable扔给Thread，告诉线程该干嘛，其他的也是同样的道理。
 那么我们是不是可以理解为：
 这些都是线程执行任务的方式，或者说是真正实现线程任务的方式，但是无论怎样，说是创建线程的方式，是不是有点不对呢？
+
+[source,bash]
+----
+#!bin/bash
+#extracting command line options as parameters
+
+.\bin\logstash -f .\conf\logstash_default.conf --path.data .\data\file-logstash-kafka-alarm -b 1000 -l .\logs\file-logstash-kafka-alarm --log.level error 2>&1 &
+----

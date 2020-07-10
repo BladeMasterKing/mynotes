@@ -1,0 +1,277 @@
+= OpenOffice开发者手册
+BladeMasterKing <wang_jiansheng@hotmail.com>
+v1.0 , 2020-07-06
+:doctype: book
+:encoding: utf-8
+:lang: zh_cn
+:toc: left
+:numbered:
+
+:toc:
+
+== 起步
+=== 简介
+[%heardbreaks]
+UNO(Universal Network Objects)是OpenOffice的基本组件，支持的编程语言是JAVA和C++
+
+==== 第一次接触
+[%heardbreaks]
+自从OpenOffice 2.0 开始，获得一个使用UNO功能和office功能的工作环境很简单。下面演示了如何编写和构建一个初始化UNO的小程序，这意味着从内部连接office，或者在必要时开启一个新的office进程，并且它告诉你它是否能够获取ofice service manager对象提供的office component context。
+
+代码：
+[source,java]
+----
+public class FirstUnoContact{
+    public static void main(String[] args){
+        try{
+            //获取远程office组件上下文
+            com.sun.star.uno.XComponentContext xContext = com.sun.star.comp.helper.Bootstrap.bootstrap();
+            System.out.println("Connected to a running office ...");
+            com.sun.star.lang.XMultiComponentFactory xMCF = xContext.getServiceManager();
+            String available = (xMCF != null ? "available" : "not available");
+            System.outprintln("remote ServiceManager is" + available);
+        } catch(java.lang.Exception e){
+            e.printStackTrace();
+        } finally {
+            System.exit(0);
+        }
+    }
+}
+----
+
+==== Service Managers
+[%heardbreaks]
+UNO服务管理器，可以被认为是创建服务的工厂。目前，将服务看作UNO对象就足够了，这些对象可用于执行特定的任务。稍后，我们将为术语服务给出更精确的定义。例如，以下服务是可用的
+
+* com.sun.star.frame.Desktop + 
+维护加载的文档：用于加载文档，获取当前文档，并访问所有加载的文档
+* com.sun.star.configuration.ConfigurationProvider + 
+生产访问OpenOffice的配置，在软件 Tools > Options对话框的配置
+* com.sun.star.sdb.DatabaseContext + 
+保存在OpenOffice中注册的数据库
+* com.sun.star.system.SystemShellExecute
+执行在当前平台注册的应用注册的系统命令或文档
+* com.sun.star.text.GlobalSettings
+管理文本文档的全局视图和打印设置
+
+
+服务总是有一个组件上下文，包含创建服务的服务管理器和其他用于服务的数据。
+_FirstUnoContact_ 类文件被认为是一个OpenOffice进程的客户端，在这方面OpenOffice是服务端。服务端有自己的组件上下文和服务管理器，这些允许客户端程序访问来使用 _office_ 功能，客户端程序初始化UNO并从OpenOffice进程得到组件上下文。在内部，初始化流程创建本地服务管理器，建立一个运行OpenOffice进程(如果有必要将启动一个新的进程)的管道连接并返回远程组件上下文。第一步，这是唯一需要了解的内容。_com.sun.star.comp.helper.Bootstrap.bootstrap()_ 方法初始化UNO并返回一个运行的OpenOffice进程的远程组件上下文(RemoteComponentContext)，你可以发现关于引导UNO的更多细节，在UNO概念中，不同连接类型的机会以及如何建立到UNO服务器进程的连接。
+
+在第一步初始化之后，可以调用 _com.sun.star.uno.XComponentContext:getServiceManager()_ 从组件上下文来获取远程服务管理器，提供通过API来访问office 的功能。
+
+==== 失败的连接
+远程连接在以下条件下可能会失败： 
+
+* 客户端程序应该能检测到错误。例如有时网桥可能不可用，连接到office、执行某个任务然后退出的简单客户端应该停止工作，并在出现错误时通知用户。 
+* 需要长时间运行的客户端不应该假设对初始对象的引用在客户机的整个运行时都是有效的。即使因为某种原因客户端连接中断，也应该在不久后恢复。当连接失败时，一个健壮的、长时间运行的客户端应该停止当前的工作，通知用户连接不可用，并释放对远程进程的引用。当用户尝试重复最后一个操作时，客户端应该尝试重新构建连接，不要因为连接暂时不可用而强迫用户重新启动程序。
+
+当网桥不可用并尝试访问时，客户端连接抛出异常(com.sun.star.lang.DisposedException)，每当在程序中访问远程时，以将远程引用设置为null并相应地通知用户这样的方式捕获此异常。如果您的客户端被设计为运行较长时间，那么当您发现新的远程引用为空时，请做好获取这些引用的准备。
+
+处理连接丢失的更复杂的方法是在底层桥接对象上注册侦听器。在章节UNO进程间通信中展示了怎样写连接感知的客户端。
+
+
+=== 如何在OpenOffice中获取对象
+____
+我们上下文中的对象是一个软件工件，它具有您可以调用的方法。对象需要使用OpenOffice.org做一些事情。但是你从哪里得到它们呢?
+____
+
+==== 新建对象
+通常，新建对象或首次访问必要的对象，由OpenOffice的服务管理器来提供。在 _FirstLoadComponent_ 实例中，远程服务管理器创建了远程 _Desktop_ 对象用来处理应用窗口和加载文档。
+[source,java]
+----
+Object desktop = xRemoteServiceManager.createInstanceWithContext(
+"com.sun.star.frame.Desktop", xRemoteContext);
+----
+
+
+==== 文档对象
+文档对象代表文件已经使用OpenOffice打开，由 _Desktop_ 对象创建，其 _loadComponentFromURL()_ 方法可以实现这个目标。
+
+==== 其他对象提供的对象
+对象可以分发其他对象，有两个案例：
+
+* 可以通过OpenOffice API中的get方法获得，被设计为提供该特性的对象不可分割的一部分的特性，从get方法获取对象是很常见的。例如， _getSheets()_ 是每个Calc文档必须的 ，_getText()_ 对于Writer文档是必须的，_getDrawpages()_ 对于每个Draw文档是必须的。加载文档后，使用这些方法获取相应文档的Sheets、Text和Drawpages对象。特定于对象的get方法是获取对象的一项重要技术。
+* 对于一个对象的体系结构来说，不被认为是不可或缺的特性可以通过一组通用的方法来访问。在OpenOffice中，这些特性被叫做属性，并使用了泛型方法，例如 _getPropertyValue(String propertyName)_ 方法来访问他们。在某些情况下，这样的非整体特性作为对象来提供，因此，getPropertyValue()方法可以是对象的另一个来源。例如，电子表格的页面样式有 _RightPageHeaderContent_ 和 _LeftPageHeaderContent_ 属性，它们包含电子表格文档的页面标题部分的对象。通用的 _getPropertyValue()_ 方法有时可以提供你需要的对象。
+
+
+==== 对象集合
+[%hardbreaks]
+对象可以是一组类似对象中的元素，在集合中，要访问一个对象，你需要知道如何从集合中获取特定元素。OpenOffice的API允许四种方式在集合中提供元素。前三种方式是具有元素访问方法的对象，允许通过名称、索引或枚举进行访问。第四种方法是一个没有访问方法，但可以作为数组直接使用的元素序列。怎样使用这些元素集合稍后讨论。
+对象的设计者根据对象的特殊条件，决定提供哪些机会，例如它如何远程执行，或者哪些访问方法最好与实现一起工作。
+
+=== 使用对象
+
+使用OpenOffice的API对象包含以下内容：
+
+* 首先，我们将学习UNO对象、接口、服务、特性和属性的概念，并且了解UNO的使用方法。
+* 然后，我们将首次使用OpenOffice.org文档，并给出OpenOffice.org API中最常见类型的用法提示。
+* 最后，我们将介绍一些公共接口，这些接口允许您跨所有OpenOffice文档类型使用文本、表和绘图。
+
+==== 对象、接口、服务
+[%hardbreaks]
+*对象*
+在UNO中，对象是一种软件构件，它具有可以调用的方法和可以获取和设置的属性。对象提供的方法和属性通过它所支持的接口集合指定。
+*接口*
+接口指定一组属性和方法，它们共同定义对象的一个切面。例如， _com.sun.star.resource.XResourceBundle_ 接口指定了 _Parent_ 属性， _getLocale()_ 和 _getDirectElement()_ 方法。
+[source,java]
+----
+module com { module sun { module star { module resource { interface
+XResourceBundle: com::sun::star::container::XNameAccess {
+    [attribute] XResourceBundle Parent;
+    com::sun::star::lang::Locale getLocale();
+    any getDirectElement([in] string key);
+};
+}; }; }; };
+----
+[%hardbreaks]
+为了允许重用这些接口规范，接口可以继承一个或多个其他接口（例如， _com.sun.star.resource.XResourceBundle_ 继承了 _com.sun.star.container.XNameAccess_ 所有的属性和方法）。OpenOffice 2.0 引入了接口的多重继承，即实现多个接口的能力。
+严格来说，UNO中不需要接口的属性。每个属性能够表示为获取属性值的一种方法和设置属性值的另一种方法的组合（或者只使用一个方法获取只读属性的值）。然而，在UNO的接口中包含属性有两个很好的理由：第一，这种get和set值结合的方式已经足够广泛来保证额外的扩展；第二，通过属性，接口设计者可以更好地表达对象不同特性之间的细微差别。属性可用于那些不被认为是对象的整体或结构部分的特性，显式方法被保留用于访问核心特性。在历史上，UNO对象通常支持一组许多独立的接口，这些接口对应于它的许多不同方面。使用多继承接口，就不那么需要这样做了，因为一个对象现在只支持一个接口，该接口继承自构成对象各个方面的所有其他接口。
+*服务*
+历史上，在UNO中“服务”一词的含义并不明确。从OpenOffice 2.0 开始，底层概念变得更加清晰。不幸的是，在UNO中“服务”这个术语还有两种不同的含义。在下面，我们将使用术语“新型服务”来表示实体，符合清晰的OpenOffice 2.0 的概念，而我们使用“旧式服务”来表示一个实体，只符合历史，更模糊的概念。使问题更加复杂的是，在UNO之外的上下文中，服务这个术语通常具有不同的含义。
+虽然从技术上讲应该不再需要老式的服务，但是OpenOffice的API仍然广泛地使用它们以保持向后兼容。因此，在使用OpenOffice的API时，请准备好同时使用这两种服务概念。
+*新型服务*
+[source,java]
+----
+module com { module sun { module star { module bridge {
+    serviceUnoUrlResolver: XUnoUrlResolver;
+}; }; }; };
+----
+[%hardbreaks]
+指定支持某个接口（例如 _com.sun.star.bridge.XUnoUrlResolver_）的对象，在某个服务名称（如 _com.sun.star.bridge.UnoUrlResolver_）下可用，在组件上下文的服务管理器。(在形式上，“新型服务”被称为基于单接口的服务。)
+各种UNO语言绑定提供了特殊的构造，只要给定合适的组件上下文，就可以容易地获得这种新型服务的实例;请参阅Java语言绑定和c++语言绑定。
+*旧型服务（正式称谓是“基于累加的服务”）*
+[source,java]
+----
+module com { module sun { module star { module frame {serviceDesktop {
+    service Frame;
+    interface XDesktop;
+    interface XComponentLoader;
+    interface com::sun::star::document::XEventBroadcaster;
+};
+}; }; }; };
+----
+用于指定以下任何一项：
+
+* 一般的约定是，如果一个对象被记录为支持某个旧样式的服务，那么您可以期望该对象支持由服务本身导出的所有接口和任何继承的服务。例如， _com.sun.star.frame.XFrames:queryFrames_ 返回了一序列的对象，它应该全部支持旧型服务 _com.sun.star.frame.Frame_ ，这些所有的接口都是 _com.sun.star.frame.Frame_ 导出的。
+* 另外，一个旧形式的服务可以指定一个或多个属性：
+[source,java]
+----
+module com { module sun { module star { module frame {service Frame {
+    interface com::sun::star::frame::XFrame;
+    interface com::sun::star::frame::XDispatchProvider;
+    // ...
+    [property] string Title;
+    [property, optional] XDispatchRecorderSupplier RecorderSupplier;
+    // ...
+};
+}; }; }; };
+----
+与接口属性相似的是，它们描述了对象的附加特性,主要的区别是接口属性可以直接访问，而旧式服务的属性通常通过像 _com.sun.star.beans.XPropertySet_ 这样的通用接口访问，通常，接口属性用于表示对象的整体特性，而属性则表示附加的、更不稳定的特性。
+
+* 一些旧式服务打算在组件上下文的服务管理器中可用。例如，_com.sun.star.frame.Desktop_ 服务能够在组件上下文的服务管理器的 _"com.sun.star.frame.Desktop"_ 服务名称下实例化。（问题是无法判断给定的旧式服务是否打算在组件上下文中可用;而使用新样式的服务则会显式地显示该意图）
+* 其他旧式服务被设计成由其他服务继承的通用超级服务。例如，_com.sun.star.document.OfficeDocument_ 服务作为所有不同类型的具体文档服务的通用基础，像 _com.sun.star.text.TextDocument_ 和 _com.sun.star.drawing.DrawingDocument_ 。（多继承接口现在是表达这种通用基础服务的首选机制。）
+* 而其他旧式服务只列出属性，根本不导出任何接口。与其他类型的旧式服务那样指定特定对象支持的接口不同，此类服务用于记录一组相关属性，例如，_com.sun.star.document.MediaDescriptor_ 服务列举出所有可以传递给 _com.sun.star.frame.XComponentLoader:loadComponentFromURL_ 的属性。
+
+属性是对象的一个特性，通常不被认为是对象的整体或结构部分，因此可以通过通用的 _getPropertyValue()/setPropertyValue()_ 方法来处理，而不是通过专门的get方法，比如getPrinter()来处理。旧式服务提供一种特殊的语法来列出对象的所有属性。包含属性的对象只需要支持 _com.sun.star.beans.XPropertySet_ 接口准备处理各种属性。典型的例子是字符或段落格式的属性。使用属性，可以通过调用 _setPropertyValues()_ 来设置对象的多个特性，这将极大地提高远程性能。例如，段落支持 _setPropertyValues()_ 方法是通过 _com.sun.star.beans.XMultiPropertySet_ 接口。
+
+==== 使用服务
+引入接口和服务的概念有以下原因：
+
+* *接口和服务将规范从实现中剥离* +
+接口或服务的规范是抽象的，也就是说，它没有定义支持特定功能的对象如何在内部完成此工作。通过OpenOffice的API的抽象规范，可以从API中提取实现，并在需要时安装不同的实现。
+* *服务名允许按规范名而不是按类名创建实例* +
+在Java或c++中，使用new操作符创建类实例。这种方法受到限制:您获得的类是硬编码的。在不编辑代码的情况下，您不能稍后通过另一个类来交换它。服务的概念解决了这个问题。OpenOffice中的中心对象工厂(全局服务管理器)被要求创建可用于特定目的的对象，而无需定义其内部实现。这是可能的，因为可以根据服务名称从工厂订购服务，并且工厂决定返回哪个服务实现。获得哪个实现没有区别，您只使用定义良好的服务接口。
+
+*接口*
+
+如果抽象接口是细粒度的（如果它们很小，并且只描述了一个物体的单一方面），则其可重用性更强。为了描述对象的许多方面，对象可以实现这些细粒度接口中的多个接口。由于能够实现多个接口，因此可以使用相同的代码访问类似对象的类似方面。例如，许多对象支持文本：文本可以在文档主体、文本框、页眉和页脚、脚注、表格单元格和绘图形状中找到。这些对象都支持相同的接口，因此过程可以使用getText()从这些对象中检索文本。
+
+下图展示了旧式服务 _com.sun.star.text.TextDocument_ 的服务、接口和方法，使用UML符号显示的。在此图中，服务显示在左侧。服务之间的箭头表示上层服务(箭头)提供的服务被低层服务继承。这些服务导出的接口显示在右侧。OpenOffice的API中的所有接口名称都以X开头，以便与其他实体的名称区别开来。每个接口都包含方法，这些方法列在接口下面。
+
+.TextDocument继承了OfficeDocument的方法
+[uml,file="uml-example.png"]
+--
+abstract class com.sun.star.text.TextDocument
+interface com.sun.star.text.XTextDocument
+interface com.sun.star.util.XSearchable
+interface com.sun.star.util.XRefreshable
+
+abstract class com.sun.star.document.OfficeDocument
+interface com.sun.star.view.XPrintable
+interface com.sun.star.frame.XStorable
+interface com.sun.star.frame.XModel
+interface com.sun.star.util.XModifiable
+
+com.sun.star.text.XTextDocument <|-- com.sun.star.text.TextDocument
+com.sun.star.util.XSearchable <|-- com.sun.star.text.TextDocument
+com.sun.star.util.XRefreshable <|-- com.sun.star.text.TextDocument
+
+com.sun.star.view.XPrintable <|-- com.sun.star.document.OfficeDocument
+com.sun.star.frame.XStorable <|-- com.sun.star.document.OfficeDocument
+com.sun.star.frame.XModel <|-- com.sun.star.document.OfficeDocument
+com.sun.star.util.XModifiable <|-- com.sun.star.document.OfficeDocument
+
+com.sun.star.document.OfficeDocument <|-- com.sun.star.text.TextDocument
+
+interface com.sun.star.text.XTextDocument {
+  getText()
+  reformat()
+}
+
+interface com.sun.star.util.XSearchable {
+  createSearchDescriptor()
+  findAll()
+  findFirst()
+  findNext()
+}
+
+interface com.sun.star.util.XRefreshable {
+  refresh()
+  addRefreshListener()
+  removeRefreshListener()
+  findNext()
+}
+
+interface com.sun.star.view.XPrintable{
+    getPrinter()
+    setPrinter()
+    print()
+}
+interface com.sun.star.frame.XStorable{
+    hasLocation()
+    getLocation()
+    isReadOnly()
+    store()
+    storeAsUrl()
+    storeToUrl()
+}
+interface com.sun.star.frame.XModel{
+    attachResource()
+    getUrl()
+    getArgs()
+    connectController()
+    disconnectController()
+    lockControllers()
+    unlockControllers()
+    hasControllersLocked()
+    setCurrentController()
+    getCurrentController()
+}
+interface com.sun.star.util.XModifiable{
+    isModified()
+    setModified()
+}
+--
+[%hardbreaks]
+_TextDocument_ 对象提供了 _com.sun.star.text.TextDocument_ 服务，服务实现了 _XTextDocument_ , _XSearchable_ , _XRefreshable_ 三个接口，这些接口提供了例如 _getText()_ 方法将文本添加到文档，_findAll()_ 来查找整篇文档。
+如箭头所示，_com.sun.star.text.TextDocument_ 也继承了 _com.sun.star.document.OfficeDocument_ 提供的所有接口，所以这些也提供给 _TextDocument_ 对象。这些接口处理OpenOffice应用程序常见的任务：打印 _XPrintable_，排序 _XStorable_，修改 _XModifiable_，模型处理 _XModel_。
+图中显示的接口只是 _TextDocument_对象的强制接口，TextDocument具有可选的属性和接口，其中包括属性CharacterCount、ParagraphCount和WordCount，以及接口XPropertySet，如果属性存在，则必须支持该接口。OpenOffice中TextDocument服务的实现还支持必需的和所有可选的接口。在TextDocument这一章详细描述了TextDocument的用法。
+c++和Java在访问方法时要求提供接口名。旧式的服务可能提供几个接口来跟踪。新型服务更容易使用，因为它们只有一个接口: multiple-inheritance接口，所以所有方法都通过同一个接口访问。
+
+[%hardbreaks]
+*使用接口*
+每个UNO对象都必须通过其接口访问这一事实在Java和 c++等语言中具有影响，在这些语言中，编译器需要正确的对象引用类型，然后才能从它调用方法。在Java或c++中，通常只需在访问对象实现的接口之前强制转换对象。当使用UNO对象时，情况就不同了:当您希望访问对象支持的接口的方法，但编译器还不知道时，您必须要求UNO环境为您获取适当的引用。只有这样，你才能安全地抛下它。
+ava UNO环境有一个为此目的的方法queryInterface()。乍一看，它看起来很复杂，但是一旦您理解了queryInterface()是关于跨进程边界安全转换UNO类型的，您将很快习惯它。看一下第二个示例FirstLoadComponent.java(如果您在计算机上安装了SDK，则在示例目录中)，其中创建了一个新的桌面对象，然后使用queryInterface()方法获取com.sun.star.frame.XComponentLoader接口。
+
+

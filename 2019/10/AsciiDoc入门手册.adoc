@@ -1,5 +1,5 @@
 = AsciiDoc文档语法
-AsciiDoctor <doc.writer@asciidoctor.org>
+BladeMasterKing <wang_jiansheng@hotmail.com>
 v1.0 , 2019-10-23
 :toc:
 
@@ -371,6 +371,7 @@ video::67480300[vimeo]
 ----
 
 === 11.3 字面意义块
+[source
 ----
 ....
 error: The requested operation returned error: 1954 Forbidden search for defensive
@@ -381,83 +382,84 @@ would you like to die again? y/n
 ----
 
 === 11.4 带标题列表块，无语法高亮
-    .Gemfile.lock
-    ----
-    GEM
-        remote: https://rubygems.org/
-        specs:
-            asciidoctor (0.1.4)
-    PLATFORMS
-        ruby
-    DEPENDENCIES
-        asciidoctor (~> 0.1.4)
-    ----
+.Gemfile.lock
+[source]
+----
+GEM
+    remote: https://rubygems.org/
+    specs:
+        asciidoctor (0.1.4)
+PLATFORMS
+    ruby
+DEPENDENCIES
+    asciidoctor (~> 0.1.4)
+----
 
 === 11.5 带标题代码块，语法高亮
-    [source,ruby]
-    .app.rb
-    ----
-    require 'sinatra'
-    get '/hi' do
-        "Hello World!"
-    end
-    ----
+[source,ruby]
+.app.rb
+----
+require 'sinatra'
+get '/hi' do
+    "Hello World!"
+end
+----
 
 === 11.6 带标注代码块
-    [source,ruby]
-    ----
-    require 'sinatra' // <1>
-    get '/hi' do // <2>
-        "Hello World!" // <3>
-    end
-    ----
-    <1> 导入依赖库
-    <2> 映射URL
-    <3> 响应内容
+[source,ruby]
+----
+require 'sinatra' // <1>
+get '/hi' do // <2>
+    "Hello World!" // <3>
+end
+----
+<1> 导入依赖库
+<2> 映射URL
+<3> 响应内容
 
 === 11.7 带有不可选择标注的代码块
-    ----
-    line of code // <1>
-    line of code # <2>
-    line of code ;; <3>
-    ----
-    <1> 一行C语言风格的注释之后的标注
-    <2> Ruby, Python, Perl 等等语言的一行注释之后的标注.
-    <3> Clojure一行注释之后的标注
+----
+line of code // <1>
+line of code # <2>
+line of code ;; <3>
+----
+<1> 一行C语言风格的注释之后的标注
+<2> Ruby, Python, Perl 等等语言的一行注释之后的标注.
+<3> Clojure一行注释之后的标注
 
 === 11.8 带有不可选择标注的XML代码块
-    [source,xml]
-    ----
-    <section>
-    <title>Section Title</title> <!--1-->
-    </section>
-    ----
-    <1> section标题是必要的.
+[source,xml]
+----
+<section>
+<title>Section Title</title> <!--1-->
+</section>
+----
+<1> section标题是必要的.
 
 === 11.9 源于文件的代码块
-    [source,ruby]
-    ----
-    include::app.rb[]
-    ----
+[source,ruby]
+----
+include::app.rb[]
+----
 
 === 11.10 源于文件相对路径的代码块
-    :sourcedir: src/main/java
-    [source,java]
-    ----
-    include::{sourcedir}/org/asciidoctor/Asciidoctor.java[]
-    ----
+:sourcedir: src/main/java
+[source,java]
+----
+include::{sourcedir}/org/asciidoctor/Asciidoctor.java[]
+----
 
 === 11.11 
-    [source,ruby,indent=0]
-    ----
-    include::lib/document.rb[lines=5..10]
-    ----
+[source,ruby,indent=0]
+----
+include::lib/document.rb[lines=5..10]
+----
 
 === 11.12 无分隔符的代码块
-    [source,xml]
-    <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
-    这是普通的内容.
+[source,xml]
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+这是普通的内容.
 
 
 == 12 更多分隔块
@@ -487,6 +489,7 @@ Another paragraph.
 NOTE: Asciidoctor可以使用 https://fortawesome.github.io/Font-Awesome[Font Awesome] 图标和样式
 
 === 12.3 引用快
+[source]
 ----
 [quote, 亚伯拉罕·林肯, 军人的国家公墓献辞]
 ____
