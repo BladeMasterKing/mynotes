@@ -274,4 +274,193 @@ c++和Java在访问方法时要求提供接口名。旧式的服务可能提供�
 每个UNO对象都必须通过其接口访问这一事实在Java和 c++等语言中具有影响，在这些语言中，编译器需要正确的对象引用类型，然后才能从它调用方法。在Java或c++中，通常只需在访问对象实现的接口之前强制转换对象。当使用UNO对象时，情况就不同了:当您希望访问对象支持的接口的方法，但编译器还不知道时，您必须要求UNO环境为您获取适当的引用。只有这样，你才能安全地抛下它。
 ava UNO环境有一个为此目的的方法queryInterface()。乍一看，它看起来很复杂，但是一旦您理解了queryInterface()是关于跨进程边界安全转换UNO类型的，您将很快习惯它。看一下第二个示例FirstLoadComponent.java(如果您在计算机上安装了SDK，则在示例目录中)，其中创建了一个新的桌面对象，然后使用queryInterface()方法获取com.sun.star.frame.XComponentLoader接口。
 
+[source,java]
+----
+Object desktop = xRemoteServiceManager.createInstanceWithContext( "com.sun.star.frame.Desktop", xRemoteContext);
+XComponentLoader xComponentLoader = (XComponentLoader) UnoRuntime.queryInterface(XComponentLoader.class, desktop);
+----
+我们通知服务管理器它的工厂调用 _createInstanceWithContext()_ 方法创建 _com.sun.star.frame.Desktop_  这个方法被定义为返回一个Java对象类型，这并不奇怪——毕竟工厂必须能够返回任何类型:
+[source,java]
+----
+java.lang.Object createInstanceWithContext(String serviceName, XComponentContext context)
+----
+我们接收的对象是com.sun.star.frame.Desktop服务。要点是，虽然我们知道我们在工厂中订购的对象是一个DesktopUnoUrlResolver，并在其他接口中导出XComponentLoader接口，但是编译器不知道。因此，我们必须使用UNO运行时环境来询问或查询接口XComponentLoader，因为我们希望在这个接口上使用loadComponentFromURL()方法。方法queryInterface()确保我们获得一个可以转换为所需接口类型的引用，无论目标对象是本地对象还是远程对象.在Java UNO语言绑定中有两种queryInterface定义:
+
+[source,java]
+----
+java.lang.Object UnoRuntime.queryInterface(java.lang.Class targetInterface, Object sourceObject)
+java.lang.Object UnoRuntime.queryInterface(com.sun.star.uno.Type targetInterface, Object sourceObject)
+----
+因为UnoRuntime.queryInterface()被指定为返回java.lang。与工厂方法createInstanceWithContext()一样，我们仍然必须显式地将接口引用转换为所需的类型。区别在于，在queryInterface()之后，我们可以安全地将对象转换为我们的接口类型，而且最重要的是，该引用现在甚至可以与另一个进程中的对象一起工作。下面是queryInterface()调用，一步一步解释:
+[source,java]
+----
+ XComponentLoader xComponentLoader = (XComponentLoader) UnoRuntime.queryInterface(XComponentLoader.class, desktop);
+----
+XComponentLoader是我们希望使用的接口，因此我们定义一个名为XComponentLoader的XComponentLoader变量(下端x)来存储我们从queryInterface中期望的接口。然后查询桌面对象的XComponentLoader接口，传入XComponentLoader.class作为目标接口，桌面作为源对象。最后，我们将结果转换为XComponentLoader，并将结果引用分配给变量XComponentLoader。如果源对象不支持我们要查询的接口，queryInterface()将返回null。
+
+在Java中，当您有一个对象的引用，该对象已知支持您需要的接口，但您还没有适当的引用类型时，调用queryInterface()是必要的。幸运的是，您不仅可以从java.lang中使用queryInterface()。对象源类型，但是你也可以从另一个接口引用查询一个接口，像这样:
+[source,java]
+----
+// loading a blank spreadsheet document gives us its XComponent interface: XComponent xComponent = xComponentLoader.loadComponentFromURL( "private:factory/scalc", "_blank", 0, loadProps);
+  // now we query the interface XSpreadsheetDocument from xComponent
+XSpreadsheetDocument xSpreadsheetDocument = (XSpreadsheetDocument)UnoRuntime.queryInterface(
+XSpreadsheetDocument.class, xComponent);
+----
+此外，如果方法已经定义为返回接口类型，则不需要查询接口，但可以立即使用其方法。在上面的代码片段中，loadComponentFromURL方法被指定为返回com.sun.star.lang。如果您想要得到文档被关闭的通知，那么您可以直接在XComponent变量上调用XComponent方法addEventListener()和removeEventListener()。c++中对应的步骤是通过一个Reference<>模板完成的，该模板以源实例为参数:
+[source,java]
+----
+ // instantiate a sample service with the servicemanager. Reference< XInterface > rInstance =
+ rServiceManager->createInstanceWithContext( OUString::createFromAscii("com.sun.star.frame.Desktop" ), rComponentContext );
+// Query for the XComponentLoader interface
+Reference< XComponentLoader > rComponentLoader( rInstance, UNO_QUERY );
+----
+在OpenOffice.org Basic中，不需要查询接口;基本的运行时引擎会在内部处理这个问题。随着OpenOffice.org API中多继承接口的增加，显式查询Java或c++中特定接口的需求将减少。例如，假设的接口
+[source,java]
+----
+interface XBase1 {   void fun1();
+  };
+  interface XBase2 {
+      void fun2();
+  };
+  interface XBoth { // inherits from both XBase1 and XBase2
+      interface XBase1;
+      interface XBase2;
+  };
+  interface XFactory {
+      XBoth getBoth();};
+----
+您可以直接在通过XFactory.getBoth()获得的引用上调用fun1()和fun2()，而无需查询XBase1或XBase2。
+
+*使用属性*
+对象必须通过允许您使用属性的接口提供其属性。这些接口的最基本形式是接口com.sun.star.beans.XPropertySet。属性还有其他接口，比如com.sun.star.beans。XMultiPropertySet，它通过一个方法调用获取和设置多个属性。当属性出现在服务中时，始终支持XPropertySet。
+
+在XPropertySet中，有两种方法进行属性访问，在Java中定义如下:
+[source,java]
+----
+void setPropertyValue(String propertyName, Object propertyValue)
+  Object getPropertyValue(String propertyName)
+----
+在FirstLoadComponent示例中，XPropertySet接口用于设置单元格对象的CellStyle属性。cell对象是com.sun.star.sheet。SheetCell，因此也支持com.sun.star.table。CellProperties服务，它有一个CellStyle属性。下面的代码解释了这个属性是如何设置的:
+[source,java]
+----
+ // query the XPropertySet interface from cell object XPropertySet xCellProps =
+ (XPropertySet)UnoRuntime.queryInterface(XPropertySet.class, xCell);
+// set the CellStyle property xCellProps.setPropertyValue("CellStyle", "Result");
+----
+现在可以开始使用OpenOffice.org文档了。
+
+==== 示例:处理电子表格文档
+在本例中，我们将要求远程服务管理器提供远程桌面对象，并使用其loadComponentFromURL()方法创建一个新的电子表格文档。从文档中我们获得了它的sheets容器，我们在其中通过名称插入和访问一个新的工作表。在新的工作表中，我们将值输入A1和A2，并将它们汇总到A3中。汇总单元格的单元格样式将获得单元格样式结果，以便以斜体、粗体和下划线显示。最后，我们将新工作表设置为活动工作表，以便用户可以看到它。将这些导入行添加到上面的FirstConnection示例中:
+[source,java]
+----
+import com.sun.star.beans.PropertyValue;
+import com.sun.star.lang.XComponent;
+import com.sun.star.sheet.XSpreadsheetDocument; import com.sun.star.sheet.XSpreadsheets; import com.sun.star.sheet.XSpreadsheet;
+import com.sun.star.sheet.XSpreadsheetView; import com.sun.star.table.XCell;
+import com.sun.star.frame.XModel;
+import com.sun.star.frame.XController;
+import com.sun.star.frame.XComponentLoader;
+----
+编辑useConnection方法如下:
+[source,java]
+----
+protected void useConnection() throws java.lang.Exception { try {
+// get the remote office component context
+xRemoteContext = com.sun.star.comp.helper.Bootstrap.bootstrap(); System.out.println("Connected to a running office ...");
+xRemoteServiceManager = xRemoteContext.getServiceManager(); }
+catch( Exception e) { e.printStackTrace(); System.exit(1);
+}
+  try {
+        // get the Desktop, we need its XComponentLoader interface to load a
+new document
+Object desktop = xRemoteServiceManager.createInstanceWithContext(
+"com.sun.star.frame.Desktop", xRemoteContext);
+ // query the XComponentLoader interface from the desktop
+XComponentLoader xComponentLoader = (XComponentLoader)UnoRuntime.queryInterface(
+XComponentLoader.class, desktop);
+        // create empty array of PropertyValue structs, needed for
+loadComponentFromURL
+PropertyValue[] loadProps = new PropertyValue[0];
+        // load new calc file
+XComponent xSpreadsheetComponent = xComponentLoader.loadComponentFromURL(
+"private:factory/scalc", "_blank", 0, loadProps);
+        // query its XSpreadsheetDocument interface, we want to use
+getSheets()
+XSpreadsheetDocument xSpreadsheetDocument = (XSpreadsheetDocument)UnoRuntime.queryInterface(
+XSpreadsheetDocument.class, xSpreadsheetComponent);
+// use getSheets to get spreadsheets container
+XSpreadsheets xSpreadsheets = xSpreadsheetDocument.getSheets();
+        //insert new sheet at position 0 and get it by name, then query its
+XSpreadsheet interface
+xSpreadsheets.insertNewByName("MySheet", (short)0);
+Object sheet = xSpreadsheets.getByName("MySheet");
+XSpreadsheet xSpreadsheet = (XSpreadsheet)UnoRuntime.queryInterface(
+XSpreadsheet.class, sheet);
+        // use XSpreadsheet interface to get the cell A1 at position 0,0 and
+enter 21 as value
+XCell xCell = xSpreadsheet.getCellByPosition(0, 0); xCell.setValue(21);
+// enter another value into the cell A2 at position 0,1 xCell = xSpreadsheet.getCellByPosition(0, 1); xCell.setValue(21);
+// sum up the two cells
+xCell = xSpreadsheet.getCellByPosition(0, 2); xCell.setFormula("=sum(A1:A2)");
+        // we want to access the cell property CellStyle, so query the cell's
+XPropertySet interface
+XPropertySet xCellProps = (XPropertySet)UnoRuntime.queryInterface( XPropertySet.class, xCell);
+// assign the cell style "Result" to our formula, which is available out of the box
+xCellProps.setPropertyValue("CellStyle", "Result");
+        // we want to make our new sheet the current sheet, so we need to ask
+the model
+        // for the controller: first query the XModel interface from our
+spreadsheet component
+XModel xSpreadsheetModel = (XModel)UnoRuntime.queryInterface(XModel.class, xSpreadsheetComponent);
+        // then get the current controller from the model
+XController xSpreadsheetController = xSpreadsheetModel.getCurrentController();
+        // get the XSpreadsheetView interface from the controller, we want to
+call its method
+        // setActiveSheet
+XSpreadsheetView xSpreadsheetView = (XSpreadsheetView)UnoRuntime.queryInterface(
+XSpreadsheetView.class, xSpreadsheetController);
+        // make our newly inserted sheet the active sheet using setActiveSheet
+xSpreadsheetView.setActiveSheet(xSpreadsheet); }
+catch( com.sun.star.lang.DisposedException e ) { //works from Patch 1 xRemoteContext = null;
+throw e; }
+}
+----
+或者，您可以从示例目录中添加FirstLoadComponent.java到当前项目中，它包含上面所示的更改。
+
+==== 常见的类型
+到目前为止，方法参数和返回值的文字和通用Java类型一直被当作OpenOffice.org API是为Java创建的。但是，必须理解UNO被设计成独立于语言的，因此具有自己的一组类型，必须将这些类型映射到语言绑定所需的适当类型。本节将简要描述类型映射。有关类型映射的详细信息，请参阅Professional UNO。
+
+===== 基本类型
+基本UNO类型(术语“basic”与OpenOffice.org basic无关)作为结构体的成员、方法返回类型或方法参数出现。下表显示了基本UNO类型，如果可用，还显示了它们与Java、c++和OpenOffice.org基本类型的确切映射。
+
+.基本类型表
+[width="100%",options="header,footer"]
+|====================
+| UNO | 类型描述 | JAVA | C++ | Basic
+| void | 空值,只作为方法返回值 | void | void | - 
+| boolean | boolean类型,true或false | boolean | sal_Bool | Boolean 
+| byte | 有符号的8位整数字节 | byte | sal_Int8 | Integer 
+| short | 有符号的16位整数字节 | short | sal_Int16 | Integer
+
+|====================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
