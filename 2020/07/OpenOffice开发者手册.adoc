@@ -441,8 +441,306 @@ throw e; }
 | boolean | boolean类型,true或false | boolean | sal_Bool | Boolean 
 | byte | 有符号的8位整数字节 | byte | sal_Int8 | Integer 
 | short | 有符号的16位整数字节 | short | sal_Int16 | Integer
-
+| unsigned short | 无符号的16位整数字节| - | sal_uInt16 | -
+| long | 有符号的32位整数字节 | int | sal_Int32 | Long
+| unsigned long | 无符号的32位整数字节 | - | sal_uInt32 | -
+| hyper | 有符号64位整数字节 | long | sal_Int64 | -
+| unsigned long | 无符号的64位整数字节 | - | sal_uInt64 | -
+| float | 单精度浮点型 | float | float | Single
+| double | 双精度浮点型 | double | double | Double
+| char | 16位Unicode字符类型(更准确地说:UTF-16代码单元) | char | sal_Unicode | -
 |====================
+对于在该表中没有精确映射的类型，有一些特殊条件。在有关类型的相应部分中检查有关这些类型的详细信息UNO语言绑定中的映射。
+
+*字符串*
+
+UNO认为字符串是简单类型，但由于它们在有些环境需要特殊处理，我们在这里单独讨论。
+
+.字符串类型表
+[width="100%",options="header,footer"]
+|==========
+| UNO | 描述 | JAVA | C++ | Basic
+| string | Unicode字符串类型(更准确地说:Unicode标量值的字符串) | java.lang.String | rtl::OUString | String
+|==========
+在Java中，像使用本机java.lang.String对象一样使用UNO字符串。在c++中，本地字符字符串必须通过SAL转换函数转换为UNO Unicode字符串，通常是rtl::OUString类中的createFromAscii()函数:
+[source,c++]
+----
+//C++
+static OUString createFromAscii( const sal_Char * value ) throw();
+----
+在Basic中，Basic字符串透明地映射到UNO字符串。
+
+
+*枚举和常量*
+
+OpenOffice API使用许多枚举类型(称为枚举)和常量组(称为常量组)。枚举用来列出a中的每一个可能的值特定的上下文。常量组定义属性、参数、返回值和结构成员的可能值。例如，这是一个enum
+[source,java]
+----
+com.sun.star.table.CellVertJustify
+----
+它描述了用于垂直调整表单元格内容的可能值。单元格的垂直调整是由它们的属性 _com.sun.star.table.CellProperties:VertJustify_ 决定的。根据 _CellVertJustify_，此属性的可能值是 _STANDARD_ 、_TOP_、_CENTER_和_BOTTOM_。
+[source,java]
+----
+// adjust a cell content to the upper cell border
+// The service com.sun.star.table.Cell includes the service
+com.sun.star.table.CellProperties
+// and therefore has a property VertJustify that controls the vertical cell
+adjustment
+// we have to use the XPropertySet interface of our Cell to set it
+xCellProps.setPropertyValue("VertJustify",
+com.sun.star.table.CellVertJustify.TOP);
+----
+OpenOffice基本了解枚举类型和常量组。它们的用法很简单:
+[source,Basic]
+----
+'OpenOffice.org Basic
+oCellProps.VertJustify = com.sun.star.table.CellVertJustify.TOP
+----
+在c++中枚举和常量组与范围操作符一起使用::
+[source,c++]
+----
+//C++
+rCellProps->setPropertyValue(OUString::createFromAscii( "VertJustify"),
+::com::sun::star::table::CellVertJustify.TOP);
+----
+
+
+*Struct*
+
+OpenOffice API中的结构用于创建其他UNO类型的组合。它们对应于仅由公共成员变量组成的C结构体或Java类。虽然struct不封装数据，但它们更容易作为一个整体传输，而不是来回封送get()和set()调用。特别是，这对远程通信有好处。
+方法可以访问struct成员。(点)操作符如in:
+[source,java]
+----
+aProperty.Name = "ReadOnly";
+----
+在Java、c++和OpenOffice Basic中，关键字new实例化结构。在OLE自动化中，使用com.sun.star.reflection。CoreReflection获得UNO结构。不要使用服务管理器创建结构体。
+[source,java]
+----
+//In Java:
+com.sun.star.beans.PropertyValue aProperty
+= new com.sun.star.beans.PropertyValue();
+'In OpenOffice.org Basic
+Dim aProperty as new com.sun.star.beans.PropertyValue
+----
+
+*Any*
+
+OpenOffice API经常使用any类型，它是其他环境中已知的变体类型的对应物。any类型包含一个任意的UNO类型。any类型特别用于通用的UNO接口。
+出现any的例子是以下常用方法的方法参数和返回值:
+
+.Any
+[width="100%",options="header,footer"]
+|====================
+| 接口 | 返回任意类型 | 任意类型参数
+| XPropertySet | any getPropertyValue(string propertyName) | void setPropertyValue(any value)
+| XNameContainer | any getByName(string name) | void replaceByName(string name,any element) void insertByName(string name,any element)
+| XIndexContainer | any getByIndex(long index) | void replaceByIndex(long index, any element) void insertByIndex(long index, any element)
+| XEnumeration | any nextElement() | -
+|====================
+[%hardbreaks]
+_any_ 类型也出现在 _com.sun.star.beans.PropertyValue_ 的结构中。
+这个 _struct_ 有两个成员变量，_Name_ 和 _Value_，并且普遍存在于 _PropertyValue_ 结构体的集合中，其中每个 _PropertyValue_ 都是一个键值对，通过名称和值描述属性。如果需要设置这种 _PropertyValue struct_的值，则必须指定 _any_类型，并且如果从 _PropertyValue_读取，则必须能够解释包含的 _any_。如何做到这一点取决于你的语言。
+在Java中，any类型被映射到 _java.lang.Object_，但是还有一个特殊的Java类 _com.sun.star.uno.Any_，主要用于普通对象不明确的情况。这里有两条简单的经验法则:
+
+* 当你想传递一个any值时，总是传递一个java.lang.Object或Java UNO对象。
+例如，如果使用setPropertyValue()设置目标对象中具有非接口类型的属性，则必须传入 _java.lang.Object_的新值。如果新值是Java的原始类型，使用对应的对象类型:
+[source,java]
+----
+xCellProps.setPropertyValue("CharWeight", new Double(200.0));
+----
+另一个例子是你想为 _loadComponentFromURL_使用的PropertyValue结构:
+[source,java]
+----
+com.sun.star.beans.PropertyValue aProperty = new
+com.sun.star.beans.PropertyValue();
+aProperty.Name = "ReadOnly";
+aProperty.Value = Boolean.TRUE;
+----
+* 当接收到any实例时，始终使用 _com.sun.star.uno.AnyConverter_ 检索其值。
+需要仔细查看 _AnyConverter_。例如，如果您希望获得一个包含原始Java类型的属性，您必须知道getPropertyValue()返回一个java.lang.Object，该对象包含包装在any值中的基元类型。
+com.sun.star.uno.AnyConverter是此类对象的转换器。实际上，它可以做的不仅仅是转换，您可以在Java UNO引用中找到它的规范。下面的列表总结了AnyConverter中的转换函数:
+[source,java]
+----
+static java.lang.Object toArray(java.lang.Object object)
+static boolean toBoolean(java.lang.Object object)
+static byte toByte(java.lang.Object object)
+static char toChar(java.lang.Object object)
+static double toDouble(java.lang.Object object)
+static float toFloat(java.lang.Object object)
+static int toInt(java.lang.Object object)
+static long toLong(java.lang.Object object)
+static java.lang.Object toObject(Class clazz, java.lang.Object object)
+static java.lang.Object toObject(Type type, java.lang.Object object)
+static short toShort(java.lang.Object object)
+static java.lang.String toString(java.lang.Object object)
+static Type toType(java.lang.Object object)
+static int toUnsignedInt(java.lang.Object object)
+static long toUnsignedLong(java.lang.Object object)
+static short toUnsignedShort(java.lang.Object object)
+----
+它的用法很简单:
+[source,java]
+----
+import com.sun.star.uno.AnyConverter;
+long cellColor =
+AnyConverter.toLong(xCellProps.getPropertyValue("CharColor"));
+----
+为了方便，对于接口类型，你可以直接使用 _UnoRuntime.queryInterface()_而不需要首先调用 _AnyConverter.getobject()_:
+[source,java]
+----
+import com.sun.star.uno.AnyConverter;import com.sun.star.uno.UnoRuntime;
+Object ranges = xSpreadsheet.getPropertyValue("NamedRanges");
+XNamedRanges ranges1 = (XNamedRanges) UnoRuntime.queryInterface(
+XNamedRanges.class, AnyConverter.toObject(XNamedRanges.class, r));
+XNamedRanges ranges2 = (XNamedRanges)
+UnoRuntime.queryInterface( XNamedRanges.class, r);
+----
+在OpenOffice Basic中，any类型变成了变体:
+[source,Basic]
+----
+'OpenOffice.org Basic
+Dim cellColor as Variant
+cellColor = oCellProps.CharColor
+----
+在c++中，对于 _Any_类型都有特殊的操作符:
+[source,c++]
+----
+//C++ has >>= and <<= for Any (the pointed brackets are always left)
+sal_Int32 cellColor;
+Any any;
+any = rCellProps-
+>getPropertyValue(OUString::createFromAscii( "CharColor" ));
+// extract the value from any
+any >>= cellColor;
+----
+
+*Sequence*
+
+序列是一种UNO类型值的同构集合，元素数量可变。在大多数当前语言绑定中，序列映射到数组。尽管这样的集合有时被实现为具有UNO中的元素访问方法的对象(例如，通过 _com.sun.star.container.XEnumeration_接口)，还有一个sequence类型，用于影响远程性能的场合。在API参考中，序列总是用尖括号写的:
+[source,java]
+----
+// a sequence of strings is notated as follows in the API reference
+sequence< string > aStringSequence;
+----
+在Java中，将序列视为数组。(但不要对空序列使用 _null_，而是使用通过 _new_ 创建的数组，长度为零。)此外，请记住，只有在创建Java对象数组时才会创建引用数组，而不会分配实际的对象。因此，必须使用new来创建数组本身，然后必须再次对每个对象使用new，并将新对象分配给数组。 _loadComponentFromURL_ 经常需要 _PropertyValue_ 结构的空序列:
+[source,java]
+----
+// create an empty array of PropertyValue structs for loadComponentFromURL
+PropertyValue[] emptyProps = new PropertyValue[0];
+----
+需要一个 _PropertyValue_ 结构序列来使用 _loadComponentFromURL()_ 的加载参数。_loadComponentFromURL()_ 和 _com.sun.star.document.MediaDescriptor_ 中可能存在的参数值。
+[source,java]
+----
+// create an array with one PropertyValue struct for loadComponentFromURL, it contains references only
+PropertyValue[] loadProps = new PropertyValue[1];
+// instantiate PropertyValue struct and set its member fields
+PropertyValue asTemplate = new PropertyValue();
+asTemplate.Name = "AsTemplate";
+asTemplate.Value = Boolean.TRUE;
+// assign PropertyValue struct to first element in our array of references
+to PropertyValue structs
+loadProps[0] = asTemplate;
+// load calc file as template
+XComponent xSpreadsheetComponent = xComponentLoader.loadComponentFromURL(
+"file:///X:/share/samples/english/spreadsheets/OfficeSharingAssoc.sxc",
+"_blank", 0, loadProps);
+----
+在OpenOffice Basic中，一个简单的 _Dim_ 创建一个空数组。
+[source,Basic]
+----
+'OpenOffice.org Basic
+Dim loadProps() 'empty array
+----
+使用new和Dim创建一系列struct。
+[source,Basic]
+----
+'OpenOffice.org Basic
+Dim loadProps(0) as new com.sun.star.beans.PropertyValue 'one PropertyValue
+----
+在c++中，有一个用于序列的类模板。可以通过省略所需的元素数量来创建空序列。
+[source,c++]
+----
+//C++
+Sequence< ::com::sun::star::beans::PropertyValue > loadProperties; // empty
+sequence
+----
+如果您传递了一些元素，您将得到一个请求长度的数组。
+[source,c++]
+----
+//C++
+Sequence< ::com::sun::star::beans::PropertyValue > loadProps( 1 );
+// the structs are default constructed
+loadProps[0].Name = OUString::createFromAscii( "AsTemplate" );
+loadProps[0].Handle <<= true;
+Reference< XComponent > rComponent = rComponentLoader->loadComponentFromURL(
+OUString::createFromAscii("private:factory/swriter"),
+OUString::createFromAscii("_blank"),
+0,
+loadProps);
+----
+
+===== 元素访问
+[%hardbreak]
+我们已经在如何在OpenOffice.org中获取对象一节中看到，对象集也可以通过元素访问方法提供。三种最重要的元素访问接口是 _com.sun.star.container.XNameContainer_ , _com.sun.star.container。XIndexContainer_ 和 _com.sun.star.container.XEnumeration_。
+这三个元素访问接口是OpenOffice API的细粒度接口如何允许一致的对象设计的示例。
+这三个接口都继承了 _XElementAccess_;因此，它们包括方法
+[source,java]
+----
+type getElementType()
+boolean hasElements()
+----
+查找关于一组元素的基本信息。方法hasElements()告诉集合是否包含任何元素;getElementType()方法告诉集合包含哪种类型。在Java和c++中，您可以通过com.sun.star.uno获取关于UNO类型的信息。类型，cf, Java UNO和c++ UNO引用。
+_com.sun.star.container.XIndexContainer_ 和 _com.sun.star.container.XNameContainer_ 接口具有并行设计。考虑在UML表示法中这两个接口。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
