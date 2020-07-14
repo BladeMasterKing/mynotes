@@ -189,80 +189,8 @@ module com { module sun { module star { module frame {service Frame {
 
 下图展示了旧式服务 _com.sun.star.text.TextDocument_ 的服务、接口和方法，使用UML符号显示的。在此图中，服务显示在左侧。服务之间的箭头表示上层服务(箭头)提供的服务被低层服务继承。这些服务导出的接口显示在右侧。OpenOffice的API中的所有接口名称都以X开头，以便与其他实体的名称区别开来。每个接口都包含方法，这些方法列在接口下面。
 
-.TextDocument继承了OfficeDocument的方法
-[uml,file="uml-example.png"]
---
-abstract class com.sun.star.text.TextDocument
-interface com.sun.star.text.XTextDocument
-interface com.sun.star.util.XSearchable
-interface com.sun.star.util.XRefreshable
+image::img/txtdocument-extends-officedocument.png[TextDocument继承了OfficeDocument的方法]
 
-abstract class com.sun.star.document.OfficeDocument
-interface com.sun.star.view.XPrintable
-interface com.sun.star.frame.XStorable
-interface com.sun.star.frame.XModel
-interface com.sun.star.util.XModifiable
-
-com.sun.star.text.XTextDocument <|-- com.sun.star.text.TextDocument
-com.sun.star.util.XSearchable <|-- com.sun.star.text.TextDocument
-com.sun.star.util.XRefreshable <|-- com.sun.star.text.TextDocument
-
-com.sun.star.view.XPrintable <|-- com.sun.star.document.OfficeDocument
-com.sun.star.frame.XStorable <|-- com.sun.star.document.OfficeDocument
-com.sun.star.frame.XModel <|-- com.sun.star.document.OfficeDocument
-com.sun.star.util.XModifiable <|-- com.sun.star.document.OfficeDocument
-
-com.sun.star.document.OfficeDocument <|-- com.sun.star.text.TextDocument
-
-interface com.sun.star.text.XTextDocument {
-  getText()
-  reformat()
-}
-
-interface com.sun.star.util.XSearchable {
-  createSearchDescriptor()
-  findAll()
-  findFirst()
-  findNext()
-}
-
-interface com.sun.star.util.XRefreshable {
-  refresh()
-  addRefreshListener()
-  removeRefreshListener()
-  findNext()
-}
-
-interface com.sun.star.view.XPrintable{
-    getPrinter()
-    setPrinter()
-    print()
-}
-interface com.sun.star.frame.XStorable{
-    hasLocation()
-    getLocation()
-    isReadOnly()
-    store()
-    storeAsUrl()
-    storeToUrl()
-}
-interface com.sun.star.frame.XModel{
-    attachResource()
-    getUrl()
-    getArgs()
-    connectController()
-    disconnectController()
-    lockControllers()
-    unlockControllers()
-    hasControllersLocked()
-    setCurrentController()
-    getCurrentController()
-}
-interface com.sun.star.util.XModifiable{
-    isModified()
-    setModified()
-}
---
 [%hardbreaks]
 _TextDocument_ 对象提供了 _com.sun.star.text.TextDocument_ 服务，服务实现了 _XTextDocument_ , _XSearchable_ , _XRefreshable_ 三个接口，这些接口提供了例如 _getText()_ 方法将文本添加到文档，_findAll()_ 来查找整篇文档。
 如箭头所示，_com.sun.star.text.TextDocument_ 也继承了 _com.sun.star.document.OfficeDocument_ 提供的所有接口，所以这些也提供给 _TextDocument_ 对象。这些接口处理OpenOffice应用程序常见的任务：打印 _XPrintable_，排序 _XStorable_，修改 _XModifiable_，模型处理 _XModel_。
@@ -681,7 +609,7 @@ loadProps);
 
 ===== 元素访问
 [%hardbreak]
-我们已经在如何在OpenOffice.org中获取对象一节中看到，对象集也可以通过元素访问方法提供。三种最重要的元素访问接口是 _com.sun.star.container.XNameContainer_ , _com.sun.star.container。XIndexContainer_ 和 _com.sun.star.container.XEnumeration_。
+我们已经在如何 *在OpenOffice中获取对象一节* 中看到，对象集也可以通过元素访问方法提供。三种最重要的元素访问接口是 _com.sun.star.container.XNameContainer_ , _com.sun.star.container。XIndexContainer_ 和 _com.sun.star.container.XEnumeration_。
 这三个元素访问接口是OpenOffice API的细粒度接口如何允许一致的对象设计的示例。
 这三个接口都继承了 _XElementAccess_;因此，它们包括方法
 [source,java]
@@ -692,10 +620,19 @@ boolean hasElements()
 查找关于一组元素的基本信息。方法hasElements()告诉集合是否包含任何元素;getElementType()方法告诉集合包含哪种类型。在Java和c++中，您可以通过com.sun.star.uno获取关于UNO类型的信息。类型，cf, Java UNO和c++ UNO引用。
 _com.sun.star.container.XIndexContainer_ 和 _com.sun.star.container.XNameContainer_ 接口具有并行设计。考虑在UML表示法中这两个接口。
 
+image::img/Indexed-and-Named-Container.png[Indexed and Named Container]
 
+[%hardbreaks]
+_XIndexAccess/XNameAccess_ 接口用于获取元素。_XIndexReplace/XNameReplace_ 接口允许您替换现有元素而不改变集合中的元素数量，而 _XIndexContainer/XNameContainer_ 接口允许您通过插入和删除元素来增加和减少元素数量。
+许多命名或索引对象集不支持 _XIndexContainer_ 或 _XNameContainer_ 的整个继承层次结构，因为每个子类添加的功能并不总是符合任何元素集的逻辑。
+_XEumerationAccess_ 接口与 _XElementAccess_ 接口下的命名和索引容器的工作方式不同。_XEnumerationAccess_ 不提供像 _XNameAccess_ 和 _XIndexAccess_ 这样的单一元素，但它创建了对象的枚举，该对象有方法去下一个元素，只要有更多的元素。
 
+image::img/Enumerated-Container.png[Enumerated Container]
 
-
+[%hardbreaks]
+对象集有时支持所有元素访问方法，有些也只支持名称、索引或枚举访问。始终在API引用中查找各种类型，以查看哪些访问方法可用。
+例如，接口com.sun.star.sheet上的方法getSheets()。指定XSpreadsheetDocument返回com.sun.star.sheet。从XNameContainer继承的XSpreadsheets接口。此外，API引用告诉您所提供的对象支持com.sun.star.sheet。电子表格服务，它定义除了XSpreadsheets之外的其他元素访问接口。
+下面提供了一些示例，说明如何使用XNameAccess、XIndexAccess和XEnumerationAccess。
 
 
 
