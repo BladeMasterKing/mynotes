@@ -1447,3 +1447,231 @@ exception SecurityException : com::sun::star::uno::RuntimeException {
 异常只能由指定的操作抛出。相反，_com.sun.star.uno.RuntimeException_ 总是会发生。
 
 WARNING: UNO基本接口 _com.sun.star.uno.XInterface_ 的方法 _acquire()_ 和发行版是上述规则的例外。 它们是可能甚至不会引发运行时异常的唯一操作。 但是在Java和C ++程序中，您不直接使用这些方法，它们由相应的语言绑定处理。
+
+=== 单例
+单例用于指定命名的对象，在UNO组件上下文的生命周期中可以恰好存在一个实例。 单例引用一种接口类型，并指定使用单例的名称可以在组件上下文上访问此单例的唯一现有实例。 如果不存在单例实例，则组件上下文将实例化一个新实例。 这种新式单例的示例是：
+[source,java]
+----
+module com {
+    module sun {
+        module star {
+            module deployment {
+                singleton thePackageManagerFactory: XPackageManagerFactory;
+            };
+        };
+    };
+};
+----
+给定组件上下文，各种语言绑定提供了特定于语言的方式来获取新型单例的实例。 例如，在Java和C ++中，有一个名为get的静态方法（响应函数），该方法以 _com.sun.star.uno.XComponentContext_ 作为唯一参数，并返回（正确键入）单例实例。如果无法获取该实例，则会引发 _com.sun.star.uno.DeploymentException_ 。
+
+还有一些老式的单例，它们引用（老式）服务而不是接口。但是，对于旧式服务，语言绑定不提供get功能。
+
+=== 了解API
+
+==== 规范、实现和实例
+您在API参考中找到的API规范是抽象的。API参考的服务描述与以前存在于某处的类无关。 首先创建规范，然后根据规范创建UNO实现。即使对于必须适应UNO的旧版实现也是如此。
+
+此外，由于组件开发者可以自由地根据需要实现服务和接口，因此在某个服务规范和实际对象之间不一定存在一对一的关系。实际对象可以提供的功能比服务定义中指定的要多。 例如，如果您在工厂订购服务或从 _getter_ 或 _getPropertyValue()_ 方法接收对象，则将显示指定的功能，但是可能会有其他功能。例如，文本文档模型具有 _com.sun.star.text.TextDocument_ 规范中未包括的一些接口。
+
+由于具有可选的接口和属性，因此无法从API参考中完全了解OpenOffice.org中给定对象实例的功能。 可选的接口和属性对于抽象规范而言是正确的，但是这意味着当您离开强制性接口和属性的范围时，该参考文献仅定义了允许的工作方式，而不是它们的实际工作方式。
+
+另一个重要的事实是，实际上有多个入口点可以实现对象实现。您无法实例化可通过全局服务管理器在API参考中找到的所有旧式服务。 原因如下：
+
+* 一些旧式服务需要特定的上下文。例如，独立于现有文本文档或可能有用的任何其他周围实例化 _com.sun.star.text.TextFrame_ 是没有意义的。此类服务通常不是由全局服务管理器创建的，而是由具有必要知识的文档工厂创建的，这些知识可以创建在特定环境中工作的对象。这并不意味着您将永远无法从全局服务管理器中获取要插入的文本框。因此，如果您希望在API参考中使用服务，请问自己在哪里可以获得支持该服务的实例，并考虑要使用该服务的上下文。如果上下文是文档，则文档工厂很有可能能够创建对象。
+* 旧式服务不仅用于指定可能的类实现，有时还用于仅指定可被其他旧式服务引用的属性组。 也就是说，有些服务根本没有接口。 您不能在服务管理器中创建此类服务。
+* 一些旧式服务需要特殊对待。例如，您不能要求服务管理器创建 _com.sun.star.text.TextDocument_ 的实例。 您必须使用台式机 _com.sun.star.frame.XComponentLoader_ 接口上的 _loadComponentFromUrl()_ 方法加载它。
+
+在上面的第一种和最后一种情况下，使用多继承接口类型代替旧式服务将是正确的设计选择，但是所提到的服务早于UNO中多继承接口类型的可用性。
+
+因此，在真正使用参考之前，在API参考中查找所需的功能有时会造成混淆，因为您需要基本了解功能的工作原理，涉及的服务，在何处可用等。本手册旨在使您对OpenOffice.org文档模型，数据库集成和应用程序本身有一定的了解。
+
+==== 对象组成
+接口支持单继承和多继承，它们都基于 _com.sun.star.uno.XInterface_ 。在API参考中，这反映在任何接口规范的“基本层次结构”部分中。如果您查找接口，请始终检查基本层次结构部分以了解支持的方法的全部范围。例如，如果您查找 _com.sun.star.text.XText_，则会看到两个方法，_insertTextContent()_ 和 _removeTextContent()_，但是继承的接口还提供了九种方法。同样的情况适用于异常，有时也适用于结构，它们也支持单继承。
+
+API参考中的服务规范可以包含“包含的服务”部分，该部分与上述内容类似，因为单个包含的旧式服务可能包含整个服务世界。但是，包含服务的事实与类继承无关。通过从基本实现继承，通过聚合，某种其他类型的委派或仅通过重新实现所有内容，服务实现从技术上讲包括其他服务，但都没有定义（对于UNO接口继承也没有定义）。对于API用户而言，这没什么意思-他绝对可以依赖所描述功能的可用性，但是他绝对不能依赖于实现的内部细节，哪些类提供了功能，它们从何处继承以及它们委托给其他类的内容 。
+
+=== UNO概念
+现在，您已经对 OpenOffice API概念有了深入的了解，并且了解了UNO对象的规范，我们准备探索UNO，即了解UNO对象如何相互连接和通信。
+
+=== UNO进程间通信
+不同环境中的UNO对象通过进程间桥连接。您可以对位于不同进程中的UNO对象实例执行调用。 这是通过将方法名称和参数转换为字节流表示形式并将此程序包发送到远程进程（例如，通过套接字连接）来完成的。本手册中的大多数示例都使用进程间桥与OpenOffice.org进行通信。本节介绍使用UNO API创建UNO进程间连接。
+
+=== 监听模式启动OpenOffice
+本开发人员指南中的大多数示例都连接到正在运行的OpenOffice并执行API调用，然后在OpenOffice中执行这些调用。默认情况下，出于安全原因，办公室不监听资源。这使得必须使OpenOffice在进程间连接资源（例如套接字）上进行侦听。当前，这可以通过两种方式完成：
+
+* 使用附加参数启动office：
+[source,java]
+----
+soffice -accept=socket,host=0,port=2002;urp;
+----
+该字符串必须在unix shell上加引号，因为分号';' 由shell解释
+
+* 将没有'-accept ='的相同字符串放入配置文件。 您可以编辑文件 _<OfficePath>/share/registry/data/org/openoffice/Setup.xcu_ 并且将标签
+[source,java]
+----
+<prop oor:name="ooSetupConnectionURL"/>
+----
+替换为
+[source,java]
+----
+<prop oor:name="ooSetupConnectionURL">
+    <value>socket,host=localhost,port=2002;urp;StarOffice.ServiceManager
+    </value>
+</prop>
+----
+如果标签不存在，请将其添加到标签中
+[source,java]
+----
+<node oor:name="Office"/>
+----
+此更改会影响整个安装。如果要为网络安装中的特定用户配置它，请将相同标签包含node _<node oor:name="Office"/>_ 添加到用户相关配置目录 _<OfficePath>/user/registry/data/org/openoffice/Setup.xcu_ 文件中
+
+选择适合您要求的过程，然后以侦听模式启动OpenOffice。通过在命令行上调用 _netstat -a_ 或 _-na_ 来检查它是否正在侦听。类似于以下的输出显示办公室正在监听：
+[source,shell]
+----
+TCP <Hostname>:8100 <Fully qualified hostname>: 0 Listening
+----
+如果使用-n选项，netstat将以数字形式显示地址和端口号。有时在可以为端口分配逻辑名的UNIX系统上，这很有用。
+
+如果office没有监听，则可能不是使用正确的连接URL参数启动的。检查 _Setup.xcu_ 文件或您的命令行中是否键入错误，然后重试。
+
+[%hardbreaks]
+NOTE: 在OpenOffice 1.1之前的版本中，存在一些差异。使office每次监听的配置位于其他位置。使用编辑器打开文件 _<OfficePath>/share/config/registry/instance/org/openoffice/Setup.xml_ ，然后查找元素：
+<ooSetupConnectionURL cfg:type="string"/>
+用以下代码扩展它：
+<ooSetupConnectionURL cfg:type="string">
+socket,port=2083;urp;
+</ooSetupConnectionURL>
+当office中有一个正在运行的实例（包括快速入门和联机帮助）时，将忽略命令行option -accept。如果使用它，请确保您的系统上没有运行任何office程序。
+
+下一节将讨论连接URL的各个部分。
+
+=== 导入一个UNO对象
+进程间连接的最常见用例是从导出服务器导入对UNO对象的引用。例如，本手册中描述的大多数Java示例都检索对OpenOffice ComponentContext的引用。正确的方法是使用 _com.sun.star.bridge.UnoUrlResolver_ 服务。 其主界面 _com.sun.star.bridge.XUnoUrlResolver_ 的定义如下：
+[source,java]
+----
+interface XUnoUrlResolver: com::sun::star::uno::XInterface{
+    /** resolves an object on the UNO URL */
+    com::sun::star::uno::XInterface resolve( [in] string sUnoUrl )
+    raises (com::sun::star::connection::NoConnectException,
+    com::sun::star::connection::ConnectionSetupException,
+    com::sun::star::lang::IllegalArgumentException);
+};
+----
+传递给 _resolve()_ 方法的字符串称为UNO URL。 它必须具有以下格式：
+
+image::img/AUNOURLscheme.jpg[a uno url scheme]
+
+示例URL应该是 _uno:socket,host=localhost,port=2002;urp;StarOffice.ServiceManager_
+该URL的部分包括：
+
+* URL约束 _uno:_ 这会将URL标识为UNO URL，并将其与其他URL区别开，例如 _http:_ 或 _ftp:_ 等URL。
+
+* 一个字符串，用于描述用于访问其他进程的连接类型。可选，在此字符串之后，紧跟着逗号分隔的名称/值对列表，其中名称和值由'='分隔。打开连接中介绍了当前支持的连接类型。 连接类型指定用于传输字节流的传输机制，例如TCP/IP套接字或命名管道。
+
+* 进程必须使用唯一名称显式导出特定对象。无法访问任意的UNO对象（例如，使用CORBA中的IOR可以实现）。
+
+下面的示例演示如何使用 _UnoUrlResolver_ 导入对象：
+[source,java]
+----
+XComponentContext xLocalContext = com.sun.star.comp.helper.Bootstrap.createInitialComponentContext(null);
+// initial serviceManager
+XMultiComponentFactory xLocalServiceManager = xLocalContext.getServiceManager();
+// create a URL resolver
+Object urlResolver = xLocalServiceManager.createInstanceWithContext( "com.sun.star.bridge.UnoUrlResolver", xLocalContext);
+// query for the XUnoUrlResolver interface
+XUnoUrlResolver xUrlResolver = (XUnoUrlResolver) UnoRuntime.queryInterface(XUnoUrlResolver.class, urlResolver);
+// Import the object
+Object rInitialObject = xUrlResolver.resolve("uno:socket,host=localhost,port=2002;urp;StarOffice.ServiceManager");
+// XComponentContext
+if (null != rInitialObject) {
+    System.out.println("initial object successfully retrieved");
+} else {
+    System.out.println("given initial-object name unknown at server side");
+}
+----
+UnoUrlResolver的使用具有某些缺点。 你不能：
+
+* 当桥梁出于任何原因终止时收到通知
+* 关闭基础的进程间连接
+* 提供本地对象作为远程进程的初始对象
+
+这些问题由基础API解决，这在“打开连接”中进行了说明。
+
+=== 进程间桥的特征
+整个网桥是线程安全的，并允许多个线程执行远程调用。网桥内的调度程序线程无法阻塞，因为它从不执行调用，而是将请求传递给工作线程。
+
+* 同步调用通过连接发送请求，并让请求线程等待答复。除了RuntimeException之外，所有具有返回值，out参数或引发异常的调用都必须是同步的。
+* 异步（或单向）调用通过连接发送请求，并立即返回而无需等待答复。当前，使用[oneway]修饰符在IDL接口上指定请求是同步还是异步。
+
+WARNING: 尽管规格和UNO单向功能的实现没有一般性问题，但是在几种API远程使用方案中，单向调用会在OpenOffice中导致死锁。 因此，不要在新的OpenOffice UNO API中引入新的单向方法。
+
+对于同步请求，可以保证线程身份。当进程A调用进程B，并且进程B调用进程A时，在进程A中等待的同一线程将接管新请求。当相同的互斥锁再次锁定时，可以避免死锁。 对于异步请求，这是不可能的，因为在进程A中没有线程在等待。此类请求在新线程中执行。保证了两个进程之间的一系列调用。如果将来自进程A的两个异步请求发送到进程B，则第二个请求将等待，直到第一个请求完成。
+
+尽管远程网桥支持异步调用，但默认情况下禁用此功能。每个调用都是同步执行的。 UNO接口方法的单向标记将被忽略。但是，网桥可以在启用单向功能的模式下启动，从而将标记为[oneway]的调用作为异步调用执行。为此，远程网桥两侧的连接字符串的协议部分必须以'，Negotiate = 0，ForceSynchronous = 0'扩展。 例如：
+[source,bash]
+----
+soffice “-accept=socket,host=0,port=2002;urp,Negotiate=0,ForceSynchronous=0;”
+----
+用于启动office和
+[source,bash]
+----
+"uno:socket,host=localhost,port=2002;urp,Negotiate=0,ForceSynchronous=0;StarOf
+fice.ServiceManager"
+----
+作为用于连接到它的UNO URL。
+
+异步模式可能会导致OpenOffice中出现死锁。如果远程网桥的一侧是OpenOffice，建议不要激活它。
+
+=== 打开连接
+使用 _UnoUrlResolver_ 导入UNO对象的方法具有上一章中描述的缺点。 _UnoUrlResolver_ 下面的层在进程间连接处理方面提供了充分的灵活性。
+
+UNO进程间网桥在 _com.sun.star.connection.XConnection_ 接口上建立，该接口封装了可靠的双向字节流连接（例如TCP / IP连接）。
+[source,java]
+----
+interface XConnection: com::sun::star::uno::XInterface{
+    long read( [out] sequence < byte > aReadBytes , [in] long nBytesToRead )
+    raises( com::sun::star::io::IOException );
+    void write( [in] sequence < byte > aData )
+    raises( com::sun::star::io::IOException );
+    void flush( ) raises( com::sun::star::io::IOException );
+    void close( ) raises( com::sun::star::io::IOException );
+    string getDescription();
+};
+----
+建立进程间连接的机制不同。这些机制大多数都遵循类似的模式。一个进程侦听一种资源，然后等待一个或多个进程连接到该资源。
+
+导出 _com.sun.star.connection.XAcceptor_ 接口的 _com.sun.star.connection.Acceptor_ 服务和导出的 _com.sun.star.connection.Connector_ 已经抽象了该模式。 _com.sun.star.connection.XConnector_ 接口。
+
+[source,java]
+----
+interface XAcceptor: com::sun::star::uno::XInterface{
+    XConnection accept( [in] string sConnectionDescription )
+    raises( AlreadyAcceptingException,
+    ConnectionSetupException,
+    com::sun::star::lang::IllegalArgumentException);
+    void stopAccepting();
+};
+interface XConnector: com::sun::star::uno::XInterface{
+    XConnection connect( [in] string sConnectionDescription )
+    raises( NoConnectException,ConnectionSetupException );
+};
+----
+侦听过程中使用接受者服务，而主动连接服务中使用连接器服务。方法 _accept()_ 和 _connect()_ 获取连接字符串作为参数。 这是UNO URL的连接部分（在 _uno:_ 和 _;urp_ 之间）。
+
+连接字符串包含一个连接类型，后跟一个逗号分隔的名称/值对列表。 下表显示了默认支持的连接类型。
+
+
+[width="100%",options="header,footer"]
+|====================
+|  连接类型 | 
+| socket | 可靠的TCP / IP套接字连接
+| pipe | 命名管道（使用共享内存）。这种类型的进程间连接比套接字连接快一点，并且仅当两个进程位于同一台计算机上时才起作用。默认情况下，它在Java上不起作用，因为Java不直接支持命名管道
+|====================
+
+[%hardbreaks]
+TIP: 您可以通过实现更多类型的进程间连接连接器和接受器服务，然后通过 _com.sun.star.connection.Connector_。<connection-type>方案选择服务名称，其中<connection-type>是新连接类型的名称。如果您实现了服务 _com.sun.star.connection.Connector.mytype_，使用UnoUrlResolver和URL
+uno:mytype,param1=foo;urp;StarOffice.ServiceManager
+建立到办公室的进程间连接。
+
+=== 建桥
