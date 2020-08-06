@@ -27,13 +27,17 @@ v1.0 , 2019-10-23
 ----
 
 === 1.4 警告类语法
-----
+
 NOTE: 注意...
+
 TIP: 提示...
+
 IMPORTANT: 重要内容...
+
 WARNING: 警告...
+
 CAUTION: 确保...
-----
+
 
 === 1.5 主要段落
 ----
@@ -464,17 +468,17 @@ content="width=device-width, initial-scale=1.0">
 
 == 12 更多分隔块
 === 12.1 边栏
-----
+
 .AsciiDoc history
 ****
 AsciiDoc was first released in Nov 2002 by Stuart Rackham.
 It was designed from the start to be a shorthand syntax
 for producing professional documents like DocBook and LaTeX.
 ****
-----
+
 
 === 12.2 警告
-----
+
 [NOTE]
 ====
 An admonition block may contain complex content.
@@ -484,13 +488,12 @@ An admonition block may contain complex content.
 - three
 Another paragraph.
 ====
-----
+
 
 NOTE: Asciidoctor可以使用 https://fortawesome.github.io/Font-Awesome[Font Awesome] 图标和样式
 
 === 12.3 引用快
-[source]
-----
+
 [quote, 亚伯拉罕·林肯, 军人的国家公墓献辞]
 ____
 八十七年前，我们的祖先在这块大陆上建立了一个新国家...
@@ -503,10 +506,10 @@ ____
 ____
 一个从不犯错误的人，一定从来没有尝试过任何新鲜事物。
 ____
-----
+
 
 === 12.4 穿透
-----
+
 ++++
 <p>
 Content in a passthrough block is passed to the output unprocessed.
@@ -515,9 +518,9 @@ That means you can include raw HTML, like this embedded Gist:
 <script src="http://gist.github.com/mojavelinux/5333524.js">
 </script>
 ++++
-----
+
 === 12.5 打开
-----
+
 --
 An open block can be an anonymous container,
 or it can masquerade as any other block.
@@ -526,34 +529,34 @@ or it can masquerade as any other block.
 --
 puts "I'm a source block!"
 --
-----
+
 === 12.6 自定义替换
-    :version: 0.1.4
-    [source,xml,subs="verbatim,attributes"]
-    ----
-    <dependency>
-    <groupId>org.asciidoctor</groupId>
-    <artifactId>asciidoctor-java-integration</artifactId>
-    <version>{version}</version>
-    </dependency>
-    ----
+:version: 0.1.4
+[source,xml,subs="verbatim,attributes"]
+----
+<dependency>
+<groupId>org.asciidoctor</groupId>
+<artifactId>asciidoctor-java-integration</artifactId>
+<version>{version}</version>
+</dependency>
+----
 
 == 13 注释
 === 13.1 行注释
-----
+
 // A single-line comment.
-----
+
 === 13.2 块注释
-----
+
 ////
 一个多行注释.
 注意，这是分隔的一块.
 ////
-----
+
 
 == 14 表格
 === 14.1 具有标题，三列，表头，两行内容的表格
-----
+
 .表格标题
 |===
 |第一列 |第二列 |第三列
@@ -564,10 +567,10 @@ puts "I'm a source block!"
 |第二列，第二行的单元格
 |第三列，第二行的单元格
 |===
-----
+
 
 === 14.2 具有两列，表头，两行内容的表格
-----
+
 [cols="2*", options="header"]
 |===
 |第一列
@@ -577,10 +580,10 @@ puts "I'm a source block!"
 |第一列，第二行的单元格
 |第二列，第二行的单元格
 |===
-----
+
 
 === 14.3 具有三列，表头，两行内容的表格
-----
+
 [cols="1,1,2", options="header"]
 .应用
 |===
@@ -594,42 +597,43 @@ puts "I'm a source block!"
 |Testing
 |一个创新和高度可扩展的测试平台。使开发人员能够轻松创建真正的自动化测试。
 |===
-----
+
 
 === 14.4 包含AsciiDoc内容的表格
-----
+
 [cols="2,2,5a"]
 |===
 |火狐
 |浏览器
 |火狐是一个开源的Web浏览器。
 它的设计理念:
+
 * 标准符合性
 * 性能
 * 可移植性
 http://getfirefox.com[Get Firefox]!
 |===
-----
+
 
 === 14.5 CSV数据创建表格
-----
+
 [format="csv", options="header"]
 |===
 艺术家,Track,Genre
 Baauer,Harlem Shake,Hip Hop
 The Lumineers,Ho Hey,Folk Rock
 |===
-----
+
 
 === 14.6 文件中的CSV数据创建表格
-----
+
 |===
 include::customers.csv[]
 |===
-----
+
 
 === 14.7 带格式化、对齐和合并单元格的表
-----
+
 [cols="e,m,^,>s", width="25%"]
 |===
 |1 >s|2 |3 |4
@@ -637,7 +641,7 @@ include::customers.csv[]
 ^|8
 |9 2+>|10
 |===
-----
+
 
 == 15 UI宏
 === 15.1 快捷键
@@ -654,20 +658,20 @@ include::customers.csv[]
 |===
 
 === 15.2 菜单选择
-----
+
 To save the file, select menu:File[Save].
 Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
-----
+
 
 === 15.3 按钮
-----
+
 Press the btn:[OK] button when you are finished.
 Select a file in the file navigator and click btn:[Open].
-----
+
 
 == 16 属性和替换
 === 16.1 属性声明与使用
-----
+
 :homepage: http://asciidoctor.org
 :docslink: http://asciidoctor.org/docs[Asciidoctor's Docs]
 :description: Asciidoctor is a mature, plain-text document format for +
@@ -680,7 +684,7 @@ Check out {homepage}[Asciidoctor]!
 {description}
 Check out {docslink} too!
 {checkedbox} That's done!
-----
+
 
 === 16.2 属性分配优先级(高到低)
 
@@ -904,43 +908,43 @@ Check out {docslink} too!
 
 == 18 转义
 === 18.1 反斜线
-----
+
 \*Stars* is not rendered as bold text.
 The asterisks around the word are preserved.
 \{author} is not resolved to the author name.
 The curly brackets around the word are preserved.
 The backslash character is automatically removed.
-----
+
 
 === 18.2 三个加号
-    +++<u>underline me</u>+++ renders as underlined text.
-    pass:[<u>underline me</u>] also renders as underlined text.
++++<u>underline me</u>+++ renders as underlined text.
+pass:[<u>underline me</u>] also renders as underlined text.
 
 == 19 目录
 === 19.1 带目录文档
-    = AsciiDoc Writer's Guide
-    Doc Writer <doc.writer@asciidoctor.org>
-    v1.0, 2019-08-01
-    :toc:
+= AsciiDoc Writer's Guide
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2019-08-01
+:toc:
 
 === 19.2 目录在右侧的文档
-    = AsciiDoc Writer's Guide
-    Doc Writer <doc.writer@asciidoctor.org>
-    v1.0, 2019-08-01
-    :toc: right
+= AsciiDoc Writer's Guide
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2019-08-01
+:toc: right
 
 == 20 参考文献
 === 20.1 引用
-    _The Pragmatic Programmer_ <<prag>> should be required reading for
-    all developers.
-    [bibliography]
-    - [[[prag]]] Andy Hunt & Dave Thomas. The Pragmatic Programmer:
-        From Journeyman to Master. Addison-Wesley. 1999.
-    - [[[seam]]] Dan Allen. Seam in Action. Manning Publications.
-        2008.
+_The Pragmatic Programmer_ <<prag>> should be required reading for
+all developers.
+[bibliography]
+- [[[prag]]] Andy Hunt & Dave Thomas. The Pragmatic Programmer:
+    From Journeyman to Master. Addison-Wesley. 1999.
+- [[[seam]]] Dan Allen. Seam in Action. Manning Publications.
+    2008.
 
 == 21 脚注
 === 21.1 普通脚注
-    A statement.footnote:[Clarification about this statement.]
-    A bold statement.footnoteref:[disclaimer,Opinions are my own.]
-    Another bold statement.footnoteref:[disclaimer]
+A statement.footnote:[Clarification about this statement.]
+A bold statement.footnoteref:[disclaimer,Opinions are my own.]
+Another bold statement.footnoteref:[disclaimer]
