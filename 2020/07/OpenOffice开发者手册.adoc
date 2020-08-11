@@ -3462,6 +3462,286 @@ public class OleObject {
 
 ==== 样式
 
+样式区分文档中常用格式的部分，并将此信息与实际格式分开。这样，可以统一文档的外观，并通过更改样式而不是在完成文档后更改本地格式设置来调整文档的格式。样式是可以在单个步骤中应用于文本或文本内容的属性包。
+
+.OpenOffice中可用的样式
+[width="100%",options="header"]
+|====================
+| 样式 | 描述
+| _CharacterStyles_ | 字符样式用于格式化单个字符或整个单词和短语。字符样式可以嵌套。
+| _ParagraphStyles_ | 段落样式用于格式化整个段落。除了段落的常规格式设置外，段落样式还定义了要使用的字体和下一个段落的段落样式。
+| _FrameStyles_ | 框架样式用于格式化图形和文本框架。这些样式用于快速自动格式化图形和框架。
+| _PageStyles_ | 页面样式用于构造页面。如果指定了“下一个样式”，则在发生自动分页符时，OpenOffice会自动应用指定的页面样式。
+| _NumberingStyles_ | 编号样式用于将段落设置为带编号或项目符号的文本格式。
+|====================
+
+文本文档模型实现 _com.sun.star.style.XStyleFamiliesSupplier_ 接口来访问这些样式。它的方法 _getStyleFamilies()_ 返回带有 _com.sun.star.container.XNameAccess_ 接口的 _com.sun.star.style.StyleFamilies_ 的集合。_com.sun.star.container.XNameAccess_ 接口通过上面列出的名称检索样式系列。_StyleFamilies_ 服务支持 _com.sun.star.container.XIndexAccess_。
+
+从 _StyleFamilies_ 中，按名称或索引检索上面列出的系列之一。收到的样式集合是 _com.sun.star.style.StyleFamily_ 服务，它通过 _com.sun.star.container.XNameContainer_ 或 _com.sun.star.container.XIndexAccess_ 提供对单个样式的访问。
+
+每种样式都是 _com.sun.star.style.Style_，并支持从 _com.sun.star.container.XNamed_ 继承的接口 _com.sun.star.style.XStyle_。_XStyle_ 包含：
+
+[source,java]
+----
+string getName()
+void setName( string aName)
+boolean isUserDefined()
+boolean isInUse()
+string getParentStyle()
+void setParentStyle( string aParentStyle)
+----
+
+Office带有一组默认样式。这些样式在API级别使用程序化名称。如果以这种样式调用，则XStyle中的 _setName()_ 方法始终会引发异常。这同样适用于更改属性类别。在用户界面上，使用本地化名称。用户界面名称通过属性UserInterfaceName提供。
+
+请注意，页面和编号样式不是分层样式，不能具有父样式。方法 _getParentStyle()_ 始终返回空字符串，而方法 _setParentStyle()_ 在以默认样式调用时将引发 _com.sun.star.uno.RuntimeException_。
+
+_isUserDefined()_ 方法确定一种样式是由用户定义还是内置样式。内置样式不能删除。此外，内置样式有两个不同的名称：真实的对象名称和在用户界面上显示的别名。这通常在OpenOffice英语版本中不可见，除了默认样式（在程序名称中为“Standard”作为程序名称，在用户界面中为“Default”）之外。
+
+样式服务定义了所有样式共享的以下属性：
+
+[width="100%"]
+|====================
+| _Style:IsPhysical_ | [可选，只读]boolean-确定是否物理创建样式。
+| _Style:FollowStyle_ | [可选]boolean-包含应用于下一个段落的样式的名称。
+| _Style:DisplayName_ | [可选，只读]string-包含在用户界面中显示的样式的名称。
+| _Style:IsAutoUpdate_ | [可选]string-决定当更改要应用样式的对象的属性时，是否自动更新样式。
+| _Style:ParaStyleConditions_ | [可选，属性]sequence<NamedValue>-定义条件段落的上下文和样式。仅当样式为条件段落样式时，此属性才可用。
+|====================
+
+为了确定用户接口名称，每种样式都有一个字符串属性 _DisplayName_，其中包含在用户界面上使用的名称。不允许将样式的DisplayName用作同一样式的用户定义样式的名称。
+
+只要不在文档中使用内置样式，就不会实际创建它们。属性IsPhysical对此进行检查。出于文件导出的目的，有必要检测不需要导出的样式。
+
+条件段落样式由属性 _com.sun.star.style.Style:ParaStyleConditions_ 处理。该序列由对组成，其中对的名称部分（第一部分）定义了应应用样式（第二部分，表示样式名称的字符串或空字符串）的上下文。为样式名称分配一个空字符串将禁用该上下文的条件样式。
+
+_StyleFamilies_ 集合可以加载样式。为此，_StyleFamilies_ 集合中提供了 _com.sun.star.style.XStyleLoader_ 接口。它包含两种方法：
+
+[source,java]
+----
+void loadStylesFromURL( string URL, sequence<PropertyValue> aOptions) sequence<PropertyValue> getStyleLoaderOptions()
+----
+
+方法 _loadStylesFromURL()_ 使文档能够从其他文档导入样式。_PropertyValue_ 结构的序列可以包含以下属性：
+
+
+[width="100%",options="header"]
+|====================
+| _loadStylesFromURL()_ 方法的属性 | 描述
+| _LoadTextStyles_ | 确定是否要导入字符和段落样式。不可能分别选择字符样式和段落样式。
+| _LoadFrameStyles_ | boolean - 仅导入框架样式。
+| _LoadPageStyles_ | boolean - 仅导入页面样式。
+| _LoadNumberingStyles_ | boolean - 仅导入编号样式。
+| _OverwriteStyles_ | boolean - 确定内部样式是否在源文档包含具有相同名称的样式时被覆盖。
+|====================
+
+方法 _getStyleLoaderOptions()_ 返回这些PropertyValue结构的序列，并设置为其默认值。
+
+
+==== 字符样式
+
+字符样式支持 _com.sun.star.style.CharacterProperties_ 和 _com.sun.star.style.CharacterPropertiesAsian_ 服务中定义的所有属性。
+
+它们是使用服务名称为“_com.sun.star.style.CharacterStyle_”的文本文档模型的 _com.sun.star.lang.XMultiServiceFactory_ 接口创建的。
+
+用户界面中显示的可通过API访问的默认样式不是样式，而是用于删除已应用字符样式的工具。 因此，其属性无法更改。
+
+在包含服务 _com.sun.star.style.CharacterProperties_ 的对象上设置属性 _CharStyleName_，以设置其字符样式。
+
+==== 段落样式
+
+段落样式支持 _com.sun.star.style.ParagraphProperties_ 和 _com.sun.star.style.ParagraphPropertiesAsian_ 服务中定义的所有属性。
+
+它们是使用服务名称为“_com.sun.star.style.ParagraphStyle_”的文本文档模型的 _com.sun.star.lang.XMultiServiceFactory_ 接口创建的。
+
+此外，还有一个 _com.sun.star.style.ConditionalParagraphStyle_ 服务，该服务可创建条件段落样式。条件样式是具有不同效果的段落样式，具体取决于上下文。该API当前不支持条件属性。
+
+在对象（包括服务 _com.sun.star.style.ParagraphProperties_）上设置属性 _ParaStyleName_ 来设置其段落样式。
+
+==== 框架样式
+
+框架样式支持 _com.sun.star.text.BaseFrameProperties_ 服务中定义的所有属性。
+
+它们是使用服务名称为“_com.sun.star.style.FrameStyle_”的文本文档模型的 _com.sun.star.lang.XMultiServiceFactory_ 接口创建的。
+
+在 _com.sun.star.text.BaseFrame_ 对象上设置属性 _FrameStyleName_，以设置其框架样式。
+
+==== 页面样式
+
+页面样式是通过属性控制的。与页面相关的属性在服务 _com.sun.star.style.PageStyle_ 中定义。
+
+它们是使用服务名称为“_com.sun.star.style.PageStyle_”的文本文档模型的 _com.sun.star.lang.XMultiServiceFactory_ 接口创建的。
+
+如上所述，页面样式不是分层的。“页面布局”部分讨论页面样式。
+
+通过将属性 _PageDescName_ 设置为现有的页面样式名称，可以将 _PageStyle_ 设置在当前文本光标位置。这将插入一个使用新页面样式的新页面。如果不应该插入新页面，则光标必须位于第一段的开头。
+
+==== 编号样式
+
+编号样式支持在 _com.sun.star.text.NumberingStyle_ 服务中定义的所有属性。
+
+它们是使用服务名称为“_com.sun.star.style.NumberingStyle_”的文本文档模型的 _com.sun.star.lang.XMultiServiceFactory_ 接口创建的。
+
+编号规则的结构在“行编号”和“大纲编号”部分中进行了描述。
+
+编号样式的名称是在段落的属性 _NumberingStyleName_ 中设置的（通过 _TextCursor_ 的 _PropertySet_ 设置）或段落样式以将编号应用于段落。
+
+下面的示例演示了段落样式的使用：
+
+[source,java]
+----
+/** This method demonstrates how to create, insert and apply styles */
+protected void StylesExample() {
+    try {
+        // 到文档的末尾
+        mxDocCursor.gotoEnd(false);
+        // 插入两个段落
+        mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
+        mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
+        // Create a new style from the document's factory
+        XStyle xStyle = (XStyle) UnoRuntime.queryInterface( XStyle.class,mxDocFactory.createInstance("com.sun.star.style.ParagraphStyle"));
+        // Access the XPropertySet interface of the new style
+        XPropertySet xStyleProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, xStyle);
+        // Give the new style a light blue background
+        xStyleProps.setPropertyValue ("ParaBackColor", new Integer(13421823));
+        // Get the StyleFamiliesSupplier interface of the document
+        XStyleFamiliesSupplier xSupplier = (XStyleFamiliesSupplier)UnoRuntime.queryInterface( XStyleFamiliesSupplier.class, mxDoc);
+        // Use the StyleFamiliesSupplier interface to get the XNameAccess interface of the
+        // actual style families
+        XNameAccess xFamilies = (XNameAccess) UnoRuntime.queryInterface ( XNameAccess.class,xSupplier.getStyleFamilies());
+        // Access the 'ParagraphStyles' Family
+        XNameContainer xFamily = (XNameContainer) UnoRuntime.queryInterface( XNameContainer.class,xFamilies.getByName("ParagraphStyles"));
+        // Insert the newly created style into the ParagraphStyles family
+        xFamily.insertByName ("All-Singing All-Dancing Style", xStyle);
+        // Get the XParagraphCursor interface of the document cursor
+        XParagraphCursor xParaCursor = (XParagraphCursor) UnoRuntime.queryInterface(XParagraphCursor.class, mxDocCursor);
+        // Select the first paragraph inserted
+        xParaCursor.gotoPreviousParagraph(false);
+        xParaCursor.gotoPreviousParagraph(true);
+        // Access the property set of the cursor selection
+        XPropertySet xCursorProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, mxDocCursor);
+        // Set the style of the cursor selection to our newly created style
+        xCursorProps.setPropertyValue("ParaStyleName", "All-Singing All-Dancing Style");
+        // Go back to the end
+        mxDocCursor.gotoEnd(false);
+        // Select the last paragraph in the document
+        xParaCursor.gotoNextParagraph(true);
+        // And reset it's style to 'Standard' (the programmatic name for the default style)
+        xCursorProps.setPropertyValue("ParaStyleName", "Standard");
+    } catch (Exception e) {
+        e.printStackTrace (System.out);
+    }
+}
+----
+
+=== 行号和大纲编号
+
+==== 段落和大纲编号
+
+段落编号的关键是段落属性 _NumberingRules_。此属性由段落和编号样式提供，并且是 _com.sun.star.style.ParagraphProperties_ 的成员。
+
+一个类似的对象控制轮廓编号，并从方法中返回：
+[source,java]
+----
+com::sun::star::container::XIndexReplace getChapterNumberingRules()
+----
+在文档模型上实现的 _com.sun.star.text.XChapterNumberingSupplier_ 接口上。
+
+这些对象提供了 _com.sun.star.container.XIndexReplace_ 接口。容器的每个元素代表一个编号级别。编写者文档提供十个编号级别。最高级别为零。容器的每个级别均由 _com.sun.star.beans.PropertyValue_ 序列组成。
+
+这两个相关的对象在提供的某些属性上有所不同。
+
+它们都提供以下属性：
+.段落和大纲编号的公共属性
+[width="100%",options="header,footer"]
+|====================
+| _NumberingLevel:Adjust_ | short-调整com.sun.star.text.HoriOrientation中定义的编号符号。
+| _NumberingLevel:ParentNumbering_ | short-确定编号中是否包含更高的编号级别，例如2.3.1.2。
+| _NumberingLevel:Prefix_ | string-包含围绕数字符号的字符串，例如方括号。
+|====================
+
+
+
+=== 文字部分
+
+文本部分是一系列完整的段落，可以有自己的格式设置和源位置，与周围的文本分开。 文本部分可以嵌套在层次结构中。
+
+例如，节的格式设置为具有文本列，该文本列在逐段的基础上在文本中具有不同的列设置。 节的内容可以通过文件链接或通过DDE连接来链接。
+
+文本部分支持服务 _com.sun.star.text.TextSection_。为了访问这些部分，文本文档模型实现了 _com.sun.star.text.XTextSectionsSupplier_ 接口，该接口提供了 _com.sun.star.container.XNameAccess_ 接口。返回的对象也支持 _com.sun.star.container.XIndexAccess_ 接口。
+
+主文档使用链接的文本部分实现子文档的结构。
+
+演示文本部分的创建，插入和链接的示例：
+[source,java]
+----
+/** This method demonstrates how to create linked and unlinked sections */
+protected void TextSectionExample() {
+    try {
+        // Go to the end of the document
+        mxDocCursor.gotoEnd(false);
+        // Insert two paragraph breaks
+        mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
+        mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, true);
+        // Create a new TextSection from the document factory and access it's XNamed interface
+        XNamed xChildNamed = (XNamed) UnoRuntime.queryInterface(XNamed.class, mxDocFactory.createInstance("com.sun.star.text.TextSection"));
+        // Set the new sections name to 'Child_Section'
+        xChildNamed.setName("Child_Section");
+        // Access the Child_Section's XTextContent interface and insert it into the document
+        XTextContent xChildSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xChildNamed);
+        mxDocText.insertTextContent (mxDocCursor, xChildSection, false);
+        // Access the XParagraphCursor interface of our text cursor
+        XParagraphCursor xParaCursor = (XParagraphCursor) UnoRuntime.queryInterface(XParagraphCursor.class, mxDocCursor);
+        // Go back one paragraph (into Child_Section)
+        xParaCursor.gotoPreviousParagraph(false);
+        // Insert a string into the Child_Section
+        mxDocText.insertString(mxDocCursor, "This is a test", false);
+        // Go to the end of the document
+        mxDocCursor.gotoEnd(false);
+        // Go back two paragraphs
+        xParaCursor.gotoPreviousParagraph (false);
+        xParaCursor.gotoPreviousParagraph (false);
+        // Go to the end of the document, selecting the two paragraphs 
+        mxDocCursor.gotoEnd(true);
+        // Create another text section and access it's XNamed interface 
+        XNamed xParentNamed = (XNamed) UnoRuntime.queryInterface(XNamed.class,
+        mxDocFactory.createInstance("com.sun.star.text.TextSection"));
+        // Set this text section's name to Parent_Section 
+        xParentNamed.setName("Parent_Section");
+        // Access the Parent_Section's XTextContent interface ... XTextContent
+        xParentSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xParentNamed);
+        // ...and insert it into the document
+        mxDocText.insertTextContent(mxDocCursor, xParentSection, false);
+        // Go to the end of the document
+        mxDocCursor.gotoEnd(false);
+        // Insert a new paragraph
+        mxDocText.insertControlCharacter( mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
+        // And select the new pargraph 
+        xParaCursor.gotoPreviousParagraph(true);
+        // Create a new Text Section and access it's XNamed interface
+        XNamed xLinkNamed = (XNamed) UnoRuntime.queryInterface( XNamed.class,mxDocFactory.createInstance("com.sun.star.text.TextSection"));
+        // Set the new text section's name to Linked_Section
+        xLinkNamed.setName("Linked_Section");
+        // Access the Linked_Section's XTextContent interface
+        XTextContent xLinkedSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xLinkNamed);
+        // And insert the Linked_Section into the document
+        mxDocText.insertTextContent(mxDocCursor, xLinkedSection, false);
+        // Access the Linked_Section's XPropertySet interface
+        XPropertySet xLinkProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, xLinkNamed);
+        // Set the linked section to be linked to the Child_Section
+        xLinkProps.setPropertyValue("LinkRegion", "Child_Section");
+        // Access the XPropertySet interface of the Child_Section XPropertySet
+        xChildProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, xChildNamed);
+        // Set the Child_Section's background colour to blue
+        xChildProps.setPropertyValue("BackColor", new Integer(13421823));
+        // Refresh the document, so the linked section matches the Child_Section
+        XRefreshable xRefresh = (XRefreshable) UnoRuntime.queryInterface(XRefreshable.class, mxDoc); 
+        xRefresh.refresh();
+    } catch (Exception e) {
+        e.printStackTrace (System.out);
+    }
+}
+----
+
 
 
 
