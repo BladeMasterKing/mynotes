@@ -21,16 +21,20 @@ UNO(Universal Network Objects)是OpenOffice的基本组件，支持的编程语�
 代码：
 [source,java]
 ----
+import com.sun.star.uno.XComponentContext;
+import com.sun.star.comp.helper.Bootstrap;
+import com.sun.star.lang.XMultiComponentFactory;
+import java.lang.Exception;
 public class FirstUnoContact{
     public static void main(String[] args){
         try{
             //获取远程office组件上下文
-            com.sun.star.uno.XComponentContext xContext = com.sun.star.comp.helper.Bootstrap.bootstrap();
+            XComponentContext xContext = Bootstrap.bootstrap();
             System.out.println("Connected to a running office ...");
-            com.sun.star.lang.XMultiComponentFactory xMCF = xContext.getServiceManager();
+            XMultiComponentFactory xMCF = xContext.getServiceManager();
             String available = (xMCF != null ? "available" : "not available");
             System.outprintln("remote ServiceManager is" + available);
-        } catch(java.lang.Exception e){
+        } catch(Exception e){
             e.printStackTrace();
         } finally {
             System.exit(0);
@@ -43,20 +47,20 @@ public class FirstUnoContact{
 [%heardbreaks]
 UNO服务管理器，可以被认为是创建服务的工厂。目前，将服务看作UNO对象就足够了，这些对象可用于执行特定的任务。稍后，我们将为术语服务给出更精确的定义。例如，以下服务是可用的
 
-* com.sun.star.frame.Desktop + 
+* **Desktop** + 
 维护加载的文档：用于加载文档，获取当前文档，并访问所有加载的文档
-* com.sun.star.configuration.ConfigurationProvider + 
+* **ConfigurationProvider** + 
 生产访问OpenOffice的配置，在软件 Tools > Options对话框的配置
-* com.sun.star.sdb.DatabaseContext + 
+* **DatabaseContext** + 
 保存在OpenOffice中注册的数据库
-* com.sun.star.system.SystemShellExecute
+* **SystemShellExecute**  +
 执行在当前平台注册的应用注册的系统命令或文档
-* com.sun.star.text.GlobalSettings
+* **GlobalSettings**   +
 管理文本文档的全局视图和打印设置
 
 
 服务总是有一个组件上下文，包含创建服务的服务管理器和其他用于服务的数据。
-_FirstUnoContact_ 类文件被认为是一个OpenOffice进程的客户端，在这方面OpenOffice是服务端。服务端有自己的组件上下文和服务管理器，这些允许客户端程序访问来使用 _office_ 功能，客户端程序初始化UNO并从OpenOffice进程得到组件上下文。在内部，初始化流程创建本地服务管理器，建立一个运行OpenOffice进程(如果有必要将启动一个新的进程)的管道连接并返回远程组件上下文。第一步，这是唯一需要了解的内容。_com.sun.star.comp.helper.Bootstrap.bootstrap()_ 方法初始化UNO并返回一个运行的OpenOffice进程的远程组件上下文(RemoteComponentContext)，你可以发现关于引导UNO的更多细节，在UNO概念中，不同连接类型的机会以及如何建立到UNO服务器进程的连接。
+_FirstUnoContact_ 类文件被认为是一个OpenOffice进程的客户端，在这方面OpenOffice是服务端。服务端有自己的组件上下文和服务管理器，这些允许客户端程序访问来使用 _office_ 功能，客户端程序初始化UNO并从OpenOffice进程得到组件上下文。在内部，初始化流程创建本地服务管理器，建立一个运行OpenOffice进程(如果有必要将启动一个新的进程)的管道连接并返回远程组件上下文。第一步，这是唯一需要了解的内容。_Bootstrap.bootstrap()_ 方法初始化UNO并返回一个运行的OpenOffice进程的远程组件上下文(—_RemoteComponentContext_)，你可以发现关于引导UNO的更多细节，在UNO概念中，不同连接类型的机会以及如何建立到UNO服务器进程的连接。
 
 在第一步初始化之后，可以调用 _com.sun.star.uno.XComponentContext:getServiceManager()_ 从组件上下文来获取远程服务管理器，提供通过API来访问office 的功能。
 
@@ -104,35 +108,40 @@ Object desktop = xRemoteServiceManager.createInstanceWithContext("com.sun.star.f
 使用OpenOffice的API对象包含以下内容：
 
 * 首先，我们将学习UNO对象、接口、服务、特性和属性的概念，并且了解UNO的使用方法。
-* 然后，我们将首次使用OpenOffice.org文档，并给出OpenOffice.org API中最常见类型的用法提示。
+* 然后，我们将首次使用OpenOffice文档，并给出OpenOffice API中最常见类型的用法提示。
 * 最后，我们将介绍一些公共接口，这些接口允许您跨所有OpenOffice文档类型使用文本、表和绘图。
 
 ==== 对象、接口、服务
 [%hardbreaks]
-*对象*
+
+===== 对象
+
 在UNO中，对象是一种软件构件，它具有可以调用的方法和可以获取和设置的属性。对象提供的方法和属性通过它所支持的接口集合指定。
-*接口*
+
+===== 接口
+
 接口指定一组属性和方法，它们共同定义对象的一个切面。例如， _com.sun.star.resource.XResourceBundle_ 接口指定了 _Parent_ 属性， _getLocale()_ 和 _getDirectElement()_ 方法。
 [source,java]
 ----
-interface XResourceBundle: com::sun::star::container::XNameAccess {
+interface XResourceBundle: com.sun.star.container.XNameAccess {
     [attribute] XResourceBundle Parent;
-    com::sun::star::lang::Locale getLocale();
-    any getDirectElement([in] string key);
+    com.sun.star.lang.Locale getLocale();
+    any getDirectElement(string key);
 }
 ----
 [%hardbreaks]
 为了允许重用这些接口规范，接口可以继承一个或多个其他接口（例如， _com.sun.star.resource.XResourceBundle_ 继承了 _com.sun.star.container.XNameAccess_ 所有的属性和方法）。OpenOffice 2.0 引入了接口的多重继承，即实现多个接口的能力。
 严格来说，UNO中不需要接口的属性。每个属性能够表示为获取属性值的一种方法和设置属性值的另一种方法的组合（或者只使用一个方法获取只读属性的值）。然而，在UNO的接口中包含属性有两个很好的理由：第一，这种get和set值结合的方式已经足够广泛来保证额外的扩展；第二，通过属性，接口设计者可以更好地表达对象不同特性之间的细微差别。属性可用于那些不被认为是对象的整体或结构部分的特性，显式方法被保留用于访问核心特性。在历史上，UNO对象通常支持一组许多独立的接口，这些接口对应于它的许多不同方面。使用多继承接口，就不那么需要这样做了，因为一个对象现在只支持一个接口，该接口继承自构成对象各个方面的所有其他接口。
-*服务*
+
+===== 服务
+
 历史上，在UNO中“服务”一词的含义并不明确。从OpenOffice 2.0 开始，底层概念变得更加清晰。不幸的是，在UNO中“服务”这个术语还有两种不同的含义。在下面，我们将使用术语“新型服务”来表示实体，符合清晰的OpenOffice 2.0 的概念，而我们使用“旧式服务”来表示一个实体，只符合历史，更模糊的概念。使问题更加复杂的是，在UNO之外的上下文中，服务这个术语通常具有不同的含义。
 虽然从技术上讲应该不再需要老式的服务，但是OpenOffice的API仍然广泛地使用它们以保持向后兼容。因此，在使用OpenOffice的API时，请准备好同时使用这两种服务概念。
-*新型服务*
+
+===== 新型服务
 [source,java]
 ----
-module com { module sun { module star { module bridge {
-    serviceUnoUrlResolver: XUnoUrlResolver;
-}; }; }; };
+com.sun.star.bridge.serviceUnoUrlResolver.XUnoUrlResolver;
 ----
 [%hardbreaks]
 指定支持某个接口（例如 _com.sun.star.bridge.XUnoUrlResolver_）的对象，在某个服务名称（如 _com.sun.star.bridge.UnoUrlResolver_）下可用，在组件上下文的服务管理器。(在形式上，“新型服务”被称为基于单接口的服务。)
@@ -167,22 +176,22 @@ module com { module sun { module star { module frame {service Frame {
 与接口属性相似的是，它们描述了对象的附加特性,主要的区别是接口属性可以直接访问，而旧式服务的属性通常通过像 _com.sun.star.beans.XPropertySet_ 这样的通用接口访问，通常，接口属性用于表示对象的整体特性，而属性则表示附加的、更不稳定的特性。
 
 * 一些旧式服务打算在组件上下文的服务管理器中可用。例如，_com.sun.star.frame.Desktop_ 服务能够在组件上下文的服务管理器的 _"com.sun.star.frame.Desktop"_ 服务名称下实例化。（问题是无法判断给定的旧式服务是否打算在组件上下文中可用;而使用新样式的服务则会显式地显示该意图）
-* 其他旧式服务被设计成由其他服务继承的通用超级服务。例如，_com.sun.star.document.OfficeDocument_ 服务作为所有不同类型的具体文档服务的通用基础，像 _com.sun.star.text.TextDocument_ 和 _com.sun.star.drawing.DrawingDocument_ 。（多继承接口现在是表达这种通用基础服务的首选机制。）
+* 其他旧式服务被设计成由其他服务继承的通用超级服务。例如，_OfficeDocument_ 服务作为所有不同类型的具体文档服务的通用基础，像 _TextDocument_ 和 _DrawingDocument_ 。（多继承接口现在是表达这种通用基础服务的首选机制。）
 * 而其他旧式服务只列出属性，根本不导出任何接口。与其他类型的旧式服务那样指定特定对象支持的接口不同，此类服务用于记录一组相关属性，例如，_com.sun.star.document.MediaDescriptor_ 服务列举出所有可以传递给 _com.sun.star.frame.XComponentLoader:loadComponentFromURL_ 的属性。
 
-属性是对象的一个特性，通常不被认为是对象的整体或结构部分，因此可以通过通用的 _getPropertyValue()/setPropertyValue()_ 方法来处理，而不是通过专门的get方法，比如getPrinter()来处理。旧式服务提供一种特殊的语法来列出对象的所有属性。包含属性的对象只需要支持 _com.sun.star.beans.XPropertySet_ 接口准备处理各种属性。典型的例子是字符或段落格式的属性。使用属性，可以通过调用 _setPropertyValues()_ 来设置对象的多个特性，这将极大地提高远程性能。例如，段落支持 _setPropertyValues()_ 方法是通过 _com.sun.star.beans.XMultiPropertySet_ 接口。
+属性是对象的一个特性，通常不被认为是对象的整体或结构部分，因此可以通过通用的 _getPropertyValue()/setPropertyValue()_ 方法来处理，而不是通过专门的get方法，比如getPrinter()来处理。旧式服务提供一种特殊的语法来列出对象的所有属性。包含属性的对象只需要支持 _XPropertySet_ 接口准备处理各种属性。典型的例子是字符或段落格式的属性。使用属性，可以通过调用 _setPropertyValues()_ 来设置对象的多个特性，这将极大地提高远程性能。例如，段落支持 _setPropertyValues()_ 方法是通过 _XMultiPropertySet_ 接口。
 
 ==== 使用服务
 引入接口和服务的概念有以下原因：
 
-* *接口和服务将规范从实现中剥离* +
+* **接口和服务将规范从实现中剥离** +
 接口或服务的规范是抽象的，也就是说，它没有定义支持特定功能的对象如何在内部完成此工作。通过OpenOffice的API的抽象规范，可以从API中提取实现，并在需要时安装不同的实现。
 * *服务名允许按规范名而不是按类名创建实例* +
 在Java或c++中，使用new操作符创建类实例。这种方法受到限制:您获得的类是硬编码的。在不编辑代码的情况下，您不能稍后通过另一个类来交换它。服务的概念解决了这个问题。OpenOffice中的中心对象工厂(全局服务管理器)被要求创建可用于特定目的的对象，而无需定义其内部实现。这是可能的，因为可以根据服务名称从工厂订购服务，并且工厂决定返回哪个服务实现。获得哪个实现没有区别，您只使用定义良好的服务接口。
 
-*接口*
+===== 接口
 
-如果抽象接口是细粒度的（如果它们很小，并且只描述了一个物体的单一方面），则其可重用性更强。为了描述对象的许多方面，对象可以实现这些细粒度接口中的多个接口。由于能够实现多个接口，因此可以使用相同的代码访问类似对象的类似方面。例如，许多对象支持文本：文本可以在文档主体、文本框、页眉和页脚、脚注、表格单元格和绘图形状中找到。这些对象都支持相同的接口，因此过程可以使用getText()从这些对象中检索文本。
+如果抽象接口是细粒度的（如果它们很小，并且只描述了一个物体的单一方面），则其可重用性更强。为了描述对象的许多方面，对象可以实现这些细粒度接口中的多个接口。由于能够实现多个接口，因此可以使用相同的代码访问类似对象的类似方面。例如，许多对象支持文本：文本可以在文档主体、文本框、页眉和页脚、脚注、表格单元格和绘图形状中找到。这些对象都支持相同的接口，因此过程可以使用 _getText()_ 从这些对象中检索文本。
 
 下图展示了旧式服务 _com.sun.star.text.TextDocument_ 的服务、接口和方法，使用UML符号显示的。在此图中，服务显示在左侧。服务之间的箭头表示上层服务(箭头)提供的服务被低层服务继承。这些服务导出的接口显示在右侧。OpenOffice的API中的所有接口名称都以X开头，以便与其他实体的名称区别开来。每个接口都包含方法，这些方法列在接口下面。
 
@@ -190,103 +199,120 @@ image::img/txtdocument-extends-officedocument.png[TextDocument继承了OfficeDoc
 
 [%hardbreaks]
 _TextDocument_ 对象提供了 _com.sun.star.text.TextDocument_ 服务，服务实现了 _XTextDocument_ , _XSearchable_ , _XRefreshable_ 三个接口，这些接口提供了例如 _getText()_ 方法将文本添加到文档，_findAll()_ 来查找整篇文档。
-如箭头所示，_com.sun.star.text.TextDocument_ 也继承了 _com.sun.star.document.OfficeDocument_ 提供的所有接口，所以这些也提供给 _TextDocument_ 对象。这些接口处理OpenOffice应用程序常见的任务：打印 _XPrintable_，排序 _XStorable_，修改 _XModifiable_，模型处理 _XModel_。
-图中显示的接口只是 _TextDocument_对象的强制接口，TextDocument具有可选的属性和接口，其中包括属性CharacterCount、ParagraphCount和WordCount，以及接口XPropertySet，如果属性存在，则必须支持该接口。OpenOffice中TextDocument服务的实现还支持必需的和所有可选的接口。在TextDocument这一章详细描述了TextDocument的用法。
-c++和Java在访问方法时要求提供接口名。旧式的服务可能提供几个接口来跟踪。新型服务更容易使用，因为它们只有一个接口: multiple-inheritance接口，所以所有方法都通过同一个接口访问。
+如箭头所示，_com.sun.star.text.TextDocument_ 也继承了 _com.sun.star.document.OfficeDocument_ 提供的所有接口，所以这些也提供给 _TextDocument_ 对象。这些接口处理OpenOffice应用程序常见的任务：打印 _XPrintable_，储存 _XStorable_，修改 _XModifiable_，模型处理 _XModel_。
 
-[%hardbreaks]
-*使用接口*
-每个UNO对象都必须通过其接口访问这一事实在Java和 c++等语言中具有影响，在这些语言中，编译器需要正确的对象引用类型，然后才能从它调用方法。在Java或c++中，通常只需在访问对象实现的接口之前强制转换对象。当使用UNO对象时，情况就不同了:当您希望访问对象支持的接口的方法，但编译器还不知道时，您必须要求UNO环境为您获取适当的引用。只有这样，你才能安全地抛下它。
-ava UNO环境有一个为此目的的方法queryInterface()。乍一看，它看起来很复杂，但是一旦您理解了queryInterface()是关于跨进程边界安全转换UNO类型的，您将很快习惯它。看一下第二个示例FirstLoadComponent.java(如果您在计算机上安装了SDK，则在示例目录中)，其中创建了一个新的桌面对象，然后使用queryInterface()方法获取com.sun.star.frame.XComponentLoader接口。
+图中显示的接口只是 _TextDocument_ 对象的强制接口，_TextDocument_ 具有可选的属性和接口，其中包括属性 _CharacterCount_、_ParagraphCount_ 和 _WordCount_，以及接口 _XPropertySet_，如果属性存在，则必须支持该接口。_OpenOffice_ 中 _TextDocument_ 服务的实现还支持必需的和所有可选的接口。在 _TextDocument_ 这一章详细描述了 _TextDocument_ 的用法。C++和Java在访问方法时要求提供接口名。旧式的服务可能提供几个接口来跟踪。新型服务更容易使用，因为它们只有一个接口: _multiple-inheritance_ 接口，所以所有方法都通过同一个接口访问。
+
+
+===== 使用接口
+
+每个UNO对象都必须通过其接口访问这一事实在Java和C+\+等语言中具有影响，在这些语言中，编译器需要正确的对象引用类型，然后才能从它调用方法。在Java或C++中，通常只需在访问对象实现的接口之前强制转换对象。当使用UNO对象时，情况就不同了:当您希望访问对象支持的接口的方法，但编译器还不知道时，您必须要求UNO环境为您获取适当的引用。只有这样，你才能安全的类型转换。
+
+Java UNO环境有一个方法 _queryInterface()_ 为此目的。乍一看，它看起来很复杂，但是一旦您理解了 _queryInterface()_ 是关于跨进程边界安全转换UNO类型的，您将很快习惯它。看一下第二个示例 _FirstLoadComponent.java_(如果您在计算机上安装了SDK，则在示例目录中)，其中创建了一个新的桌面对象，然后使用 _queryInterface()_ 方法获取 _com.sun.star.frame.XComponentLoader_ 接口。
 
 [source,java]
 ----
 Object desktop = xRemoteServiceManager.createInstanceWithContext( "com.sun.star.frame.Desktop", xRemoteContext);
-XComponentLoader xComponentLoader = (XComponentLoader) UnoRuntime.queryInterface(XComponentLoader.class, desktop);
+XComponentLoader xComponentLoader = UnoRuntime.queryInterface(XComponentLoader.class, desktop);
 ----
 我们通知服务管理器它的工厂调用 _createInstanceWithContext()_ 方法创建 _com.sun.star.frame.Desktop_  这个方法被定义为返回一个Java对象类型，这并不奇怪——毕竟工厂必须能够返回任何类型:
 [source,java]
 ----
-java.lang.Object createInstanceWithContext(String serviceName, XComponentContext context)
+Object createInstanceWithContext(String serviceName, XComponentContext context)
 ----
-我们接收的对象是com.sun.star.frame.Desktop服务。要点是，虽然我们知道我们在工厂中订购的对象是一个DesktopUnoUrlResolver，并在其他接口中导出XComponentLoader接口，但是编译器不知道。因此，我们必须使用UNO运行时环境来询问或查询接口XComponentLoader，因为我们希望在这个接口上使用loadComponentFromURL()方法。方法queryInterface()确保我们获得一个可以转换为所需接口类型的引用，无论目标对象是本地对象还是远程对象.在Java UNO语言绑定中有两种queryInterface定义:
+我们接收的对象是 _Desktop_ 服务。要点是，虽然我们知道我们在工厂中订购的对象是一个 _DesktopUnoUrlResolver_，并在其他接口中导出 _XComponentLoader_ 接口，但是编译器不知道。因此，我们必须使用UNO运行时环境来询问或查询接口 _XComponentLoader_，因为我们希望在这个接口上使用 _loadComponentFromURL()_ 方法。方法 _queryInterface()_ 确保我们获得一个可以转换为所需接口类型的引用，无论目标对象是本地对象还是远程对象.在Java UNO语言绑定中有两种 _queryInterface_ 定义:
 
 [source,java]
 ----
-java.lang.Object UnoRuntime.queryInterface(java.lang.Class targetInterface, Object sourceObject)
-java.lang.Object UnoRuntime.queryInterface(com.sun.star.uno.Type targetInterface, Object sourceObject)
+Object UnoRuntime.queryInterface(java.lang.Class targetInterface, Object sourceObject)
+Object UnoRuntime.queryInterface(com.sun.star.uno.Type targetInterface, Object sourceObject)
 ----
-因为UnoRuntime.queryInterface()被指定为返回java.lang。与工厂方法createInstanceWithContext()一样，我们仍然必须显式地将接口引用转换为所需的类型。区别在于，在queryInterface()之后，我们可以安全地将对象转换为我们的接口类型，而且最重要的是，该引用现在甚至可以与另一个进程中的对象一起工作。下面是queryInterface()调用，一步一步解释:
+因为 _UnoRuntime.queryInterface()_ 被指定为返回 _Object_。与工厂方法 _createInstanceWithContext()_ 一样，我们仍然必须显式地将接口引用转换为所需的类型。区别在于，在 _queryInterface()_ 之后，我们可以安全地将对象转换为我们的接口类型，而且最重要的是，该引用现在甚至可以与另一个进程中的对象一起工作。下面是 _queryInterface()_ 调用，一步一步解释:
+
 [source,java]
 ----
  XComponentLoader xComponentLoader = (XComponentLoader) UnoRuntime.queryInterface(XComponentLoader.class, desktop);
 ----
-XComponentLoader是我们希望使用的接口，因此我们定义一个名为XComponentLoader的XComponentLoader变量(下端x)来存储我们从queryInterface中期望的接口。然后查询桌面对象的XComponentLoader接口，传入XComponentLoader.class作为目标接口，桌面作为源对象。最后，我们将结果转换为XComponentLoader，并将结果引用分配给变量XComponentLoader。如果源对象不支持我们要查询的接口，queryInterface()将返回null。
 
-在Java中，当您有一个对象的引用，该对象已知支持您需要的接口，但您还没有适当的引用类型时，调用queryInterface()是必要的。幸运的是，您不仅可以从java.lang中使用queryInterface()。对象源类型，但是你也可以从另一个接口引用查询一个接口，像这样:
+_XComponentLoader_ 是我们希望使用的接口，因此我们定义一个名为 _xComponentLoader_ (小写x)的 _XComponentLoader_ 变量来存储我们从 _queryInterface_ 中期望的接口。然后查询 _Desktop_ 对象的 _XComponentLoader_ 接口，传入 _XComponentLoader.class_ 作为目标接口，_Desktop_ 作为源对象。最后，我们将结果转换为 _XComponentLoader_ ，并将结果引用分配给变量 _xComponentLoader_。如果源对象不支持我们要查询的接口，_queryInterface()_ 将返回 _null_。
+
+在Java中，当您有一个对象的引用，该对象已知支持您需要的接口，但您还没有适当的引用类型时，调用 _queryInterface()_ 是必要的。幸运的是，您不仅可以从 _java.lang.Object_ 源类型中使用 _queryInterface()_，但是你也可以从另一个接口引用查询一个接口，像这样:
 [source,java]
 ----
-// loading a blank spreadsheet document gives us its XComponent interface: XComponent xComponent = xComponentLoader.loadComponentFromURL( "private:factory/scalc", "_blank", 0, loadProps);
-  // now we query the interface XSpreadsheetDocument from xComponent
-XSpreadsheetDocument xSpreadsheetDocument = (XSpreadsheetDocument)UnoRuntime.queryInterface(
-XSpreadsheetDocument.class, xComponent);
+// loading a blank spreadsheet document gives us its XComponent interface: 
+XComponent xComponent = xComponentLoader.loadComponentFromURL( "private:factory/scalc", "_blank", 0, loadProps);
+// now we query the interface XSpreadsheetDocument from xComponent
+XSpreadsheetDocument xSpreadsheetDocument = UnoRuntime.queryInterface(XSpreadsheetDocument.class, xComponent);
 ----
-此外，如果方法已经定义为返回接口类型，则不需要查询接口，但可以立即使用其方法。在上面的代码片段中，loadComponentFromURL方法被指定为返回com.sun.star.lang。如果您想要得到文档被关闭的通知，那么您可以直接在XComponent变量上调用XComponent方法addEventListener()和removeEventListener()。c++中对应的步骤是通过一个Reference<>模板完成的，该模板以源实例为参数:
+
+此外，如果方法已经定义为返回接口类型，则不需要查询接口，但可以立即使用其方法。在上面的代码片段中，_loadComponentFromURL_ 方法被指定为返回 _com.sun.star.lang.XComponent_ 接口。如果您想要得到文档被关闭的通知，那么您可以直接在 _XComponent_ 变量上调用 _XComponent_ 方法 _addEventListener()_ 和 _removeEventListener()_。c++中对应的步骤是通过一个 _Reference<>_ 模板完成的，该模板以源实例为参数:
 [source,java]
 ----
- // instantiate a sample service with the servicemanager. Reference< XInterface > rInstance =
- rServiceManager->createInstanceWithContext( OUString::createFromAscii("com.sun.star.frame.Desktop" ), rComponentContext );
+// instantiate a sample service with the servicemanager. 
+Reference<XInterface> rInstance = rServiceManager-> createInstanceWithContext( OUString::createFromAscii("com.sun.star.frame.Desktop" ), rComponentContext );
 // Query for the XComponentLoader interface
-Reference< XComponentLoader > rComponentLoader( rInstance, UNO_QUERY );
+Reference<XComponentLoader> rComponentLoader( rInstance, UNO_QUERY );
 ----
-在OpenOffice.org Basic中，不需要查询接口;基本的运行时引擎会在内部处理这个问题。随着OpenOffice.org API中多继承接口的增加，显式查询Java或c++中特定接口的需求将减少。例如，假设的接口
+
+在OpenOffice Basic中，不需要查询接口;基本的运行时引擎会在内部处理这个问题。随着OpenOffice API中多继承接口的增加，显式查询Java或c++中特定接口的需求将减少。例如，假设的接口
 [source,java]
 ----
-interface XBase1 {   void fun1();
-  };
-  interface XBase2 {
-      void fun2();
-  };
-  interface XBoth { // inherits from both XBase1 and XBase2
-      interface XBase1;
-      interface XBase2;
-  };
-  interface XFactory {
-      XBoth getBoth();};
+interface XBase1 {
+    void fun1();
+};
+interface XBase2 {
+    void fun2();
+};
+interface XBoth {
+    // inherits from both XBase1 and XBase2
+    interface XBase1;
+    interface XBase2;
+};
+interface XFactory {
+    XBoth getBoth();
+};
 ----
-您可以直接在通过XFactory.getBoth()获得的引用上调用fun1()和fun2()，而无需查询XBase1或XBase2。
 
-*使用属性*
-对象必须通过允许您使用属性的接口提供其属性。这些接口的最基本形式是接口com.sun.star.beans.XPropertySet。属性还有其他接口，比如com.sun.star.beans。XMultiPropertySet，它通过一个方法调用获取和设置多个属性。当属性出现在服务中时，始终支持XPropertySet。
+您可以直接在通过 _XFactory.getBoth()_ 获得的引用上调用 _fun1()_ 和 _fun2()_，而无需查询 _XBase1_ 或 _XBase2_。
 
-在XPropertySet中，有两种方法进行属性访问，在Java中定义如下:
+===== 使用属性
+
+对象必须通过允许您使用属性的接口提供其属性。这些接口的最基本形式是接口 _com.sun.star.beans.XPropertySet_。属性还有其他接口，比如 _com.sun.star.beans.XMultiPropertySet_，它通过一个方法调用获取和设置多个属性。当属性出现在服务中时，始终支持 _XPropertySet_。
+
+在 _XPropertySet_ 中，有两种方法进行属性访问，在Java中定义如下:
 [source,java]
 ----
 void setPropertyValue(String propertyName, Object propertyValue)
-  Object getPropertyValue(String propertyName)
+Object getPropertyValue(String propertyName)
 ----
-在FirstLoadComponent示例中，XPropertySet接口用于设置单元格对象的CellStyle属性。cell对象是com.sun.star.sheet。SheetCell，因此也支持com.sun.star.table。CellProperties服务，它有一个CellStyle属性。下面的代码解释了这个属性是如何设置的:
+
+在 _FirstLoadComponent_ 示例中，_XPropertySet_ 接口用于设置单元格对象的 _CellStyle_ 属性。cell对象是 _com.sun.star.sheet.SheetCell_，因此也支持 _com.sun.star.table.CellProperties_ 服务，它有一个 _CellStyle_ 属性。下面的代码解释了这个属性是如何设置的:
 [source,java]
 ----
- // query the XPropertySet interface from cell object XPropertySet xCellProps =
- (XPropertySet)UnoRuntime.queryInterface(XPropertySet.class, xCell);
-// set the CellStyle property xCellProps.setPropertyValue("CellStyle", "Result");
+ // query the XPropertySet interface from cell object
+ XPropertySet xCellProps = (XPropertySet)UnoRuntime.queryInterface(XPropertySet.class, xCell);
+// set the CellStyle property
+xCellProps.setPropertyValue("CellStyle", "Result");
 ----
-现在可以开始使用OpenOffice.org文档了。
+现在可以开始使用OpenOffice文档了。
 
 ==== 示例:处理电子表格文档
-在本例中，我们将要求远程服务管理器提供远程桌面对象，并使用其loadComponentFromURL()方法创建一个新的电子表格文档。从文档中我们获得了它的sheets容器，我们在其中通过名称插入和访问一个新的工作表。在新的工作表中，我们将值输入A1和A2，并将它们汇总到A3中。汇总单元格的单元格样式将获得单元格样式结果，以便以斜体、粗体和下划线显示。最后，我们将新工作表设置为活动工作表，以便用户可以看到它。将这些导入行添加到上面的FirstConnection示例中:
+
+在本例中，我们将要求远程服务管理器提供远程 _Desktop_ 对象，并使用其 _loadComponentFromURL()_ 方法创建一个新的电子表格文档。从文档中我们获得了它的sheets容器，我们在其中通过名称插入和访问一个新的工作表。在新的工作表中，我们将值输入A1和A2，并将它们汇总到A3中。汇总单元格的单元格样式将获得单元格样式结果，以便以斜体、粗体和下划线显示。最后，我们将新工作表设置为活动工作表，以便用户可以看到它。将这些导入行添加到上面的 _FirstConnection_ 示例中:
 [source,java]
 ----
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.lang.XComponent;
-import com.sun.star.sheet.XSpreadsheetDocument; import com.sun.star.sheet.XSpreadsheets; import com.sun.star.sheet.XSpreadsheet;
-import com.sun.star.sheet.XSpreadsheetView; import com.sun.star.table.XCell;
+import com.sun.star.sheet.XSpreadsheetDocument;
+import com.sun.star.sheet.XSpreadsheets;
+import com.sun.star.sheet.XSpreadsheet;
+import com.sun.star.sheet.XSpreadsheetView;
+import com.sun.star.table.XCell;
 import com.sun.star.frame.XModel;
 import com.sun.star.frame.XController;
 import com.sun.star.frame.XComponentLoader;
 ----
-编辑useConnection方法如下:
+编辑 _useConnection_ 方法如下:
 [source,java]
 ----
 protected void useConnection() throws Exception {
@@ -317,8 +343,11 @@ protected void useConnection() throws Exception {
         Object sheet = xSpreadsheets.getByName("MySheet");
         XSpreadsheet xSpreadsheet = (XSpreadsheet)UnoRuntime.queryInterface(XSpreadsheet.class, sheet);
         // use XSpreadsheet interface to get the cell A1 at position 0,0 and enter 21 as value
-        XCell xCell = xSpreadsheet.getCellByPosition(0, 0); xCell.setValue(21);
-        // enter another value into the cell A2 at position 0,1 xCell = xSpreadsheet.getCellByPosition(0, 1); xCell.setValue(21);
+        XCell xCell = xSpreadsheet.getCellByPosition(0, 0); 
+        xCell.setValue(21);
+        // enter another value into the cell A2 at position 0,1 
+        xCell = xSpreadsheet.getCellByPosition(0, 1);
+        xCell.setValue(21);
         // sum up the two cells
         xCell = xSpreadsheet.getCellByPosition(0, 2);
         xCell.setFormula("=sum(A1:A2)");
@@ -342,16 +371,19 @@ protected void useConnection() throws Exception {
     }
 }
 ----
-或者，您可以从示例目录中添加FirstLoadComponent.java到当前项目中，它包含上面所示的更改。
+
+或者，您可以从示例目录中添加 _FirstLoadComponent.java_ 到当前项目中，它包含上面所示的更改。
 
 ==== 常见的类型
-到目前为止，方法参数和返回值的文字和通用Java类型一直被当作OpenOffice.org API是为Java创建的。但是，必须理解UNO被设计成独立于语言的，因此具有自己的一组类型，必须将这些类型映射到语言绑定所需的适当类型。本节将简要描述类型映射。有关类型映射的详细信息，请参阅Professional UNO。
+
+到目前为止，方法参数和返回值的文字和通用Java类型已被使用，就好像OpenOffice API是为Java制作的一样。但是，必须理解UNO被设计成独立于语言的，因此具有自己的一组类型，必须将这些类型映射到语言绑定所需的适当类型。本节将简要描述类型映射。有关类型映射的详细信息，请参阅Professional UNO。
 
 ===== 基本类型
-基本UNO类型(术语“basic”与OpenOffice.org basic无关)作为结构体的成员、方法返回类型或方法参数出现。下表显示了基本UNO类型，如果可用，还显示了它们与Java、c++和OpenOffice.org基本类型的确切映射。
+
+基本UNO类型(术语“basic”与 _OpenOffice Basic_ 无关)作为结构体的成员、方法返回类型或方法参数出现。下表显示了基本UNO类型，如果可用，还显示了它们与Java、c++和OpenOffice基本类型的确切映射。
 
 .基本类型表
-[width="100%",options="header,footer"]
+[width="100%",options="header"]
 |====================
 | UNO | 类型描述 | JAVA | C++ | Basic
 | void | 空值,只作为方法返回值 | void | void | - 
@@ -367,9 +399,10 @@ protected void useConnection() throws Exception {
 | double | 双精度浮点型 | double | double | Double
 | char | 16位Unicode字符类型(更准确地说:UTF-16代码单元) | char | sal_Unicode | -
 |====================
+
 对于在该表中没有精确映射的类型，有一些特殊条件。在有关类型的相应部分中检查有关这些类型的详细信息UNO语言绑定中的映射。
 
-*字符串*
+====== 字符串
 
 UNO认为字符串是简单类型，但由于它们在有些环境需要特殊处理，我们在这里单独讨论。
 
@@ -388,7 +421,7 @@ static OUString createFromAscii( const sal_Char * value ) throw();
 在Basic中，Basic字符串透明地映射到UNO字符串。
 
 
-*枚举和常量*
+====== 枚举和常量
 
 OpenOffice API使用许多枚举类型(称为枚举)和常量组(称为常量组)。枚举用来列出a中的每一个可能的值特定的上下文。常量组定义属性、参数、返回值和结构成员的可能值。例如，这是一个enum
 [source,java]
@@ -399,13 +432,12 @@ com.sun.star.table.CellVertJustify
 [source,java]
 ----
 // adjust a cell content to the upper cell border
-// The service com.sun.star.table.Cell includes the service
-com.sun.star.table.CellProperties
-// and therefore has a property VertJustify that controls the vertical cell
-adjustment
+// The service com.sun.star.table.Cell includes the service com.sun.star.table.CellProperties
+// and therefore has a property VertJustify that controls the vertical cell adjustment
 // we have to use the XPropertySet interface of our Cell to set it
-xCellProps.setPropertyValue("VertJustify",com.sun.star.table.CellVertJustify.TOP);
+xCellProps.setPropertyValue("VertJustify",CellVertJustify.TOP);
 ----
+
 OpenOffice基本了解枚举类型和常量组。它们的用法很简单:
 [source,Basic]
 ----
@@ -420,30 +452,29 @@ rCellProps->setPropertyValue(OUString::createFromAscii( "VertJustify"), ::com::s
 ----
 
 
-*Struct*
+====== Struct
 
-OpenOffice API中的结构用于创建其他UNO类型的组合。它们对应于仅由公共成员变量组成的C结构体或Java类。虽然struct不封装数据，但它们更容易作为一个整体传输，而不是来回封送get()和set()调用。特别是，这对远程通信有好处。
-方法可以访问struct成员。(点)操作符如in:
+OpenOffice API中的结构用于创建其他UNO类型的组合。它们对应于仅由公共成员变量组成的C结构体或Java类。虽然struct不封装数据，但它们更容易作为一个整体传输，而不是来回封送 _get()_ 和 _set()_ 调用。特别是，这对远程通信有好处。方法可以访问struct成员。(点)操作符如in:
 [source,java]
 ----
 aProperty.Name = "ReadOnly";
 ----
-在Java、c++和OpenOffice Basic中，关键字new实例化结构。在OLE自动化中，使用com.sun.star.reflection。CoreReflection获得UNO结构。不要使用服务管理器创建结构体。
+在Java、c++和 _OpenOffice Basic_ 中，关键字new实例化结构。在OLE自动化中，使用 _com.sun.star.reflection.CoreReflection_ 获得UNO结构。不要使用服务管理器创建结构体。
 [source,java]
 ----
 //In Java:
 PropertyValue aProperty= new PropertyValue();
+
 'In OpenOffice.org Basic
 Dim aProperty as new com.sun.star.beans.PropertyValue
 ----
 
-*Any*
+====== Any
 
-OpenOffice API经常使用any类型，它是其他环境中已知的变体类型的对应物。any类型包含一个任意的UNO类型。any类型特别用于通用的UNO接口。
-出现any的例子是以下常用方法的方法参数和返回值:
+_OpenOffice API_ 经常使用any类型，它是其他环境中已知的变体类型的对应物。any类型包含一个任意的UNO类型。any类型特别用于通用的UNO接口。出现any的例子是以下常用方法的方法参数和返回值:
 
 .Any
-[width="100%",options="header,footer"]
+[width="100%",options="header"]
 |====================
 | 接口 | 返回任意类型 | 任意类型参数
 | XPropertySet | any getPropertyValue(string propertyName) | void setPropertyValue(any value)
@@ -451,13 +482,13 @@ OpenOffice API经常使用any类型，它是其他环境中已知的变体类型
 | XIndexContainer | any getByIndex(long index) | void replaceByIndex(long index, any element) void insertByIndex(long index, any element)
 | XEnumeration | any nextElement() | -
 |====================
+
 [%hardbreaks]
 _any_ 类型也出现在 _com.sun.star.beans.PropertyValue_ 的结构中。
-这个 _struct_ 有两个成员变量，_Name_ 和 _Value_，并且普遍存在于 _PropertyValue_ 结构体的集合中，其中每个 _PropertyValue_ 都是一个键值对，通过名称和值描述属性。如果需要设置这种 _PropertyValue struct_的值，则必须指定 _any_类型，并且如果从 _PropertyValue_读取，则必须能够解释包含的 _any_。如何做到这一点取决于你的语言。
-在Java中，any类型被映射到 _java.lang.Object_，但是还有一个特殊的Java类 _com.sun.star.uno.Any_，主要用于普通对象不明确的情况。这里有两条简单的经验法则:
+这个 _struct_ 有两个成员变量，_Name_ 和 _Value_，并且普遍存在于 _PropertyValue_ 结构体的集合中，其中每个 _PropertyValue_ 都是一个键值对，通过名称和值描述属性。如果需要设置这种 _PropertyValue struct_的值，则必须指定 _any_类型，并且如果从 _PropertyValue_读取，则必须能够解释包含的 _any_。如何做到这一点取决于你的语言。在Java中，any类型被映射到 _java.lang.Object_，但是还有一个特殊的Java类 _com.sun.star.uno.Any_，主要用于普通对象不明确的情况。这里有两条简单的经验法则:
 
-* 当你想传递一个any值时，总是传递一个java.lang.Object或Java UNO对象。
-例如，如果使用setPropertyValue()设置目标对象中具有非接口类型的属性，则必须传入 _java.lang.Object_的新值。如果新值是Java的原始类型，使用对应的对象类型:
+* 当你想传递一个any值时，总是传递一个 _java.lang.Object_ 或 _Java UNO_ 对象。
+例如，如果使用 _setPropertyValue()_ 设置目标对象中具有非接口类型的属性，则必须传入 _java.lang.Object_的新值。如果新值是Java的原始类型，使用对应的对象类型:
 [source,java]
 ----
 xCellProps.setPropertyValue("CharWeight", new Double(200.0));
@@ -470,8 +501,7 @@ aProperty.Name = "ReadOnly";
 aProperty.Value = Boolean.TRUE;
 ----
 * 当接收到any实例时，始终使用 _com.sun.star.uno.AnyConverter_ 检索其值。
-需要仔细查看 _AnyConverter_。例如，如果您希望获得一个包含原始Java类型的属性，您必须知道getPropertyValue()返回一个java.lang.Object，该对象包含包装在any值中的基元类型。
-com.sun.star.uno.AnyConverter是此类对象的转换器。实际上，它可以做的不仅仅是转换，您可以在Java UNO引用中找到它的规范。下面的列表总结了AnyConverter中的转换函数:
+需要仔细查看 _AnyConverter_。例如，如果您希望获得一个包含原始Java类型的属性，您必须知道 _getPropertyValue()_ 返回一个 _java.lang.Object_，该对象包含包装在any值中的基元类型。_com.sun.star.uno.AnyConverter_ 是此类对象的转换器。实际上，它可以做的不仅仅是转换，您可以在Java UNO引用中找到它的规范。下面的列表总结了 _AnyConverter_ 中的转换函数:
 [source,java]
 ----
 static Object toArray(Object object)
@@ -500,7 +530,9 @@ long cellColor = AnyConverter.toLong(xCellProps.getPropertyValue("CharColor"));
 为了方便，对于接口类型，你可以直接使用 _UnoRuntime.queryInterface()_而不需要首先调用 _AnyConverter.getobject()_:
 [source,java]
 ----
-import com.sun.star.uno.AnyConverter;import com.sun.star.uno.UnoRuntime;
+import com.sun.star.uno.AnyConverter;
+import com.sun.star.uno.UnoRuntime;
+
 Object ranges = xSpreadsheet.getPropertyValue("NamedRanges");
 XNamedRanges ranges1 = (XNamedRanges) UnoRuntime.queryInterface(XNamedRanges.class, AnyConverter.toObject(XNamedRanges.class, r));
 XNamedRanges ranges2 = (XNamedRanges)UnoRuntime.queryInterface( XNamedRanges.class, r);
@@ -523,13 +555,13 @@ any = rCellProps->getPropertyValue(OUString::createFromAscii( "CharColor" ));
 any >>= cellColor;
 ----
 
-*Sequence*
+====== Sequence
 
 序列是一种UNO类型值的同构集合，元素数量可变。在大多数当前语言绑定中，序列映射到数组。尽管这样的集合有时被实现为具有UNO中的元素访问方法的对象(例如，通过 _com.sun.star.container.XEnumeration_接口)，还有一个sequence类型，用于影响远程性能的场合。在API参考中，序列总是用尖括号写的:
 [source,java]
 ----
 // a sequence of strings is notated as follows in the API reference
-sequence< string > aStringSequence;
+sequence<string> aStringSequence;
 ----
 在Java中，将序列视为数组。(但不要对空序列使用 _null_，而是使用通过 _new_ 创建的数组，长度为零。)此外，请记住，只有在创建Java对象数组时才会创建引用数组，而不会分配实际的对象。因此，必须使用new来创建数组本身，然后必须再次对每个对象使用new，并将新对象分配给数组。 _loadComponentFromURL_ 经常需要 _PropertyValue_ 结构的空序列:
 [source,java]
@@ -567,57 +599,62 @@ Dim loadProps(0) as new com.sun.star.beans.PropertyValue 'one PropertyValue
 [source,c++]
 ----
 //C++
-Sequence< ::com::sun::star::beans::PropertyValue > loadProperties; // empty sequence
+Sequence<::com::sun::star::beans::PropertyValue> loadProperties;
+// empty sequence
 ----
 如果您传递了一些元素，您将得到一个请求长度的数组。
 [source,c++]
 ----
 //C++
-Sequence< ::com::sun::star::beans::PropertyValue > loadProps( 1 );
+Sequence<::com::sun::star::beans::PropertyValue> loadProps( 1 );
 // the structs are default constructed
 loadProps[0].Name = OUString::createFromAscii( "AsTemplate" );
 loadProps[0].Handle <<= true;
-Reference< XComponent > rComponent = rComponentLoader->loadComponentFromURL(OUString::createFromAscii("private:factory/swriter"), OUString::createFromAscii("_blank"), 0, loadProps);
+Reference<XComponent> rComponent = rComponentLoader -> loadComponentFromURL(OUString::createFromAscii("private:factory/swriter"), OUString::createFromAscii("_blank"), 0, loadProps);
 ----
 
 ===== 元素访问
+
 [%hardbreak]
-我们已经在如何 *在OpenOffice中获取对象一节* 中看到，对象集也可以通过元素访问方法提供。三种最重要的元素访问接口是 _com.sun.star.container.XNameContainer_ , _com.sun.star.container。XIndexContainer_ 和 _com.sun.star.container.XEnumeration_。
-这三个元素访问接口是OpenOffice API的细粒度接口如何允许一致的对象设计的示例。
-这三个接口都继承了 _XElementAccess_;因此，它们包括方法
+我们已经在如何 *在OpenOffice中获取对象一节* 中看到，对象集也可以通过元素访问方法提供。三种最重要的元素访问接口是 _com.sun.star.container.XNameContainer_ , _com.sun.star.container。XIndexContainer_ 和 _com.sun.star.container.XEnumeration_。这三个元素访问接口是 _OpenOffice API_ 的细粒度接口如何允许一致的对象设计的示例。这三个接口都继承了 _XElementAccess_;因此，它们包括方法
+
 [source,java]
 ----
 type getElementType()
 boolean hasElements()
 ----
-查找关于一组元素的基本信息。方法hasElements()告诉集合是否包含任何元素;getElementType()方法告诉集合包含哪种类型。在Java和c++中，您可以通过com.sun.star.uno获取关于UNO类型的信息。类型，cf, Java UNO和c++ UNO引用。
+查找关于一组元素的基本信息。方法 _hasElements()_ 告诉集合是否包含任何元素; _getElementType()_ 方法告诉集合包含哪种类型。在Java和c+\+中，您可以通过 _com.sun.star.uno.Type_ , cf, Java UNO和c++ UNO引用。获取关于UNO类型的信息。
+
+
 _com.sun.star.container.XIndexContainer_ 和 _com.sun.star.container.XNameContainer_ 接口具有并行设计。考虑在UML表示法中这两个接口。
 
 image::img/Indexed-and-Named-Container.png[Indexed and Named Container]
 
 [%hardbreaks]
 _XIndexAccess/XNameAccess_ 接口用于获取元素。_XIndexReplace/XNameReplace_ 接口允许您替换现有元素而不改变集合中的元素数量，而 _XIndexContainer/XNameContainer_ 接口允许您通过插入和删除元素来增加和减少元素数量。
+
 许多命名或索引对象集不支持 _XIndexContainer_ 或 _XNameContainer_ 的整个继承层次结构，因为每个子类添加的功能并不总是符合任何元素集的逻辑。
+
 _XEumerationAccess_ 接口与 _XElementAccess_ 接口下的命名和索引容器的工作方式不同。_XEnumerationAccess_ 不提供像 _XNameAccess_ 和 _XIndexAccess_ 这样的单一元素，但它创建了对象的枚举，该对象有方法去下一个元素，只要有更多的元素。
 
 image::img/Enumerated-Container.png[Enumerated Container]
 
-[%hardbreaks]
 对象集有时支持所有元素访问方法，有些也只支持名称、索引或枚举访问。始终在API引用中查找各种类型，以查看哪些访问方法可用。
-例如，接口com.sun.star.sheet上的方法getSheets()。指定XSpreadsheetDocument返回com.sun.star.sheet。从XNameContainer继承的XSpreadsheets接口。此外，API引用告诉您所提供的对象支持 _com.sun.star.sheet.Spreadsheets_ 服务，它定义除了XSpreadsheets之外的其他元素访问接口。
-下面提供了一些示例，说明如何使用XNameAccess、XIndexAccess和XEnumerationAccess。
+
+例如，接口 _com.sun.star.sheet.XSpreadsheetDocument_ 上的 _getSheets()_ 方法指定返回继承 _XSpreadsheets_ 的 _com.sun.star.sheet.XNameContainer_   接口。此外，API告诉您所提供的对象支持 _com.sun.star.sheet.Spreadsheets_ 服务，它定义除了 _XSpreadsheets_ 之外的其他元素访问接口。
+下面提供了一些示例，说明如何使用 _XNameAccess_、_XIndexAccess_ 和 _XEnumerationAccess_。
 
 
-*Name Access*
+====== Name Access
 
 按名称分发元素的基本接口是 _com.sun.star.container.XNameAccess_ 接口。它有三种方法:
 [source,java]
 ----
-any getByName( [in] string name)
+any getByName( string name)
 sequence<string> getElementNames()
-boolean hasByName( [in] string name)
+boolean hasByName( string name)
 ----
-在上面的FirstLoadComponent.java示例中，方法 _getSheets()_ 返回一个 _com.sun.star.sheet.XSpreadsheets_ 接口，它继承了 _XNameAccess_。因此，您可以使用getByName()从XSpreadsheets容器中通过名称获取工作表“MySheet”:
+在上面的 _FirstLoadComponent.java_ 示例中，方法 _getSheets()_ 返回一个 _com.sun.star.sheet.XSpreadsheets_ 接口，它继承了 _XNameAccess_。因此，您可以使用 _getByName()_ 从 _XSpreadsheets_ 容器中通过名称获取工作表“MySheet”:
 [source,java]
 ----
 XSpreadsheets xSpreadsheets = xSpreadsheetDocument.getSheets();
@@ -626,10 +663,11 @@ XSpreadsheet xSpreadsheet = (XSpreadsheet)UnoRuntime.queryInterface(XSpreadsheet
 // use XSpreadsheet interface to get the cell A1 at position 0,0 and enter 42 as value
 XCell xCell = xSpreadsheet.getCellByPosition(0, 0);
 ----
-由于getByName()返回一个any，在调用电子表格对象的方法之前，您必须使用AnyConverter.toObject()和/或UnoRuntime.queryInterface()。
+
+由于 _getByName()_ 返回一个any，在调用电子表格对象的方法之前，您必须使用 _AnyConverter.toObject()_ 和/或 _UnoRuntime.queryInterface()_。
 
 
-*Index Access*
+====== Index Access
 
 按索引分发元素的接口是 _com.sun.star.container.XIndexAccess_ 接口。它有两种方法:
 [source,java]
@@ -637,7 +675,7 @@ XCell xCell = xSpreadsheet.getCellByPosition(0, 0);
 any getByIndex( [in] long index)
 long getCount()
 ----
-FirstLoadComponent示例允许演示XIndexAccess。API引用告诉我们getSheets()返回的服务是com.sun.star.sheet。电子表格服务，不仅支持接口com.sun.star.sheet。XSpreadsheets，还有XIndexAccess。因此，表格可以通过索引访问，而不只是通过名称执行查询XIndexAccess接口从我们的xSpreadsheets变量:
+_FirstLoadComponent_ 示例允许演示 _XIndexAccess_。API引用告诉我们 _getSheets()_ 返回的服务是 _com.sun.star.sheet.Spreadsheet _服务，不仅支持接口 _com.sun.star.sheet.XSpreadsheets_，还有 _XIndexAccess_。因此，表格可以通过索引访问，而不只是通过名称执行查询 _XIndexAccess_ 接口从我们的 _xSpreadsheets_ 变量:
 [source,java]
 ----
 XIndexAccess xSheetIndexAccess = (XIndexAccess)UnoRuntime.queryInterface(XIndexAccess.class, xSpreadsheets);
@@ -645,14 +683,14 @@ Object sheet = XSheetIndexAccess.getByIndex(0);
 ----
 
 
-*Enumeration Access*
+====== Enumeration Access
 
-com.sun.star.container的接口。XEnumerationAccess创建枚举，它允许在一组对象之间移动。它有一个方法:
+接口 _com.sun.star.container.XEnumerationAccess_ 创建枚举，它允许在一组对象之间移动。它有一个方法:
 [source,java]
 ----
-com.sun.star.container.XEnumeration createEnumeration()
+XEnumeration createEnumeration()
 ----
-从createEnumeration()获得的枚举对象支持接口com.sun.star.container.XEnumeration。通过这个接口，只要枚举中有更多的元素，我们就可以一直从枚举中提取元素。XEnumeration提供了以下方法:
+从 _createEnumeration()_ 获得的枚举对象支持接口 _com.sun.star.container.XEnumeration_。通过这个接口，只要枚举中有更多的元素，我们就可以一直从枚举中提取元素。_XEnumeration_ 提供了以下方法:
 [source,java]
 ----
 boolean hasMoreElements()
@@ -666,16 +704,19 @@ while (xCells.hasMoreElements()) {
     // do something with cell
 }
 ----
-[%hardbreaks]
-例如，在电子表格中，您可以找出哪些单元格包含公式。生成的单元集作为XEnumerationAccess提供。
-使用公式查询单元格的接口是 _com.sun.star.sheet.XCellRangesQuery_ 定义了一个方法XSheetCellRanges queryContentCells(short cellFlags)，该方法查询具有在常量组com.sun.star.sheet.CellFlags中定义的内容的单元格。其中一个标记是公式。从queryContentCells()中，我们接收到一个带有com.sun.star.sheet的对象。XSheetCellRanges接口，它有以下方法:
+
+例如，在电子表格中，您可以找出哪些单元格包含公式。生成的单元集作为 _XEnumerationAccess_ 提供。
+
+使用公式查询单元格的接口是 _com.sun.star.sheet.XCellRangesQuery_ 定义了一个方法 _XSheetCellRanges queryContentCells(short cellFlags)_ ，该方法查询具有在常量组 _com.sun.star.sheet.CellFlags_ 中定义的内容的单元格。其中一个标记是公式。从 _queryContentCells()_ 中，我们接收到一个带有 _com.sun.star.sheet.XSheetCellRanges_ 接口的对象。它有以下方法:
 [source,java]
 ----
 XEnumerationAccess getCells()
 String getRangeAddressesAsString()
-sequence< com.sun.star.table.CellRangeAddress > getRangeAddresses()
+sequence<CellRangeAddress> getRangeAddresses()
 ----
-方法getCells()可以使用 _XEnumerationAccess_ 列出我们的FirstLoadComponent示例中的电子表格文档中的所有公式单元格和包含公式。
+
+方法 _getCells()_ 可以使用 _XEnumerationAccess_ 列出我们的 _FirstLoadComponent_ 示例中的电子表格文档中的所有公式单元格和包含公式。
+
 [source,java]
 ----
 XCellRangesQuery xCellQuery = (XCellRangesQuery)UnoRuntime.queryInterface(XCellRangesQuery.class, sheet);
@@ -695,14 +736,13 @@ while (xFormulaEnum.hasMoreElements()) {
 ----
 
 
-*如何知道用哪种类型*
+====== 如何知道用哪种类型
 
-[%hardbreaks]
 一个常见的问题是，在从方法接收到对象之后，决定对象真正具有什么功能。通过观察Java IDE中的代码完成情况，您可以发现从方法返回的对象的基本接口。您将注意到 _loadComponentFromURL()_ 返回一个 _com.sun.star.lang.XComponent_。
 通过在NetBeans IDE中按Alt + F1，你可以阅读关于你正在使用的接口和服务的规范。
 但是，方法只能指定为返回一种接口类型。从方法获得的接口通常比方法返回的接口支持更多的接口(特别是当这些接口的设计早于UNO中多继承接口类型的可用性时)。此外，接口不会告诉对象包含的任何属性。
 因此，您应该使用本手册来了解如何工作。然后开始编写代码，使用代码完成和API引用。
-此外，您可以尝试InstanceInspector，这是一个Java工具，它是OpenOffice SDK示例的一部分。它是一个Java组件，可以向office注册，并显示当前使用的对象的接口和属性。
+此外，您可以尝试 _InstanceInspector_，这是一个Java工具，它是 _OpenOffice SDK_ 示例的一部分。它是一个Java组件，可以向office注册，并显示当前使用的对象的接口和属性。
 在OpenOffice Basic中，可以使用以下基本属性检查对象。
 [source,Basic]
 ----
@@ -726,20 +766,20 @@ end sub
 
 ===== 示例：文本、表格、图形入门
 
-本节的目标是简要概述OpenOffice API中所有文档类型都通用的那些机制。OpenOffice的三个主要应用领域是文本、表格和绘图形状。要点是:文本、表格和绘图形状可以出现在所有三种文档类型中，无论您处理的是 _Writer_、 _Calc_ 或 _Draw/Impress_ 文件，但它们在任何地方都以相同的方式处理。掌握了通用机制后，就能够在所有文档类型中插入和使用文本、表格和绘图了。
+本节的目标是简要概述 _OpenOffice API_ 中所有文档类型都通用的那些机制。OpenOffice的三个主要应用领域是文本、表格和绘图形状。要点是:文本、表格和绘图形状可以出现在所有三种文档类型中，无论您处理的是 _Writer_、 _Calc_ 或 _Draw/Impress_ 文件，但它们在任何地方都以相同的方式处理。掌握了通用机制后，就能够在所有文档类型中插入和使用文本、表格和绘图了。
 
-*用于文本、表格和绘图的通用机制*
+====== 用于文本、表格和绘图的通用机制
 
-[%hardbreaks]
 我们想强调共同点，因此我们从允许操作现有文本、表格和绘图的公共接口和属性开始。然后，我们将演示在每种文档类型中创建文本、表格和绘图的不同技术。
 使用现有文本、表格和绘图的关键接口和属性如下:对于文本，接口 _com.sun.star.text.XText_ 包含更改实际文本和其他文本内容的方法(除了传统文本段落之外，文本内容的例子还有文本表、文本字段、图形对象和类似的东西，但这些内容不是在所有上下文中都可用的)。当我们在这里谈到文本时，我们指的是任何文本——文本文档中的文本、文本框架、页眉和页脚、表格单元格或绘图形状中的文本。_XText_ 是OpenOffice中所有文本的关键。
 
 image::img/XTextRange.png[XTextRange]
 
-[%hardbreaks]
 _com.sun.star.text.XText_ 的接口能够设置或获取作为单个字符串的文本，并定位文本的开头和结尾。此外，_XText_ 可以在文本中的任意位置插入字符串，并创建文本游标来选择和格式化文本。最后，XText通过 _insertTextContent_ 和 _removeTextContent_ 方法处理文本内容，尽管并非所有文本都接受常规文本以外的文本内容。实际上，XText通过继承 _com.sun.star.text.XSimpleText_ 涵盖了所有这些内容继承自 _com.sun.star.text.XTextRange_。
 文本格式是通过 _com.sun.star.style.ParagraphProperties_ 和 _com.sun.star.style.CharacterProperties_ 服务中描述的属性进行的。
+
 下面的示例方法 _manipulatetext()_ 添加文本，然后使用文本光标使用 _CharacterProperties_ 选择和格式化几个单词，然后插入更多文本。方法 _manipulatetext()_ 只包含 _XText_ 最基本的方法，所以它可以处理每个文本对象。特别是，它避免了 _insertTextContent()_，因为除了可以插入到所有文本对象中的常规文本之外，没有文本内容。
+
 [source,java]
 ----
 protected void manipulateText(XText xText) throws com.sun.star.uno.Exception {
@@ -768,13 +808,13 @@ protected void manipulateText(XText xText) throws com.sun.star.uno.Exception {
     xText.insertString(xTextCursor, "\n \"Is that the mill?\" he asked.",false);
 }
 ----
+
 在表和单元格中，_com.sun.star.table.XCellRange_ 接口允许检索单元格和单元格的子例程。有了单元格后，可以通过接口 _com.sun.star.table.XCell_ 使用其公式或数值。
 
 表格格式在文本表格和电子表格中有部分不同。文本表使用 _com.sun.star.text.TextTable_ 中指定的属性。而电子表格使用 _com.sun.star.table.CellProperties_。此外，还有一些表游标允许选择和格式化单元格范围和所包含的文本。但是自从一个 _com.sun.star.text.TextTableCursor_ 的工作原理与 _com.sun.star.sheet.SheetCellCursor_ 非常不同。我们将在关于文本和电子表格文档的章节中讨论它们。
 [source,java]
 ----
-protected void manipulateTable(XCellRange xCellRange) throws
-com.sun.star.uno.Exception {
+protected void manipulateTable(XCellRange xCellRange) throws Exception {
     String backColorPropertyName = "";
     XPropertySet xTableProps = null;
     // enter column titles and a cell value
@@ -817,12 +857,10 @@ com.sun.star.uno.Exception {
         XPropertySet.class, xCellRange);
     }
     // set cell background color
-    xCellProps.setPropertyValue(backColorPropertyName, new
-    Integer(0x99CCFF));
+    xCellProps.setPropertyValue(backColorPropertyName, new Integer(0x99CCFF));
     // set table borders
     // create description for blue line, width 10
-    // colors are given in ARGB, comprised of four bytes for alpha-redgreen-
-    blue as in 0xAARRGGBB
+    // colors are given in ARGB, comprised of four bytes for alpha-redgreen-blue as in 0xAARRGGBB
     BorderLine theLine = new BorderLine();
     theLine.Color = 0x000099;
     theLine.OuterLineWidth = 10;
@@ -837,7 +875,7 @@ com.sun.star.uno.Exception {
 ----
 在绘制形状时，_com.sun.star.drawing.XShape_ 接口用于确定形状的位置和大小。
 
-其他一切都是基于属性的格式问题，可以使用多种属性。org提供了11种不同的图形，它们是GUI(图形用户界面)中绘图工具的基础。其中六种形状有各自的属性，反映出它们的特征。这六种形状是:
+其他一切都是基于属性的格式问题，可以使用多种属性。OpenOffice提供了11种不同的图形，它们是GUI(图形用户界面)中绘图工具的基础。其中六种形状有各自的属性，反映出它们的特征。这六种形状是:
 
 * _com.sun.star.drawing.EllipseShape_ 用于圆形和椭圆.
 * _com.sun.star.drawing.RectangleShape_ 用于盒子
@@ -881,7 +919,7 @@ protected void manipulateShape(XShape xShape) throws com.sun.star.uno.Exception 
 }
 ----
 
-*创建文本、表格、图形*
+====== 创建文本、表格、图形
 
 以上三种 _manipulateXXX_ 方法均以文本、表格和形状对象为参数并改变它们。下面的方法展示了如何创建这样的文件对象在各种文档类型中。注意，所有文档都有自己的文档服务工厂来创建要插入到文档中的对象。除此之外这在很大程度上取决于文档类型。本节只演示不同的程序，解释可以在关于文本、电子表格和绘图文档的章节中找到。
 
@@ -898,7 +936,7 @@ protected XComponent newDocComponent(String docType) throws java.lang.Exception 
 }
 ----
 
-*Writer中的文本、表格和图形*
+====== Writer中的文本、表格和图形
 
 _useWriter_ 方法创建一个writer文档并操作它的文本，然后使用文档的内部服务管理器实例化一个文本表和一个形状，插入它们并操作表和形状。有关更详细的信息，请参考文本文档。
 [source,java]
@@ -941,7 +979,7 @@ protected void useWriter() throws java.lang.Exception {
 }
 ----
 
-*Calc中的文本、表格和图形*
+====== Calc中的文本、表格和图形
 
 _useCalc_ 方法创建calc文档，使用其文档工厂创建形状并操作单元格文本、表格和形状。电子表格文档这一章讨论电子表格的所有方面。
 [source,java]
@@ -987,7 +1025,7 @@ protected void useCalc() throws java.lang.Exception {
 }
 ----
 
-*Draw中的图形和文本*
+====== Draw中的图形和文本
 
 _useDraw_ 方法创建一个绘制文档，并使用其文档工厂实例化和添加一个形状，然后对该形状进行操作。绘图文档和演示文档这一章对绘图和演示提供了更多的信息。
 [source,java]
@@ -1044,7 +1082,6 @@ UNO（通用网络对象）的目标是为跨编程语言和平台边界的网�
 
 === API概念
 
-[%hardbreaks]
 OpenOffice API是一种独立于语言的方法，用于指定OpenOffice的功能。其主要目标是提供一种API，以访问OpenOffice的功能，使用户能够通过自己的解决方案和新功能扩展功能，并使OpenOffice的内部实现可互换。
 
 OpenOffice路线图的长期目标是将现有的OpenOffice拆分为多个小组件，这些小组件结合在一起即可提供完整的OpenOffice功能。这样的组件是可管理的，它们相互交互以提供高级功能，并且即使这些新的实现以不同的编程语言实现，它们也可以与提供相同功能的其他实现互换。当达到此目标时，API，组件和基本概念将提供一个构建工具包，它使OpenOffice不仅适用于具有预定义和静态功能的Office套件，而且适用于各种专用解决方案。本部分为您提供了对OpenOffice API背后概念的透彻理解。
@@ -1062,7 +1099,7 @@ API参考中的数据类型是UNO类型，必须将其映射到可以与OpenOffi
 UNO提供了一组预定义的简单类型，下表中列出了这些类型
 
 
-[width="100%",options="header,footer"]
+[width="100%",options="header"]
 |====================
 | UNO类型 | 描述
 | void | 空类型，仅用作方法返回类型在any之中。
@@ -1087,11 +1124,10 @@ UNO提供了一组预定义的简单类型，下表中列出了这些类型
 
 === 任意类型
 
-特殊类型any可以代表所有其他UNO类型的值。在目标语言中，任何类型都需要特殊处理。 Java中有一个AnyConverter，而C ++中有特殊的运算符。有关详细信息，请参见UNO语言绑定。
+特殊类型any可以代表所有其他UNO类型的值。在目标语言中，任何类型都需要特殊处理。 Java中有一个AnyConverter，而C++中有特殊的运算符。有关详细信息，请参见UNO语言绑定。
 
 === 接口
 
-[%hardbreaks]
 UNO对象之间的通信基于对象接口。 可以从对象的外部或内部看到接口。
 
 接口从对象的外部提供对象的功能或特殊方面。接口通过发布覆盖对象某个方面的一组操作来提供对对象的访问，而无需告知对象内部信息。
@@ -1196,18 +1232,18 @@ service SomeService: XSomeInterface {
 [source,java]
 ----
 public class SomeService {
-    public static XSomeInterface create1(com.sun.star.uno.XComponentContext context) { ... }
-    public static XSomeInterface create2(com.sun.star.uno.XComponentContext context, int arg1, String arg2) {... }
-    public static XSomeInterface create3(com.sun.star.uno.XComponentContext context, Object... rest) { ... }
+    public static XSomeInterface create1(XComponentContext context) { ... }
+    public static XSomeInterface create2(XComponentContext context, int arg1, String arg2) {... }
+    public static XSomeInterface create3(XComponentContext context, Object... rest) { ... }
 }
 ----
-服务构造函数还可以具有异常规范（“raises(Exception1，...)”），其处理方式与异常规范相同接口方法。（如果构造函数没有异常规范，则只能抛出运行时异常，尤其是 _com.sun.star.uno.DeploymentException_。）
+服务构造函数还可以具有异常规范（“_raises(Exception1，...)_”），其处理方式与异常规范相同接口方法。（如果构造函数没有异常规范，则只能抛出运行时异常，尤其是 _com.sun.star.uno.DeploymentException_。）
 
 如果使用缩写形式编写了新式服务，请服务SomeService:XSomeInterface; 那么它有一个隐式构造函数。隐式构造函数的确切行为是特定于语言的，但通常被称为 _create_，除了 _com.sun.star.uno.XComponentContext_ 之外不接受任何参数，并且可能仅抛出运行时异常。
 
 ==== 包含属性
 
-建立OpenOffice API的结构时，设计人员发现了认为办公室环境中的对象将具有大量的质量，这些质量似乎并不是对象结构的一部分，而是看起来是对基础对象的表面变化。 同样很清楚的是，并非某种类型的每个物体都具有所有的特质。因此，引入了属性的概念，而不是为每种质量定义一个复杂的可选接口和非可选接口的谱系。属性是对象中通过名称通过通用接口提供的用于属性访问的数据，其中包含getPropertyValue（）和setPropertyValue（）访问方法。属性的概念还有其他优点，并且还有更多有关属性的知识。 请参阅属性以获取有关属性的更多信息。
+建立OpenOffice API的结构时，设计人员发现了认为办公室环境中的对象将具有大量的质量，这些质量似乎并不是对象结构的一部分，而是看起来是对基础对象的表面变化。 同样很清楚的是，并非某种类型的每个物体都具有所有的特质。因此，引入了属性的概念，而不是为每种质量定义一个复杂的可选接口和非可选接口的谱系。属性是对象中通过名称通过通用接口提供的用于属性访问的数据，其中包含 _getPropertyValue()_ 和 _setPropertyValue()_ 访问方法。属性的概念还有其他优点，并且还有更多有关属性的知识。 请参阅属性以获取有关属性的更多信息。
 
 旧式服务可以直接在UNOIDL规范中列出支持的属性。属性定义具有特定类型的成员变量，该变量可以在实现组件上通过特定名称访问。可以通过附加标志为属性添加更多限制。 以下旧式服务引用了一个接口和三个可选属性。所有已知的API类型都可以是有效的属性类型：
 
@@ -1376,8 +1412,8 @@ WARNING: 一旦指定并发布了枚举类型，您就可以相信以后不会�
 序列类型是一组相同类型的元素，具有可变数量的元素。在UNO IDL中，used元素始终引用现有的已知类型或其他序列类型。在所有其他类型定义中，序列可以作为普通类型出现。
 [source,c++]
 ----
-sequence< com::sun::star::uno::XInterface >
-sequence< string > getNamesOfIndex( sequence< long > indexes );
+sequence<XInterface >
+sequence<string> getNamesOfIndex( sequence<long> indexes );
 ----
 
 === 模块
@@ -1432,6 +1468,7 @@ exception SecurityException : com::sun::star::uno::RuntimeException {
 WARNING: UNO基本接口 _com.sun.star.uno.XInterface_ 的方法 _acquire()_ 和发行版是上述规则的例外。 它们是可能甚至不会引发运行时异常的唯一操作。 但是在Java和C ++程序中，您不直接使用这些方法，它们由相应的语言绑定处理。
 
 === 单例
+
 单例用于指定命名的对象，在UNO组件上下文的生命周期中可以恰好存在一个实例。 单例引用一种接口类型，并指定使用单例的名称可以在组件上下文上访问此单例的唯一现有实例。 如果不存在单例实例，则组件上下文将实例化一个新实例。 这种新式单例的示例是：
 [source,java]
 ----
@@ -1469,17 +1506,21 @@ module com {
 因此，在真正使用参考之前，在API参考中查找所需的功能有时会造成混淆，因为您需要基本了解功能的工作原理，涉及的服务，在何处可用等。本手册旨在使您对OpenOffice.org文档模型，数据库集成和应用程序本身有一定的了解。
 
 ==== 对象组成
+
 接口支持单继承和多继承，它们都基于 _com.sun.star.uno.XInterface_ 。在API参考中，这反映在任何接口规范的“基本层次结构”部分中。如果您查找接口，请始终检查基本层次结构部分以了解支持的方法的全部范围。例如，如果您查找 _com.sun.star.text.XText_，则会看到两个方法，_insertTextContent()_ 和 _removeTextContent()_，但是继承的接口还提供了九种方法。同样的情况适用于异常，有时也适用于结构，它们也支持单继承。
 
 API参考中的服务规范可以包含“包含的服务”部分，该部分与上述内容类似，因为单个包含的旧式服务可能包含整个服务世界。但是，包含服务的事实与类继承无关。通过从基本实现继承，通过聚合，某种其他类型的委派或仅通过重新实现所有内容，服务实现从技术上讲包括其他服务，但都没有定义（对于UNO接口继承也没有定义）。对于API用户而言，这没什么意思-他绝对可以依赖所描述功能的可用性，但是他绝对不能依赖于实现的内部细节，哪些类提供了功能，它们从何处继承以及它们委托给其他类的内容 。
 
 === UNO概念
+
 现在，您已经对 OpenOffice API概念有了深入的了解，并且了解了UNO对象的规范，我们准备探索UNO，即了解UNO对象如何相互连接和通信。
 
 === UNO进程间通信
-不同环境中的UNO对象通过进程间桥连接。您可以对位于不同进程中的UNO对象实例执行调用。 这是通过将方法名称和参数转换为字节流表示形式并将此程序包发送到远程进程（例如，通过套接字连接）来完成的。本手册中的大多数示例都使用进程间桥与OpenOffice.org进行通信。本节介绍使用UNO API创建UNO进程间连接。
+
+不同环境中的UNO对象通过进程间桥连接。您可以对位于不同进程中的UNO对象实例执行调用。 这是通过将方法名称和参数转换为字节流表示形式并将此程序包发送到远程进程（例如，通过套接字连接）来完成的。本手册中的大多数示例都使用进程间桥与OpenOffice进行通信。本节介绍使用UNO API创建UNO进程间连接。
 
 === 监听模式启动OpenOffice
+
 本开发人员指南中的大多数示例都连接到正在运行的OpenOffice并执行API调用，然后在OpenOffice中执行这些调用。默认情况下，出于安全原因，办公室不监听资源。这使得必须使OpenOffice在进程间连接资源（例如套接字）上进行侦听。当前，这可以通过两种方式完成：
 
 * 使用附加参数启动office：
@@ -1518,7 +1559,6 @@ TCP <Hostname>:8100 <Fully qualified hostname>: 0 Listening
 
 如果office没有监听，则可能不是使用正确的连接URL参数启动的。检查 _Setup.xcu_ 文件或您的命令行中是否键入错误，然后重试。
 
-[%hardbreaks]
 NOTE: 在OpenOffice 1.1之前的版本中，存在一些差异。使office每次监听的配置位于其他位置。使用编辑器打开文件 _<OfficePath>/share/config/registry/instance/org/openoffice/Setup.xml_ ，然后查找元素：
 <ooSetupConnectionURL cfg:type="string"/>
 用以下代码扩展它：
@@ -1530,6 +1570,7 @@ socket,port=2083;urp;
 下一节将讨论连接URL的各个部分。
 
 === 导入一个UNO对象
+
 进程间连接的最常见用例是从导出服务器导入对UNO对象的引用。例如，本手册中描述的大多数Java示例都检索对OpenOffice ComponentContext的引用。正确的方法是使用 _com.sun.star.bridge.UnoUrlResolver_ 服务。 其主界面 _com.sun.star.bridge.XUnoUrlResolver_ 的定义如下：
 [source,java]
 ----
@@ -1615,12 +1656,12 @@ UNO进程间网桥在 _com.sun.star.connection.XConnection_ 接口上建立，�
 [source,java]
 ----
 interface XConnection: com::sun::star::uno::XInterface{
-    long read( [out] sequence < byte > aReadBytes , [in] long nBytesToRead )
-    raises( com::sun::star::io::IOException );
-    void write( [in] sequence < byte > aData )
-    raises( com::sun::star::io::IOException );
-    void flush( ) raises( com::sun::star::io::IOException );
-    void close( ) raises( com::sun::star::io::IOException );
+    long read( sequence <byte> aReadBytes , long nBytesToRead )
+    raises( IOException );
+    void write( sequence <byte> aData )
+    raises( IOException );
+    void flush( ) raises( IOException );
+    void close( ) raises( IOException );
     string getDescription();
 };
 ----
@@ -1631,14 +1672,12 @@ interface XConnection: com::sun::star::uno::XInterface{
 [source,java]
 ----
 interface XAcceptor: com::sun::star::uno::XInterface{
-    XConnection accept( [in] string sConnectionDescription )
-    raises( AlreadyAcceptingException,
-    ConnectionSetupException,
-    com::sun::star::lang::IllegalArgumentException);
+    XConnection accept( string sConnectionDescription )
+    raises( AlreadyAcceptingException,ConnectionSetupException,IllegalArgumentException);
     void stopAccepting();
 };
 interface XConnector: com::sun::star::uno::XInterface{
-    XConnection connect( [in] string sConnectionDescription )
+    XConnection connect( string sConnectionDescription )
     raises( NoConnectException,ConnectionSetupException );
 };
 ----
@@ -1672,14 +1711,14 @@ image::img/CreateTheBridge.jpg[启动UNO进程间桥所需的服务交互，接�
 [source,java]
 ----
 interface XBridgeFactory: com::sun::star::uno::XInterface{
-    XBridge createBridge( [in] string sName, [in] string sProtocol , [in] com::sun::star::connection::XConnection aConnection , [in] XInstanceProvider anInstanceProvider )
-    raises ( BridgeExistsException , com::sun::star::lang::IllegalArgumentException );
-    XBridge getBridge( [in] string sName );
-    sequence < XBridge > getExistingBridges( );
+    XBridge createBridge( string sName, string sProtocol , XConnection aConnection , XInstanceProvider anInstanceProvider )
+    raises ( BridgeExistsException , IllegalArgumentException );
+    XBridge getBridge( string sName );
+    sequence <XBridge> getExistingBridges( );
 };
 ----
 
-NOTE: 在OpenOffice.org 1.1之前的版本中，有几个区别
+NOTE: 在OpenOffice 1.1之前的版本中，有几个区别
 
 BridgeFactory服务管理所有UNO进程间连接。 _createBridge()_ 方法创建一个新的桥：
 
@@ -1691,8 +1730,8 @@ BridgeFactory服务管理所有UNO进程间连接。 _createBridge()_ 方法创�
 [source,java]
 ----
 interface XInstanceProvider: com::sun::star::uno::XInterface{
-    com::sun::star::uno::XInterface getInstance( [in] string sInstanceName )
-    raises ( com::sun::star::container::NoSuchElementException );
+    XInterface getInstance( string sInstanceName )
+    raises ( NoSuchElementException );
 };
 ----
 BridgeFactory返回 _com.sun.star.bridge.XBridge_ 接口。
@@ -1700,7 +1739,7 @@ BridgeFactory返回 _com.sun.star.bridge.XBridge_ 接口。
 [source,java]
 ----
 interface XBridge: com::sun::star::uno::XInterface{
-    XInterface getInstance( [in] string sInstanceName );
+    XInterface getInstance( string sInstanceName );
     string getName();
     string getDescription();
 };
@@ -1913,11 +1952,12 @@ TIP: 如果需要特定的文档组件，但不确定该组件是否为当前组
 ----
 import com.sun.star.frame.TerminationVetoException;
 import com.sun.star.frame.XTerminateListener;
+import com.sun.star.lang.EventObject;
 public class TerminateListener implements XTerminateListener {
-    public void notifyTermination (com.sun.star.lang.EventObject eventObject) {
+    public void notifyTermination (EventObject eventObject) {
         System.out.println("about to terminate...");
     }
-    public void queryTermination (com.sun.star.lang.EventObject eventObject) throws TerminationVetoException {
+    public void queryTermination (EventObject eventObject) throws TerminationVetoException {
         // test if we can terminate now
         if (TerminationTest.isAtWork() == true) {
             System.out.println("Terminate while we are at work? No way!");
@@ -1927,13 +1967,14 @@ public class TerminateListener implements XTerminateListener {
             returns false
         }
     }
-    public void disposing (com.sun.star.lang.EventObject eventObject) {}
+    public void disposing (EventObject eventObject) {}
 }
 ----
 
 下面的TerminationTest类测试上面的TerminateListener。
 [source,java]
 ----
+import com.sun.star.comp.helper.Bootstrap;
 import com.sun.star.bridge.XUnoUrlResolver;
 import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
@@ -1951,7 +1992,7 @@ public class TerminationTest extends java.lang.Object {
         XDesktop xDesktop = null;
         try {
             // connect and retrieve a remote service manager and component context
-            XComponentContext xLocalContext = com.sun.star.comp.helper.Bootstrap.createInitialComponentContext(null);
+            XComponentContext xLocalContext = Bootstrap.createInitialComponentContext(null);
             XMultiComponentFactory xLocalServiceManager = xLocalContext.getServiceManager();
             Object urlResolver = xLocalServiceManager.createInstanceWithContext( "com.sun.star.bridge.UnoUrlResolver", xLocalContext );
             XUnoUrlResolver xUnoUrlResolver = (XUnoUrlResolver)
@@ -2030,7 +2071,7 @@ void setActiveFrame ( XFrame xFrame)
 [source,java]
 ----
 void append (XFrame xFrame )
-sequence <XFrame > queryFrames (long nSearchFlags )
+sequence <XFrame> queryFrames (long nSearchFlags )
 void remove (XFrame xFrame )
 ----
 
@@ -2113,8 +2154,7 @@ XControllergetController ();
 当框架将组件链接到周围的窗口系统中时，它们将建立框架层次结构。与层次结构相关的 _XFrame_ 方法涵盖了这一方面：
 [source,java]
 ----
-[oneway] void setCreator (XFramesSupplier
-xCreator );
+[oneway] void setCreator (XFramesSupplier xCreator );
 XFramesSupplier getCreator ();
 string getName ();
 [oneway] void setName (string aName );
@@ -2465,6 +2505,7 @@ _XBookmarksSupplier_ 返回我们文档中的所有书签。书签的集合是 _
 
 [source,java]
 ----
+import java.util.Enumeration;
 /** Sample for use of templates
 This sample uses the file TextTemplateWithUserFields.odt from the
 Samples folder.
@@ -2489,7 +2530,7 @@ protected void templateExample() throws Exception {
     XNameAccess xNamedFieldMasters = xTextFieldsSupplier.getTextFieldMasters();
     XEnumerationAccess xEnumeratedFields = xTextFieldsSupplier.getTextFields();
     // iterate over hashtable and insert values into field masters
-    java.util.Enumeration keys = recipient.keys();
+    Enumeration keys = recipient.keys();
     while (keys.hasMoreElements()) {
         // get column name
         String key = (String)keys.nextElement();
@@ -3148,7 +3189,7 @@ _com.sun.star.style.CharacterProperties_ 描述了所有语言区域的通用字
 _com.sun.star.style.CharacterPropertiesAsian_ 描述亚洲文字中使用的属性。所有这些属性在CharacterProperties中都有一个对应项。 一旦使用的Unicode字符子集将文本识别为亚洲文字，它们便立即适用
 
 .CharacterPropertiesAsian的属性
-[width="100%",options="header,footer"]
+[width="100%"]
 |====================
 | _CharHeightAsian_ | float-此值包含以磅为单位的字符的高度。
 | _CharWeightAsian_ | float-此属性包含字体粗细的值。
@@ -3173,7 +3214,8 @@ _com.sun.star.style.CharacterPropertiesAsian_ 描述亚洲文字中使用的属�
 ----
 /** This snippet shows the necessary steps to set a property at the
 current position of a given text cursor mxDocCursor */
-// query the XPropertySet interface XPropertySet xCursorProps = (XPropertySet)
+// query the XPropertySet interface
+XPropertySet xCursorProps = (XPropertySet)
 UnoRuntime.queryInterface(XPropertySet.class, mxDocCursor);
 // call setPropertyValue, passing in a Float object
 xCursorProps.setPropertyValue("CharWeight", new Float(FontWeight.BOLD));
@@ -3677,69 +3719,263 @@ com::sun::star::container::XIndexReplace getChapterNumberingRules()
 /** This method demonstrates how to create linked and unlinked sections */
 protected void TextSectionExample() {
     try {
-        // Go to the end of the document
+        // 跳转文档的末尾
         mxDocCursor.gotoEnd(false);
-        // Insert two paragraph breaks
+        // 插入两个段落
         mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
         mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, true);
-        // Create a new TextSection from the document factory and access it's XNamed interface
+        // 从文档工厂创建一个新的TextSection并访问它的XNamed接口
         XNamed xChildNamed = (XNamed) UnoRuntime.queryInterface(XNamed.class, mxDocFactory.createInstance("com.sun.star.text.TextSection"));
-        // Set the new sections name to 'Child_Section'
+        // 设置新的章节，取名'Child_Section'
         xChildNamed.setName("Child_Section");
-        // Access the Child_Section's XTextContent interface and insert it into the document
+        // 访问Child_Section的XTextContent接口并将其插入到文档
         XTextContent xChildSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xChildNamed);
         mxDocText.insertTextContent (mxDocCursor, xChildSection, false);
-        // Access the XParagraphCursor interface of our text cursor
+        // 访问文本光标的XParagraphCursor接口
         XParagraphCursor xParaCursor = (XParagraphCursor) UnoRuntime.queryInterface(XParagraphCursor.class, mxDocCursor);
-        // Go back one paragraph (into Child_Section)
+        // 返回上一个段落(into Child_Section)
         xParaCursor.gotoPreviousParagraph(false);
-        // Insert a string into the Child_Section
+        // 插入字符串到Child_Section
         mxDocText.insertString(mxDocCursor, "This is a test", false);
-        // Go to the end of the document
+        // 跳转到文档末尾
         mxDocCursor.gotoEnd(false);
-        // Go back two paragraphs
+        // 返回两个段落
         xParaCursor.gotoPreviousParagraph (false);
         xParaCursor.gotoPreviousParagraph (false);
-        // Go to the end of the document, selecting the two paragraphs 
+        // 跳转文档末尾,选择两个段落 
         mxDocCursor.gotoEnd(true);
-        // Create another text section and access it's XNamed interface 
+        // 创建另一个章节并访问XNamed接口 
         XNamed xParentNamed = (XNamed) UnoRuntime.queryInterface(XNamed.class,
         mxDocFactory.createInstance("com.sun.star.text.TextSection"));
-        // Set this text section's name to Parent_Section 
+        // 设置章节名为Parent_Section 
         xParentNamed.setName("Parent_Section");
-        // Access the Parent_Section's XTextContent interface ... XTextContent
-        xParentSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xParentNamed);
-        // ...and insert it into the document
+        // 访问章节Parent_Section的XTextContent接口
+        XTextContent xParentSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xParentNamed);
+        // 并将其插入到文档
         mxDocText.insertTextContent(mxDocCursor, xParentSection, false);
-        // Go to the end of the document
+        // 跳转文档末尾
         mxDocCursor.gotoEnd(false);
-        // Insert a new paragraph
+        // 插入新的段落
         mxDocText.insertControlCharacter( mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
-        // And select the new pargraph 
+        // 并选择新段落 
         xParaCursor.gotoPreviousParagraph(true);
-        // Create a new Text Section and access it's XNamed interface
+        // 创建新的章节并访问XNamed接口
         XNamed xLinkNamed = (XNamed) UnoRuntime.queryInterface( XNamed.class,mxDocFactory.createInstance("com.sun.star.text.TextSection"));
-        // Set the new text section's name to Linked_Section
+        // 设置新章节的名称为Linked_Section
         xLinkNamed.setName("Linked_Section");
-        // Access the Linked_Section's XTextContent interface
+        // 访问Linked_Section的XTextContent接口
         XTextContent xLinkedSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xLinkNamed);
-        // And insert the Linked_Section into the document
+        // 并插入Linked_Section到文档
         mxDocText.insertTextContent(mxDocCursor, xLinkedSection, false);
-        // Access the Linked_Section's XPropertySet interface
+        // 访问Linked_Section的XPropertySet接口
         XPropertySet xLinkProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, xLinkNamed);
-        // Set the linked section to be linked to the Child_Section
+        // 设置链接章节链接到Child_Section
         xLinkProps.setPropertyValue("LinkRegion", "Child_Section");
-        // Access the XPropertySet interface of the Child_Section XPropertySet
-        xChildProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, xChildNamed);
-        // Set the Child_Section's background colour to blue
+        // 访问Child_Section的XPropertySet接口 
+        XPropertySet xChildProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, xChildNamed);
+        // 设置Child_Section的背景色为蓝色
         xChildProps.setPropertyValue("BackColor", new Integer(13421823));
-        // Refresh the document, so the linked section matches the Child_Section
+        // 刷新文档,链接章节匹配Child_Section
         XRefreshable xRefresh = (XRefreshable) UnoRuntime.queryInterface(XRefreshable.class, mxDoc); 
         xRefresh.refresh();
     } catch (Exception e) {
         e.printStackTrace (System.out);
     }
 }
+----
+
+==== 页面布局
+
+OpenOffice中的页面布局始终是页面样式。页面不能被硬格式化。若要更改当前页面布局，请从文本光标属性 _PageStyleName_ 中检索当前页面样式，并从 _StyleFamily PageStyles_ 中获取此页面样式。
+
+页面布局的更改通过 _com.sun.star.style.PageProperties_ 中描述的属性发生。有关所有可能属性的详细信息，请参阅API参考，包括这些属性的一部分的页眉和页脚文本。
+
+当页眉或页脚连接到页面样式时，文本对象将作为样式的属性提供。根据页面布局的设置，每种样式都有一个页眉和页脚文本对象，或者有两个，左右页眉和页脚文本：
+
+.包含页眉和页脚的页面属性
+[width="100%"]
+|====================
+| _PageProperties:HeaderText_ | _com.sun.star.text.Text_
+| _PageProperties:HeaderTextLeft_ |
+| _PageProperties:HeaderTextRight_ |
+| _PageProperties:FooterText_ |
+| _PageProperties:FooterTextLeft_ |
+| _PageProperties:FooterTextRight_ |
+|====================
+
+页面样式的页面布局在左右页面上可以相等，可以是镜像的，也可以在左右页面上分开。这由属性 _PageStyleLayout_ 控制，该属性需要枚举 _com.sun.star.style.PageStyleLayout_ 中的值。只要左右页面相等，_HeaderText_ 和 _HeaderRightText_ 就是相同的。页脚也是如此。
+
+只有使用属性 _HeaderIsOn_ 和 _FooterIsOn_ 打开页眉或页脚时，页眉和页脚中的文本对象才可用。
+
+不能将图形对象插入页眉或页脚。
+
+==== 列
+
+文本框，文本部分和页面样式可以设置为具有列的格式。列的宽度是相对的，因为对象的绝对宽度在模型中是未知的。布局格式负责计算列的实际宽度。
+
+使用属性 _TextColumns_ 来应用列。它期望必须由文档工厂创建的 _com.sun.star.text.TextColumns_ 服务。在将创建的 _TextColumns_ 服务应用于属性 _TextColumns_ 之前，接口 _com.sun.star.text.XTextColumns_ 会优化文本列的特性。
+
+考虑以下示例，以了解如何处理文本列：
+
+[source,java]
+----
+/** This method demonstrates the XTextColumns interface and how to insert a
+blank paragraph using the XRelativeTextContentInsert interface */
+protected void TextColumnsExample() {
+    try {
+        // Go to the end of the doucment
+        mxDocCursor.gotoEnd(false);
+        // insert a new paragraph 
+        mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
+        // insert the string 'I am a fish.' 100 times
+        for (int i = 0 ; i < 100; ++i) {
+            mxDocText.insertString(mxDocCursor, "I am a fish.",false);
+        }
+        // insert a paragraph break after the text
+        mxDocText.insertControlCharacter(mxDocCursor,ControlCharacter.PARAGRAPH_BREAK, false);
+        // Get the XParagraphCursor interface of our text cursor
+        XParagraphCursor xParaCursor = (XParagraphCursor) UnoRuntime.queryInterface(XParagraphCursor.class, mxDocCursor);
+        // Jump back before all the text we just inserted 
+        xParaCursor.gotoPreviousParagraph(false);
+        xParaCursor.gotoPreviousParagraph(false);
+        // Insert a string at the beginning of the block of text
+        mxDocText.insertString(mxDocCursor, "Fish section begins:", false);
+        // Then select all of the text xParaCursor.gotoNextParagraph(true);
+        xParaCursor.gotoNextParagraph(true);
+        // Create a new text section and get it's XNamed interface
+        XNamed xSectionNamed = (XNamed) UnoRuntime.queryInterface( XNamed.class,mxDocFactory.createInstance("com.sun.star.text.TextSection"));
+        // Set the name of our new section (appropiately) to 'Fish'
+        xSectionNamed.setName("Fish");
+        // Create the TextColumns service and get it's XTextColumns interface
+        XTextColumns xColumns = (XTextColumns) UnoRuntime.queryInterface( XTextColumns.class,mxDocFactory.createInstance("com.sun.star.text.TextColumns"));
+        // We want three columns
+        xColumns.setColumnCount((short) 3);
+        // Get the TextColumns, and make the middle one narrow with a larger margin
+        // on the left than the right
+        TextColumn[] aSequence = xColumns.getColumns ();
+        aSequence[1].Width /= 2;
+        aSequence[1].LeftMargin = 350;
+        aSequence[1].RightMargin = 200;
+        // Set the updated TextColumns back to the XTextColumns
+        xColumns.setColumns(aSequence);
+        // Get the property set interface of our 'Fish' section
+        XPropertySet xSectionProps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, xSectionNamed);
+        // Set the columns to the Text Section
+        xSectionProps.setPropertyValue("TextColumns", xColumns);
+        // Get the XTextContent interface of our 'Fish' section
+        mxFishSection = (XTextContent) UnoRuntime.queryInterface( XTextContent.class, xSectionNamed);
+        // Insert the 'Fish' section over the currently selected text
+        mxDocText.insertTextContent(mxDocCursor, mxFishSection, true);
+        // Get the wonderful XRelativeTextContentInsert interface
+        XRelativeTextContentInsert xRelative = (XRelativeTextContentInsert) UnoRuntime.queryInterface(XRelativeTextContentInsert.class, mxDocText);
+        // Create a new empty paragraph and get it's XTextContent interface
+        XTextContent xNewPara = (XTextContent) UnoRuntime.queryInterface(XTextContent.class, mxDocFactory.createInstance("com.sun.star.text.Paragraph"));
+        // Insert the empty paragraph after the fish Text Section
+        xRelative.insertTextContentAfter(xNewPara, mxFishSection);
+    } catch (Exception e) {
+        e.printStackTrace(System.out);
+    }
+}
+----
+
+文本列属性由 _com.sun.star.text.TextColumn_ 结构组成。_TextColumns_ 序列中所有结构的Width元素组成一个总和，由 _XTextColumns_ 接口的 _getReferenceValue()_ 方法提供。要确定实际列的度量标准宽度，必须使用对象（页面，文本框架，文本部分）的度量标准宽度和三项规则来计算参考值和列宽度元素，例如：
+
+[source,java]
+----
+nColumn3Width = aColumns[3].Wdth / xTextColumns.getReferenceValue() * RealObjectWidth
+----
+
+列的页边距（结构的 _LeftMargin_ 和 _RightMargin_ 元素）在列的内部。它们的值不影响列宽。 它们只是限制了列内容的可用空间。
+
+OpenOffice中的默认列设置创建的列在内部列具有相等的边距，在最左边的列中没有左边距，而在最右边的列中没有右边距。因此，第一列和最后一列的相对宽度小于内部列的相对宽度。 这会导致此属性的局限性：只有在可以确定对象的宽度（文本框架，文本部分）的情况下，才可以使用具有相等的列内容宽度和边距的文本列。不幸的是，当对象的宽度取决于其环境本身时，这是不可能的。
+
+==== 链接目标
+
+文档模型的 _com.sun.star.document.XLinkTargetSupplier_ 接口提供了可用作链接目标的文档的所有元素。这些目标可用于加载URL，并将选择内容设置为文档内部的某个位置对象。包含链接目标的URL的示例是“ file:///c:/documents/document1|bookmarkname”。
+
+在超链接对话框中使用此接口来检测文档内部可用的链接。
+
+方法 _getLinks()_ 返回的 _com.sun.star.container.XNameAccess_ 接口提供对目标类型数组的访问。 这些类型是：
+
+* _Tables_
+* _Text frame_
+* _Graphics_
+* _OLEObjects_
+* _Sections_
+* _Headings_
+* _Bookmarks_
+
+元素的名称取决于安装的语言。
+
+每个返回的对象都支持 _com.sun.star.beans.XPropertySet_ 接口和 _com.sun.star.container.XNameAccess_ 接口。该属性集提供了属性 _LinkDisplayName_（字符串）和 _LinkDisplayBitmap_（com.sun.star.awt.XBitmap）。这些对象中的每一个都提供相关类型的目标数组。返回的每个目标都支持 _com.sun.star.beans.XPropertySet_ 接口和属性 _LinkDisplayName_（字符串）。
+
+对象的名称是要添加到文档URL的书签，例如“ Table1 | table”。_LinkDisplayName_ 包含对象的名称，例如 “表格1”。
+
+=== 文本文档控制器
+
+文本文档模型知道其控制器，并且可以锁定控制器以阻止用户交互。模型的 _com.sun.star.frame.XModel_ 接口中的适当方法是：
+
+[source,java]
+----
+void lockControllers()
+void unlockControllers()
+boolean hasControllersLocked()
+XController getCurrentController()
+void setCurrentController( XController xController)
+----
+
+由 _getCurrentController()_ 返回的控制器与 _OpenOffice_ 中的所有其他文档控制器共享以下接口：
+
+* com.sun.star.frame.XController
+* com.sun.star.frame.XDispatchProvider
+* com.sun.star.ui.XContextMenuInterceptor
+
+=== 文字检视
+
+=== TextViewCursor
+
+文本控制器具有在GUI中使用的可见光标。得到 _com.sun.star.text.TextViewCursor_ 的方法是在当前文本文档控制器的 _com.sun.star.text.XTextViewCursorSupplier_ 接口上调用 _getTextViewCursor()_。
+
+它支持以下光标功能，这些功能取决于是否具有有关当前布局状态的必要信息，因此模型光标不支持此功能。
+
+[source,java]
+----
+# XPageCursor
+boolean jumpToFirstPage()
+boolean jumpToLastPage()
+boolean jumpToPage( long pageNo)
+long getPage()
+boolean jumpToNextPage()
+boolean jumpToPreviousPage()
+boolean jumpToEndOfPage()
+boolean jumpToStartOfPage()
+# XScreenCursor
+boolean screenDown()
+boolean screenUp()
+# XLineCursor
+boolean goDown( long lines, boolean bExpand)
+boolean goUp( long lines, boolean bExpand)
+boolean isAtStartOfLine()
+boolean isAtEndOfLine()
+void gotoEndOfLine( boolean bExpand)
+void gotoStartOfLine( boolean bExpand)
+# XViewCursor
+boolean goLeft( long characters, boolean bExpand)
+boolean goRight( long characters, boolean bExpand)
+boolean goDown( long characters, boolean bExpand)
+boolean goUp( long characters, boolean bExpand)
+----
+
+此外，还支持com.sun.star.beans.XPropertySet接口。
+
+当前，视图光标不具备文档光标所具有的功能。因此，有必要创建一个文档光标以访问全文光标功能。使用方法 _createTextCursorByRange()_：
+
+[source,java]
+----
+XText xCrsrText = xViewCursor.getText();
+// Create a TextCursor over the view cursor's contents
+XTextCursor xDocumentCursor = xViewText.createTextCursorByRange(xViewCursor.getStart());
+xDocumentCursor.gotoRange(xViewCursor.getEnd(), true);
 ----
 
 
