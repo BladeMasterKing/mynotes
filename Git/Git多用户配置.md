@@ -1,9 +1,7 @@
-= Git多用户配置
-BladeMasterKing <wangbodang2@126.com>
-v1.0 , 2019-10-22
+# Git多用户配置
 
-[source]
-----
+## 为不同账户创建不同密钥
+```shell
 $ cd ~/.ssh
 $ ssh-keygen -t rsa -b 4096 -C "wangbodang2@126.com"
 # 你在公司用git，肯定已经生成了公私钥，id_rsa/id_rsa.pub
@@ -17,10 +15,10 @@ $ eval $(ssh-agent -s)
 
 $ ssh-add ~/.ssh/id_rsa_github
 # 将公钥加入到github，参考：https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
-----
+```
 
-[source]
-----
+## 设置不同账户使用不同
+```shell
 # 配置使用固定的公钥去访问github
 vim ~/.ssh/config
 # 加入如下配置
@@ -28,10 +26,9 @@ Host github
  HostName github.com
  User jarvan4dev
  IdentityFile ~/.ssh/id_rsa_github
-----
+```
 
-[source]
-----
+```shell
 # 测试是否连通
 $ ssh -T git@github.com
 # 如果连通，输出如下：
@@ -55,10 +52,9 @@ $ ssh-add -K ~/.ssh/id_rsa_github
 输出如下：
 Passphrase stored in keychain: /Users/jarvan4dev/.ssh/id_rsa_github
 Identity added: /Users/jarvan4dev/.ssh/id_rsa_github (/Users/jarvan4dev/.ssh/id_rsa_github)
-----
+```
 
-[source]
-----
+```shell
 # 配置git账户
 $ git config --list #查看当前配置
 $ git config --list [--local] #查看当前仓库配置
@@ -69,4 +65,4 @@ $ git config --global user.email "your_email@example.com"  # 如果是提到gith
 # 配置本地仓库账户 (配置文件位于当前仓库目录的.git/config中）
 $ git config [--local] user.name "your_name_in_company"  # 如果是提到github上，your_name最好是你的github账户的名字
 $ git config [--local] user.email "your_company_email@example.com"  # 如果是提到github上，your_email@example.com最好是你的github账户的邮箱
-----
+```
