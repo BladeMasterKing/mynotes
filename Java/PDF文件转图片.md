@@ -1,27 +1,22 @@
-= PDF文件转图片
-BladeMasterKing <wangbodang2@126.com>
-v1.0 , 2019-10-23
+# PDF文件转图片
 
-[quote]
-项目中有将office文件第一页保存缩略图的需求，恰好工程中使用Tika解析文本用到了PDFBox，通过PDFBox将PDF转图片的实现
 
-== 依赖
+> 项目中有将office文件第一页保存缩略图的需求，恰好工程中使用Tika解析文本用到了PDFBox，通过PDFBox将PDF转图片的实现
 
-[source,xml]
-----
+## 依赖
+
+```xml
 <dependency>
     <groupId>org.apache.pdfbox</groupId>
     <artifactId>pdfbox</artifactId>
     <version>2.0.16</version>
 </dependency>
-----
+```
 
 
-== 代码清单
+## 代码清单
 
-[source,java]
-.PDFUtils.java
-----
+```java
 @Slf4j
 public class PDFUtils {
     public static final float DEFAULT_DPI = 300;  // <1>
@@ -132,7 +127,7 @@ public class PDFUtils {
         }
     }
 }
-----
+```
 
 <1> 经过测试,300显示效果较为清晰,体积稳定,dpi越高图片体积越大,一般电脑显示分辨率为96
 <2> 遍历整篇文档的所有页面，转换为长图的实现

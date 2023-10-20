@@ -1,16 +1,16 @@
-== Tesseract-OCR
+# Tesseract-OCR
 
-== Tesseract-OCR arm架构安装依赖的环境:
+## Tesseract-OCR arm架构安装依赖的环境:
 - C和C++的编译器：GCC或Clang
 - GNU Autotools：autoconf，automake，libtool
 - pkg-config
 - Leptonica
 - libpng，libjpej，libtiff
 
-=== 依赖类库
+### 依赖类库
 Ubuntu系统需要的类库(Ubuntu 16.04 / 14.04)
-[source,bash]
-----
+
+```bash
 sudo apt-get install g++ # 或者 clang+  系统已安装g++ 5.3.1-1kord
 sudo apt-get install autoconf automake libtool # 系统已安装autoconf-2.69-9kord automake-1.15-4kord libtool-2.4.6-0.1kord
 sudo apt-get install pkg-conf # 系统已安装 pkg-conf-0.29.1-0kord1
@@ -18,20 +18,18 @@ sudo apt-get install libpng-dev  # libpng-dev 未安装
 sudo apt-get install libjpeg8-dev # 未安装,支持 libjpeg8-8c-2kord8
 sudo apt-get install libtiff5-dev # 未安装,支持 libtiff5-4.0.6-1kord0.6
 sudo apt-get install zlib1g-dev # 之前编译安装Nginx中openssl也依赖此类库
-----
+```
+
 如果安装OCR的训练工具，还需要其他类库
-[source,bash]
-----
+
+```bash
 sudo apt-get install libicu-dev  # 未安装
 sudo apt-get install libpango1.0-dev # 已安装 libpango1.0-dev-1.38.1-1kord
 sudo apt-get install libcairo2-dev # 已安装 libcairo2-dev-1.14.6-1kord
-----
-== 编译Leptonica
-Tesseract对应需要安装的Leptonica版本：
+```
 
-|==
-|Tesseract |Leptonica |ubuntu
-|
+## 编译Leptonica
+Tesseract对应需要安装的Leptonica版本：
 
 
 Tesseract | Leptonica | ubuntu
@@ -59,11 +57,14 @@ Tesseract | Leptonica | ubuntu
 
 ### 编译Tesseract
 从github上下载源码
-```
+
+```bash
 # git clone https://github.com/tesseract-ocr/tesseract.git --branch 4.1 --single-bra
 ```
+
 确保系统已安装leptonica-1.74.x或更高的版本，然后编译tesseract:
-```
+
+```bash
 $ cd tesseract
 $ ./autogen.sh
 $ ./configure
@@ -71,8 +72,10 @@ $ make
 $ sudo make install
 $ sudo ldconfig
 ```
+
 ### 构建训练工具
-```
+
+```bash
 $ cd tesseract
 $ ./autogen.sh
 $ ./configure
@@ -82,13 +85,17 @@ $ sudo ldconfig
 $ make training
 $ sudo make training-install
 ```
+
 可以根据需要指定配置选项：
-```
+
+```bash
 ./configure --disable-openmp --disable-debug --disable-opencl --disable-graphics --disable-shared 'CXXFLAGS=-g -O2 -Wall -Wextra -Wpedantic'
 ```
+
 ### 调试构建
 此种构建会产生运行非常缓慢的Tesseract二进制文件。这些文件对生产没用，但是对查找或分析软件问题有用。下面是构建顺序：
-```
+
+```bash
 $ cd tesseract
 $ ./autogen.sh
 $ mkdir -p bin/debug
@@ -98,11 +105,13 @@ $ ../../configure --enable-debug --disable-shared 'CXXFLAGS=-g -O0 -Wall -Wextra
 $ make training
 $ cd ../..
 ```
+
 这样激活调试代码，不使用共享的Tesseract库(这样使tesseract无需安装可以运行)，禁用编译器优化，启用大量编译器告警并启用多个运行时检查。
 
 ### 分析构建
 此构建用于调查性能问题。Tesseract的运行速度将会比没有配置文件时慢，但速度是可接受的，构建顺序：
-```
+
+```bash
 cd tesseract
 ./autogen.sh
 mkdir -p bin/profiling
@@ -112,6 +121,7 @@ cd bin/profiling
 make training
 cd ../..
 ```
+
 它不使用共享的Tesseract库，启用概要分析代码，启用编译器优化并启用许多编译器告警。
 这个选项通过添加 --enable-debug 并且将 -o2 替换为 -o0 也可用于调试代码.
 剖析代码会在tesseract结束时在当前目录产生一个**gmon.out**的文件,GNU gprof用来展示此文件的分析信息。
@@ -119,7 +129,8 @@ cd ../..
 默认版本会创建一个Tesseract可执行文件，非常适合处理单个图像。然后，Tesseract使用4个CPU内核来尽快获得OCR结果。
 
 对于具有成百上千个图像的批量生产，默认情况很不好，因为多线程执行的开销非常大。最好运行Tesseract的单线程实例，以便每个可用的CPU内核都可以处理不同的映像。构建顺序：
-```
+
+```bash
 cd tesseract
 ./autogen.sh
 mkdir -p bin/release
@@ -129,6 +140,7 @@ cd bin/release
 make training
 cd ../..
 ```
+
 此禁用的OpenMP（多线程），不使用共享的Tesseract库（这使得tesseract无需安装即可运行），启用编译器优化，禁用errno数学函数的设置（更快执行！）并启用许多编译器警告。
 
 ### 受训的数据
@@ -136,7 +148,7 @@ cd ../..
 
 ### 测试
 
-```
+```bash
 # Tesseract Open Source OCR Engine v4.1.0 with Leptonica
 $ tesseract imagename outputbase [-l lang] [-psm pagesegmode] [configfile...]
 # ocr基本执行命令,解析内容输出到out.txt文件

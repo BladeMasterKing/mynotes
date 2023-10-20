@@ -1,18 +1,14 @@
-= Nginx源码编译安装
-BladeMasterKing <wang_jiansheng@hotmail.com>
-v1.0.2,2019-10-31
-:toc:
+# Nginx源码编译安装
 
-[quote]
-本次编译源码安装Nginx，主要是为了应服务器国产化的需求，支持国产麒麟操作系统(Ubuntu内核)以及arm架构的CPU指令集。项目中用到nginx主要是两个方面：FastDFS的代理和HTTPS协议的代理。
+> 本次编译源码安装Nginx，主要是为了应服务器国产化的需求，支持国产麒麟操作系统(Ubuntu内核)以及arm架构的CPU指令集。项目中用到nginx主要是两个方面：FastDFS的代理和HTTPS协议的代理。
 
 
-== FastDFS代理
-[%hardbreaks]
+## FastDFS代理
+
 这部分内容基于已成功编译安装**FastDFS v5.11**
 使用Nginx代理FastDFS，需要配置Nginx安装fastdfs_nginx_module(https://github.com/happyfish100/fastdfs-nginx-module/archive/V1.20.tar.gz[源码下载地址])。
-[source,bash]
-----
+
+```bash
 # 解压nginx源码包
 $ tar -zxvf nginx-1.10.1.tar.gz
 
@@ -22,16 +18,18 @@ $ tar -zxvf fastdfs-nginx-module-1.20.tar.gz
 # 进入nginx源码根目录，配置nginx的fastdfs模块
 $ cd nginx-1.10.1
 $ ./configure --add-module=/var/T/nginx/fastdfs-nginx-module-1.20/src
-----
+```
+
 执行完上述操作之后，会在根目录生成**Makefile**文件，接下来可以编译安装了
-[source]
-----
+
+```bash
 # 在nginx的根目录make安装nginx
 $ make && make install
-----
+```
+
 执行make编译安装失败，报错如下：
-[source]
-----
+
+```bash
 In file included from /mnt/e/DevelopKit/fastdfs fastdfs-nginx-module-1.20/src//common.c:26:0,
                 from /mnt/e/DevelopKit/fastdfs/fastdfs-nginx-module-1.20/src//ngx_http_fastdfs_module.c:6:
 /usr/include/fastdfs/fdfs_define.h:15:27: fatal error: common_define.h: No such file or directory
@@ -42,10 +40,11 @@ make[1]: *** [objs/addon/src/ngx_http_fastdfs_module.o] Error 1
 make[1]: Leaving directory '/mnt/e/DevelopKit/nginx-1.10.1'
 Makefile:8: recipe for target 'build' failed
 make: *** [build] Error 2
-----
+```
+
 这是由于fastdfs_nginx_module模块的版本与FastDFS的版本之间有出入，需要修改部分配置文件:
-[source]
-----
+
+```bash
 $ vim fastdfs-nginx-module-1.20/src/config
 
 
@@ -67,27 +66,30 @@ CORE_INCS="$CORE_INCS /usr/include/fastdfs /usr/include/fastcommon/"
 CORE_LIBS="$CORE_LIBS -lfastcommon -lfdfsclient"
 CFLAGS="$CFLAGS -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='2561024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"'"
 fi
-----
+```
+
 替换以下内容:
-[source]
-----
+
+```bash
 ngx_module_incs="/usr/include/fastdfs /usr/include/fastcommon/"
 CORE_INCS="$CORE_INCS /usr/include/fastdfs /usr/include/fastcommon/"
-----
+```
+
 再次回到nginx的根目录，执行**make && make install**，安装成功。
 > nginx编译安装完成后，会将配置文件存放到/usr/local/nginx路径，可以将整个文件夹移动到其他软件整体管理的位置。
 
-== HTTPS代理
-=== 安装http_ssl_module
+## HTTPS代理
+### 安装http_ssl_module
 通过nginx代理实现HTTPS协议，需要在配置nginx的时候启用http_ssl_module模块，结合fastdfs_nginx_module模块配置nginx的命令最终为：
-[source]
-----
+
+```bash
 $ ./configure --add-module=/fastdfs-nginx-module-1.20/src --with-http_ssl_module
-----
+```
+
 在国产化服务器ARM架构CPU的系统环境下，执行**openssl version**命令查看openssl的安装版本为**OpenSSL 1.0.2g-fips 1 Mar 2016**，与Ubuntu-16.04默认安装的OpenSSL的版本一致。  
 然后执行上述配置nginx的命令时报错：
-[source]
-----
+
+```bash
 checking for OpenSSL library ... not found
 checking for OpenSSL library in /usr/local/ ... not found
 checking for OpenSSL library in /usr/pkg/ ... not found
@@ -97,8 +99,9 @@ checking for OpenSSL library in /opt/local/ ... not found
 You can either do not enable the modules, or install the OpenSSL library
 into the system, or build the OpenSSL library statically from the source
 with nginx by using --with-openssl=<path> option.
-----
-提示并未找到openssl类库即libssl-dev，在 https://launchpad.net/ubuntu[Ununtu依赖库搜索网站]查找libssl-dev以及依赖的类库：
+```
+
+提示并未找到openssl类库即libssl-dev，在 [Ununtu依赖库搜索网站](https://launchpad.net/ubuntu) 查找libssl-dev以及依赖的类库：
 
 * AMD架构版本
 ** libssl-dev_1.0.2g-1ubuntu4_amd64.deb
@@ -110,24 +113,26 @@ with nginx by using --with-openssl=<path> option.
 ** libssl1.0.0_1.0.2g-1ubuntu4_arm64.deb
 
 通过Ubuntu的dpkg命令安装即可，**注意**安装顺序libssl-dev在最后
-[source]
-----
+
+```bash
 $ dpkg -i libssl1.0.0_1.0.2g-1ubuntu4_arm64.deb
 $ dpkg -i zlib1g-dev_1.2.8.dfsg-2ubuntu4_arm64.deb
 $ dpkg -i libssl-dev_1.0.2g-1ubuntu4_arm64.deb
-----
+```
+
 重新编译安装nginx成功安装
 
-=== 使用 OpenSSL 生成 SSL Key 和 CSR 文件
-[%hardbreaks]
+### 使用 OpenSSL 生成 SSL Key 和 CSR 文件
+
 配置HTTPS需要私钥 xxx.key 和 xxx.crt 证书文件，申请证书文件需要用到 xxx.csr 文件，OpenSSL 命令可以生成 xxx.key 和 xxx.csr 文件。
 **CSR ( Cerificate Signing Request )**: 证书签署请求文件，里面包含申请者的DN( Distinguished Name, 标识名) 和公钥信息, 在第三方证书颁发机构签署证书的时候需要提供. 证书颁发机构拿到CSR后使用其根证书私钥对证书进行加密并生成CRT证书文件, 里面包含证书加密信息以及申请者的DN及公钥信息.
 **Key**: 证书申请者私钥文件, 和证书里面的公钥配对使用, 在HTTPS"握手"通讯过程需要使用私钥去解密客户端发来的经过证书公钥加密的随机数信息, 是HTTPS加密通讯过程非常重要的文件, 在配置HTTPS的是够使用.
 OpenSSL生成 xxx.key 和 xxx.csr 文件的命令:
-[source]
-----
+
+```bash
 openssl req -new -newkey rsa:2048 -sha256 -nodes -out tsm-aps.csr -keyout private.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Topsec/OU=aps/CN=topsec.com.cn"
-----
+```
+
 命令中相关字段含义:
 
 * C : Country, 单位所在国家, 两个字母的国家英文缩写, CN为中国
@@ -137,18 +142,17 @@ openssl req -new -newkey rsa:2048 -sha256 -nodes -out tsm-aps.csr -keyout privat
 * OU : Organization Unit, 下属部门名称, 常常用于产品名
 * CN : Common Name, 域名
 
-[%hardbreaks]
 生成csr文件后, 提供给CA机构, 签署成功后,会得到一个 xxx.crt 证书文件, 得到SSL证书文件可以在nginx中配置HTTPS.
 签署证书命令:
-[source]
-----
-openssl x509 -req -in tsm-aps.csr -extensions v3_ca -signkey private.key -out tsm-aps.crt
-----
 
-=== 配置HTTPS
+```bash
+openssl x509 -req -in tsm-aps.csr -extensions v3_ca -signkey private.key -out tsm-aps.crt
+```
+
+### 配置HTTPS
 要启用HTTPS服务, 必须使用监听命令**listen**的**ssl**参数和定义服务器证书文件和私钥文件:
-[source]
-----
+
+```bash
 server {
     #ssl参数
     listen              0.0.0.0:443 ssl;
@@ -159,10 +163,10 @@ server {
     ssl_ciphers         HIGH:!aNULL:!MD5;
     #...
 }
-----
+```
 
 
-== 官方对configure的介绍
+## 官方对configure的介绍
 使用configure命令(源码根目录)配置构建。它定义了系统的各个方面，包括允许nginx用于连接处理的方法。最后，它会创建一个Makefile。
 该configure命令支持以下参数：
 
@@ -408,7 +412,8 @@ server {
 启用调试日志。
 
 参数用法示例（所有这些都需要在一行中键入）：
-```
+
+```bash
 ./configure 
     --sbin-path= /usr/local/nginx/nginx
     --conf-path= /usr/local/nginx/nginx.conf 
@@ -417,7 +422,9 @@ server {
     --with-pcre=../pcre-8.43 
     --with-zlib=../zlib-1.2.11
 ```
+
 执行完./configure配置后，nginx源码已经编译完成并生成Makefile文件，之后可以通过make命令来安装
-```
+
+```bash
 make && make install
 ```

@@ -1,14 +1,7 @@
-= if...esle代替方案
-BladeMasterKing <wang_jiansheng@hotmail.com>
-v1.0,2020-01-03
-:hardbreaks:
-:toc:
-[quote]
-____
-转载自公众号 https://mp.weixin.qq.com/s/ufRf8DQQRYQI0q2VxG3hQg[CodeSheep的文章"答应我，别再if/else走天下了可以吗"]
-____
+# if...esle代替方案
 
-== 错误示范
+
+## 错误示范
 一般来说我们正常的后台管理系统都有所谓的角色的概念，不同管理员权限不一样，能够行使的操作也不一样，比如：
 
 * 系统管理员（ ROLE_ROOT_ADMIN）：有 A操作权限
@@ -16,8 +9,8 @@ ____
 * 普通用户（ ROLE_NORMAL）：有 C操作权限
 
 比如一个用户进来，我们需要根据不同用户的角色来判断其有哪些行为，这时候if...else代码出现了：
-[source]
-----
+
+```java
 public class JudgeRole {
     public String judge(String roleName){
         String result = "";
@@ -36,18 +29,20 @@ public class JudgeRole {
         return result;
     }
 }
-----
-== 枚举和接口
+```
+
+## 枚举和接口
 首先定义一个公用接口 _RoleOperation_，表示不同角色所能做的操作：
-[source]
-----
+
+```java
 public interface RoleOperation {
     String op (); // 表示某个角色可以做哪些op操作
 }
-----
+```
+
 接下来将不同角色的情况全部交由枚举类来做，定义一个不同角色有不同权限的枚举类 _RoleEnum_：
-[source]
-----
+
+```java
 public enum RoleEnum implements RoleOperation{
     // 系统管理员(有A操作权限)
     ROLE_ROOT_ADMIN {
@@ -71,22 +66,25 @@ public enum RoleEnum implements RoleOperation{
         }
     };
 }
-----
+```
+
 接下来调用就变得异常简单了，一行代码就行了， if/else也灰飞烟灭了：
-[source]
-----
+
+```java
 public class JudgeRole {
     public String judge(String roleName) {
         // 一行代码搞定！之前的if/else没了！
         return RoleEnum.valueOf(roleName).op();
     }
 }
-----
-== 工厂模式
+```
+
+## 工厂模式
+
 不同分支做不同的事情，很明显就提供了使用工厂模式的契机，我们只需要将不同情况单独定义好，然后去工厂类里面聚合即可。
 首先，针对不同的角色，单独定义其业务类：
-[source]
-----
+
+```java
 // 系统管理员(有A操作权限)
 public class RootAdminRole implements RoleOperation {
     private String roleName;
@@ -120,10 +118,11 @@ public class NormalRole implements RoleOperation {
         return roleName + " has CCC permission";
     }
 }
-----
+```
+
 接下来再写一个工厂类 RoleFactory对上面不同角色进行聚合：
-[source]
-----
+
+```java
 public class RoleFactory {
     static Map<String, RoleOperation> roleOperationMap = new HashMap<>();
     // 在静态块中先把初始化工作全部做完
@@ -136,22 +135,25 @@ public class RoleFactory {
         return roleOperationMap.get(roleName);
     }
 }
-----
+```
+
 接下来借助上面这个工厂，业务代码调用也只需一行代码， if/else同样被消除了：
-[source]
-----
+
+```java
 public class JudgeRole {
     public String judge(String roleName) {
         // 一行代码搞定！之前的 if/else也没了！
         return RoleFactory.getOp(roleName).op();
     }
 }
-----
-== 策略模式
+```
+
+## 策略模式
+
 策略模式和工厂模式写起来其实区别也不大！
 在上面工厂模式代码的基础上，按照策略模式的指导思想，我们也来创建一个所谓的**策略上下文类**，这里命名为 RoleContext：
-[source]
-----
+
+```java
 public class RoleContext {
     // 可更换的策略，传入不同的策略对象，业务即相应变化
     private RoleOperation operation;
@@ -162,10 +164,11 @@ public class RoleContext {
         return operation.op();
     }
 }
-----
+```
+
 很明显上面传入的参数 operation就是表示不同的“策略”。我们在业务代码里传入不同的角色，即可得到不同的操作结果：
-[source]
-----
+
+```java
 public class JudgeRole {
     public String judge(RoleOperation roleOperation) {
         RoleContext roleContext = new RoleContext(roleOperation);
@@ -181,11 +184,12 @@ public static void main(String[] args) {
     String result3 = judgeRole.judge(new NormalRole("ROLE_NORMAL"));
     System.out.println(result3);
 }
-----
-== WEB应用策略模式+工厂模式
+```
+
+## WEB应用策略模式+工厂模式
 方便spring获取RoleService，创建一个工厂类：
-[source,java]
-----
+
+```java
 public class RoleServiceStrategyFactory {
     private static Map<String,RoleService> services = new ConcurrentHashMap<String,RoleService>();
     public static RoleService getByRole(String role){
@@ -196,19 +200,21 @@ public class RoleServiceStrategyFactory {
         services.put(role, roleService);
     }
 }
-----
+```
+
 有了这个工厂类之后，角色权限的代码得以优化：
-[source,java]
-----
+
+```java
 public static void main(String[] args){
     String role = "ROLE_ROOT_ADMIN";
     RoleService strategy = RoleServiceStrategyFactory.getByRole(role);
     System.out.pringln(strategy.op());
 }
-----
+```
+
 工厂模式中保存的所有策略需要在初始化，借用Spring提供的InitializingBean接口：
-[source,java]
-----
+
+```java
 @Service
 public class RootAdminRoleService implements RoleService,InitializingBean {
     @Override
@@ -244,4 +250,4 @@ public class NormalService implements RoleService,InitializingBean {
         RoleServiceStrategyFactory.register("ROLE_NORMAL",this);
     }
 }
-----
+```

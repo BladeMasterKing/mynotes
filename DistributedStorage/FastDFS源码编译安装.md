@@ -1,13 +1,11 @@
-= FastDFS源码编译安装
-BladeMasterKing <wangbodang2@126.com>
-v1.0 , 2019-10-22
+# FastDFS源码编译安装
 
-== 安装libfastcommon
 
-在 https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz[Github余庆大神的仓库]上下载libfastcommon包
+## 安装libfastcommon
 
-[source, bash]
-----
+在 [Github余庆大神的仓库](https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz) 上下载libfastcommon包
+
+```bash
 # 解压tar.gz包
 $ tar -zxvf libfastcommon-1.0.39.tar.gz
 # 进入根目录，编译安装
@@ -21,14 +19,13 @@ mkdir -p /usr/include/fastcommon
 install -m 755 libfastcommon.so /usr/lib64
 install -m 644 common_define.h hash.h chain.h logger.h base64.h shared_func.h pthread_func.h ini_file_reader.h _os_define.h sockopt.h sched_thread.h http_func.h md5.h local_ip_func.h avl_tree.h ioevent.h ioevent_loop.h fast_task_queue.h fast_timer.h process_ctrl.h fast_mblock.h connection_pool.h fast_mpool.h fast_allocator.h fast_buffer.h skiplist.h multi_skiplist.h flat_skiplist.h skiplist_common.h system_info.h fast_blocked_queue.h php7_ext_wrapper.h id_generator.h char_converter.h char_convert_loader.h common_blocked_queue.h multi_socket_client.h skiplist_set.h fc_list.h /usr/include/fastcommon
 if [ ! -e /usr/lib/libfastcommon.so ]; then ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so; fi
-----
+```
 
-== 安装FastDFS
-[%hardbreaks]
-在 https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz[Github余庆大神的仓库]上下载FastDFS的源码
+## 安装FastDFS
 
-[source,bash]
-----
+在 [Github余庆大神的仓库](https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz) 上下载FastDFS的源码
+
+```basu
 # 解压FastDFS的tar.gz包
 $ tar -zxvf fastdfs-5.11.tar.gz
 $ cd fastdfs-5.11
@@ -54,12 +51,11 @@ if [ 1 -eq 1 ]; then cp -f libfdfsclient.so /usr/lib64; cp -f libfdfsclient.so /
 mkdir -p /usr/include/fastdfs
 cp -f ../common/fdfs_define.h ../common/fdfs_global.h ../common/mime_file_parser.h ../common/fdfs_http_shared.h ../tracker/tracker_types.h ../tracker/tracker_proto.h ../tracker/fdfs_shared_func.h ../storage/trunk_mgr/trunk_shared.h tracker_client.h storage_client.h storage_client1.h client_func.h client_global.h fdfs_client.h /usr/include/fastdfs
 if [ ! -f /etc/fdfs/client.conf.sample ]; then cp -f ../conf/client.conf /etc/fdfs/client.conf.sample; fi
-----
+```
 
 *配置文件准备:*
 
-[source,bash]
-----
+```bash
 $ cp /etc/fdfs/tracker.conf.sample /etc/fdfs/tracker.conf
 $ cp /etc/fdfs/storage.conf.sample /etc/fdfs/storage.conf
 $ cp /etc/fdfs/client.conf.sample /etc/fdfs/client.conf #客户端文件，测试用
@@ -75,26 +71,24 @@ total 32
 -rwxr-xr-x 1 root root  105 Sep 29 15:48 storage_ids.conf.sample
 -rwxr-xr-x 1 root root 7389 Sep 29 15:54 tracker.conf
 -rwxr-xr-x 1 root root 7389 Sep 29 15:48 tracker.conf.sample
-----
+```
 
-== 安装fastdfs-nginx-module
+## 安装fastdfs-nginx-module
 
-在 https://github.com/happyfish100/fastdfs-nginx-module/archive/V1.20.tar.gz[Github余庆大神的仓库]上下载fastdfs-nginx-module的源码:
+在 [Github余庆大神的仓库](https://github.com/happyfish100/fastdfs-nginx-module/archive/V1.20.tar.gz) 上下载fastdfs-nginx-module的源码:
 
-[source ,bash]
-----
+```bash
 # 编译nginx并安装
 $ tar -zxvf nginx-1.10.1.tar.gz
 $ cd nginx-1.10.1
 # 调用nginx的configure命令,将fastdfs模块配置到nginx
 $ ./configure --add-module=/mnt/e/DevelopKit/fastdfs/fastdfs-nginx-module-1.20/src
 $ make && make install
-----
+```
 
 *make安装nginx时报错:*
 
-[source,bash]
-----
+```bash
 # make安装fastdfs-nginx-module时报错
 In file included from /mnt/e/DevelopKit/fastdfs/fastdfs-nginx-module-1.20/src//common.c:26:0,
                  from /mnt/e/DevelopKit/fastdfs/fastdfs-nginx-module-1.20/src//ngx_http_fastdfs_module.c:6:
@@ -106,12 +100,12 @@ make[1]: *** [objs/addon/src/ngx_http_fastdfs_module.o] Error 1
 make[1]: Leaving directory '/mnt/e/DevelopKit/nginx-1.10.1'
 Makefile:8: recipe for target 'build' failed
 make: *** [build] Error 2
-----
+```
 
 确定是因为高版本出现的问题,需要修改源码:
-[source,bash]
-.fastdfs-nginx-module-1.20/src/config
-----
+```bash
+## fastdfs-nginx-module-1.20/src/config
+
 $ vim fastdfs-nginx-module-1.20/src/config
 
 ngx_addon_name=ngx_http_fastdfs_module
@@ -132,24 +126,26 @@ CORE_INCS="$CORE_INCS /usr/include/fastdfs /usr/include/fastcommon/"
 CORE_LIBS="$CORE_LIBS -lfastcommon -lfdfsclient"
 CFLAGS="$CFLAGS -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='2561024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"'"
 fi
-----
+```
 
 *替换以下内容:*
-----
+
+```bash
 ngx_module_incs="/usr/include/fastdfs /usr/include/fastcommon/"
 CORE_INCS="$CORE_INCS /usr/include/fastdfs /usr/include/fastcommon/"
-----
+```
 
 再次调用 make && make install 成功安装。
 
 NOTE: nginx编译安装完成之后，nginx的存放路径在 /usr/local/nginx 目录下，nginx的启动脚本配置文件都在这个目录下，不再使用源码包conf目录下的文件.
 
-== 单机部署
+## 单机部署
 
 * tracker配置:
-[source]
-./etc/fdfs/tracker.conf
-----
+
+```bash
+# /etc/fdfs/tracker.conf
+
 $ vim /etc/fdfs/tracker.conf
 #需要修改的内容如下
 port=22122  # tracker服务器端口（默认22122,一般不修改）
@@ -165,12 +161,12 @@ $ /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf
 [2018-04-25 23:37:36] CRIT - exit abnormally!
 # 需要修改配置文件 /etc/fdfs/tracker.conf :
 thread_statck_size=1024KB  # 原 64KB 改为 1024KB 即可
-----
+```
     
 * storage配置:
-[source]
-./etc/fdfs/storage.conf
-----
+```bash
+# ./etc/fdfs/storage.conf
+
 $ vim /etc/fdfs/storage.conf
 # 需要修改的内容如下
 port=23000  # storage服务端口（默认23000,一般不修改）
@@ -182,16 +178,20 @@ http.server_port=8888  # http访问文件的端口(默认8888,看情况修改,�
 
 # 检验storage是否注册到tracker中
 $ /usr/bin/fdfs_monitor /etc/fdfs/storage.conf
+```
+
 
 # 启动storage
+```bash
 $ service fdfs_storaged start
 $ /usr/bin/fdfs_storaged /etc/fdfs/storage.conf
-----
+```
 
 * client测试:
-[source]
-./etc/fdfs/client.conf
-----
+
+```bash
+# /etc/fdfs/client.conf
+
 $ vim /etc/fdfs/client.conf
 # 需要修改的内容如下
 base_path=/mnt/e/DevelopKit/fastdfs_tracker   #tracker服务器文件路径
@@ -201,12 +201,13 @@ tracker_server=192.168.52.1:22122    #tracker服务器IP和端口
 # 保存后测试,返回ID表示成功
 $ fdfs_upload_file /etc/fdfs/client.conf /mnt/e/DevelopKit/fastdfs/fastdfs-5.11.tar.gz
 group1/M00/00/00/wKcDCF2dQiuAGERCAAUkK6yqBFI.tar.gz
-----
+```
 
 * 配置nginx访问:
-[source]
-./etc/fdfs/mod_fastdfs.conf
-----
+
+```bash
+# /etc/fdfs/mod_fastdfs.conf
+
 $ vim /etc/fdfs/mod_fastdfs.conf
 # 需要修改的内容如下
 base_path=/mnt/e/DevelopKit/fastdfs_storage  #保存日志目录
@@ -239,11 +240,14 @@ server {
         ngx_fastdfs_module;
     }
 }
+```
+
 
 # 启动nginx,脚本在编译完自动创建在/usr/local/nginx/sbin目录
-$ /usr/local/nginx/sbin/nginx
-----
 
+```bash
+$ /usr/local/nginx/sbin/nginx
+```
 
 测试下载，用外部浏览器访问刚才已传过的nginx安装包,引用返回的ID:  
 http://192.167.3.8:80/group1/M00/00/00/wKcDCF2dQiuAGERCAAUkK6yqBFI.tar.gz  

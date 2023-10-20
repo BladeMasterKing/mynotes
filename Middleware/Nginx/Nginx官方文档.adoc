@@ -1,5 +1,0 @@
-= Nginx官方文档
-BladeMasterKing <wangbodang2@126.com>
-v 1.0,2019-11-01
-
-== Configure

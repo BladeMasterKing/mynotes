@@ -1,11 +1,8 @@
-= Elasticsearch脚本
-BladeMasterKing <wang_jiansheng@hotmail.com>
-v1.0
-:toc:
+# Elasticsearch脚本
 
-== 根据查询更新
-[source]
-----
+## 7.x版本
+### 根据查询更新
+```shell
 POST {index}/_update_by_query
 {
   "script": {
@@ -18,11 +15,10 @@ POST {index}/_update_by_query
     }
   }
 }
-----
+```
 
-== 删除字段
-[source]
-----
+### 删除字段
+```shell
 POST {index}/_update_by_query
 {
   "script": {
@@ -35,11 +31,10 @@ POST {index}/_update_by_query
     }
   }
 }
-----
+```
 
-== 虚拟列聚合
-[source]
-----
+### 虚拟列聚合
+```shell
 POST {index}/_search
 {
   "aggs": {
@@ -53,4 +48,4 @@ POST {index}/_search
     }
   }
 }
-----
+```
