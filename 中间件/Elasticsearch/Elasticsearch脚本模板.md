@@ -1,6 +1,10 @@
 # Elasticsearch脚本
 
 ## 7.x版本
+
+### 设置索引mapping
+
+
 ### 根据查询更新
 ```shell
 POST {index}/_update_by_query
