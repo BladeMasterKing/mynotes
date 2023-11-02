@@ -2,12 +2,20 @@
 
 ## 7.x版本
 
+### 索引API
+```bash
+curl -X GET "http://elastic:MhxzKhl2021@172.16.1.10:9292/_all/_settings?pretty"
+```
+
+
+### 计算集群中的文档数量
+
 ### 设置索引mapping
 
 
 ### 根据查询更新
-```shell
-POST {index}/_update_by_query
+```bash
+curl -X POST "http://host:port{index}/_update_by_query"
 {
   "script": {
     "source": "ctx._source['field_name'] = 'field_value'",
