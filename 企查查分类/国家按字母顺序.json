@@ -1,0 +1,1624 @@
+[
+    {
+        "groupName": "HOT",
+        "countryList": [
+            {
+                "country_code": "86",
+                "country_pinyin": "zhong guo",
+                "country_name_en": "China",
+                "country_name_cn": "中国"
+            },
+            {
+                "country_code": "852",
+                "country_pinyin": "zhong guo xiang gang te bie xing zheng qu",
+                "country_name_en": "Hong Kong SAR China",
+                "country_name_cn": "中国香港"
+            },
+            {
+                "country_code": "853",
+                "country_pinyin": "zhong guo ao men te bie xing zheng qu",
+                "country_name_en": "Macau SAR China",
+                "country_name_cn": "中国澳门"
+            },
+            {
+                "country_code": "886",
+                "country_pinyin": "zhong guo tai wan",
+                "country_name_en": "Taiwan",
+                "country_name_cn": "中国台湾"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "mei guo",
+                "country_name_en": "United States",
+                "country_name_cn": "美国"
+            },
+            {
+                "country_code": "81",
+                "country_pinyin": "ri ben",
+                "country_name_en": "Japan",
+                "country_name_cn": "日本"
+            },
+            {
+                "country_code": "82",
+                "country_pinyin": "han guo",
+                "country_name_en": "South Korea",
+                "country_name_cn": "韩国"
+            },
+            {
+                "country_code": "66",
+                "country_pinyin": "tai guo",
+                "country_name_en": "Thailand",
+                "country_name_cn": "泰国"
+            }
+        ]
+    },
+    {
+        "groupName": "A",
+        "countryList": [
+            {
+                "country_code": "376",
+                "country_pinyin": "an dao er",
+                "country_name_en": "Andorra",
+                "country_name_cn": "安道尔"
+            },
+            {
+                "country_code": "971",
+                "country_pinyin": "a la bo lian he qiu zhang guo",
+                "country_name_en": "United Arab Emirates",
+                "country_name_cn": "阿拉伯联合酋长国"
+            },
+            {
+                "country_code": "93",
+                "country_pinyin": "a fu han",
+                "country_name_en": "Afghanistan",
+                "country_name_cn": "阿富汗"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "an ti gua he ba bu da",
+                "country_name_en": "Antigua & Barbuda",
+                "country_name_cn": "安提瓜和巴布达"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "an gui la",
+                "country_name_en": "Anguilla",
+                "country_name_cn": "安圭拉"
+            },
+            {
+                "country_code": "355",
+                "country_pinyin": "a er ba ni ya",
+                "country_name_en": "Albania",
+                "country_name_cn": "阿尔巴尼亚"
+            },
+            {
+                "country_code": "244",
+                "country_pinyin": "an ge la",
+                "country_name_en": "Angola",
+                "country_name_cn": "安哥拉"
+            },
+            {
+                "country_code": "54",
+                "country_pinyin": "a gen ting",
+                "country_name_en": "Argentina",
+                "country_name_cn": "阿根廷"
+            },
+            {
+                "country_code": "43",
+                "country_pinyin": "ao de li",
+                "country_name_en": "Austria",
+                "country_name_cn": "奥地利"
+            },
+            {
+                "country_code": "61",
+                "country_pinyin": "ao da li ya",
+                "country_name_en": "Australia",
+                "country_name_cn": "澳大利亚"
+            },
+            {
+                "country_code": "297",
+                "country_pinyin": "a lu ba",
+                "country_name_en": "Aruba",
+                "country_name_cn": "阿鲁巴"
+            },
+            {
+                "country_code": "994",
+                "country_pinyin": "a sai bai jiang",
+                "country_name_en": "Azerbaijan",
+                "country_name_cn": "阿塞拜疆"
+            },
+            {
+                "country_code": "213",
+                "country_pinyin": "a er ji li ya",
+                "country_name_en": "Algeria",
+                "country_name_cn": "阿尔及利亚"
+            },
+            {
+                "country_code": "372",
+                "country_pinyin": "ai sha ni ya",
+                "country_name_en": "Estonia",
+                "country_name_cn": "爱沙尼亚"
+            },
+            {
+                "country_code": "20",
+                "country_pinyin": "ai ji",
+                "country_name_en": "Egypt",
+                "country_name_cn": "埃及"
+            },
+            {
+                "country_code": "251",
+                "country_pinyin": "ai sai e bi ya",
+                "country_name_en": "Ethiopia",
+                "country_name_cn": "埃塞俄比亚"
+            },
+            {
+                "country_code": "353",
+                "country_pinyin": "ai er lan",
+                "country_name_en": "Ireland",
+                "country_name_cn": "爱尔兰"
+            },
+            {
+                "country_code": "968",
+                "country_pinyin": "a man",
+                "country_name_en": "Oman",
+                "country_name_cn": "阿曼"
+            }
+        ]
+    },
+    {
+        "groupName": "B",
+        "countryList": [
+            {
+                "country_code": "387",
+                "country_pinyin": "bo si ni ya he hei sai ge wei na",
+                "country_name_en": "Bosnia & Herzegovina",
+                "country_name_cn": "波斯尼亚和黑塞哥维那"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "ba ba duo si",
+                "country_name_en": "Barbados",
+                "country_name_cn": "巴巴多斯"
+            },
+            {
+                "country_code": "32",
+                "country_pinyin": "bi li shi",
+                "country_name_en": "Belgium",
+                "country_name_cn": "比利时"
+            },
+            {
+                "country_code": "226",
+                "country_pinyin": "bu ji na fa suo",
+                "country_name_en": "Burkina Faso",
+                "country_name_cn": "布基纳法索"
+            },
+            {
+                "country_code": "359",
+                "country_pinyin": "bao jia li ya",
+                "country_name_en": "Bulgaria",
+                "country_name_cn": "保加利亚"
+            },
+            {
+                "country_code": "973",
+                "country_pinyin": "ba lin",
+                "country_name_en": "Bahrain",
+                "country_name_cn": "巴林"
+            },
+            {
+                "country_code": "257",
+                "country_pinyin": "bu long di",
+                "country_name_en": "Burundi",
+                "country_name_cn": "布隆迪"
+            },
+            {
+                "country_code": "229",
+                "country_pinyin": "bei ning",
+                "country_name_en": "Benin",
+                "country_name_cn": "贝宁"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "bai mu da",
+                "country_name_en": "Bermuda",
+                "country_name_cn": "百慕大"
+            },
+            {
+                "country_code": "591",
+                "country_pinyin": "bo li wei ya",
+                "country_name_en": "Bolivia",
+                "country_name_cn": "玻利维亚"
+            },
+            {
+                "country_code": "55",
+                "country_pinyin": "ba xi",
+                "country_name_en": "Brazil",
+                "country_name_cn": "巴西"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "ba ha ma",
+                "country_name_en": "Bahamas",
+                "country_name_cn": "巴哈马"
+            },
+            {
+                "country_code": "975",
+                "country_pinyin": "bu dan",
+                "country_name_en": "Bhutan",
+                "country_name_cn": "不丹"
+            },
+            {
+                "country_code": "267",
+                "country_pinyin": "bo ci wa na",
+                "country_name_en": "Botswana",
+                "country_name_cn": "博茨瓦纳"
+            },
+            {
+                "country_code": "375",
+                "country_pinyin": "bai e luo si",
+                "country_name_en": "Belarus",
+                "country_name_cn": "白俄罗斯"
+            },
+            {
+                "country_code": "501",
+                "country_pinyin": "bo li zi",
+                "country_name_en": "Belize",
+                "country_name_cn": "伯利兹"
+            },
+            {
+                "country_code": "354",
+                "country_pinyin": "bing dao",
+                "country_name_en": "Iceland",
+                "country_name_cn": "冰岛"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "bei ma li ya na qun dao",
+                "country_name_en": "Northern Mariana Islands",
+                "country_name_cn": "北马里亚纳群岛"
+            },
+            {
+                "country_code": "507",
+                "country_pinyin": "ba na ma",
+                "country_name_en": "Panama",
+                "country_name_cn": "巴拿马"
+            },
+            {
+                "country_code": "675",
+                "country_pinyin": "ba bu ya xin ji nei ya",
+                "country_name_en": "Papua New Guinea",
+                "country_name_cn": "巴布亚新几内亚"
+            },
+            {
+                "country_code": "92",
+                "country_pinyin": "ba ji si tan",
+                "country_name_en": "Pakistan",
+                "country_name_cn": "巴基斯坦"
+            },
+            {
+                "country_code": "48",
+                "country_pinyin": "bo lan",
+                "country_name_en": "Poland",
+                "country_name_cn": "波兰"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "bo duo li ge",
+                "country_name_en": "Puerto Rico",
+                "country_name_cn": "波多黎各"
+            },
+            {
+                "country_code": "970",
+                "country_pinyin": "ba lei si tan ling tu",
+                "country_name_en": "Palestinian Territories",
+                "country_name_cn": "巴勒斯坦领土"
+            },
+            {
+                "country_code": "595",
+                "country_pinyin": "ba la gui",
+                "country_name_en": "Paraguay",
+                "country_name_cn": "巴拉圭"
+            }
+        ]
+    },
+    {
+        "groupName": "C",
+        "countryList": [
+            {
+                "country_code": "240",
+                "country_pinyin": "chi dao ji nei ya",
+                "country_name_en": "Equatorial Guinea",
+                "country_name_cn": "赤道几内亚"
+            },
+            {
+                "country_code": "850",
+                "country_pinyin": "chao xian",
+                "country_name_en": "North Korea",
+                "country_name_cn": "朝鲜"
+            }
+        ]
+    },
+    {
+        "groupName": "D",
+        "countryList": [
+            {
+                "country_code": "49",
+                "country_pinyin": "de guo",
+                "country_name_en": "Germany",
+                "country_name_cn": "德国"
+            },
+            {
+                "country_code": "45",
+                "country_pinyin": "dan mai",
+                "country_name_en": "Denmark",
+                "country_name_cn": "丹麦"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "duo mi ni ke",
+                "country_name_en": "Dominica",
+                "country_name_cn": "多米尼克"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "duo mi ni jia gong he guo",
+                "country_name_en": "Dominican Republic",
+                "country_name_cn": "多米尼加共和国"
+            },
+            {
+                "country_code": "228",
+                "country_pinyin": "duo ge",
+                "country_name_en": "Togo",
+                "country_name_cn": "多哥"
+            },
+            {
+                "country_code": "670",
+                "country_pinyin": "dong di wen",
+                "country_name_en": "Timor-Leste",
+                "country_name_cn": "东帝汶"
+            }
+        ]
+    },
+    {
+        "groupName": "E",
+        "countryList": [
+            {
+                "country_code": "593",
+                "country_pinyin": "e gua duo er",
+                "country_name_en": "Ecuador",
+                "country_name_cn": "厄瓜多尔"
+            },
+            {
+                "country_code": "291",
+                "country_pinyin": "e li te li ya",
+                "country_name_en": "Eritrea",
+                "country_name_cn": "厄立特里亚"
+            },
+            {
+                "country_code": "7",
+                "country_pinyin": "e luo si",
+                "country_name_en": "Russia",
+                "country_name_cn": "俄罗斯"
+            }
+        ]
+    },
+    {
+        "groupName": "F",
+        "countryList": [
+            {
+                "country_code": "238",
+                "country_pinyin": "fu de jiao",
+                "country_name_en": "Cape Verde",
+                "country_name_cn": "佛得角"
+            },
+            {
+                "country_code": "358",
+                "country_pinyin": "fen lan",
+                "country_name_en": "Finland",
+                "country_name_cn": "芬兰"
+            },
+            {
+                "country_code": "679",
+                "country_pinyin": "fei ji",
+                "country_name_en": "Fiji",
+                "country_name_cn": "斐济"
+            },
+            {
+                "country_code": "500",
+                "country_pinyin": "fu ke lan qun dao",
+                "country_name_en": "Falkland Islands",
+                "country_name_cn": "福克兰群岛"
+            },
+            {
+                "country_code": "298",
+                "country_pinyin": "fa luo qun dao",
+                "country_name_en": "Faroe Islands",
+                "country_name_cn": "法罗群岛"
+            },
+            {
+                "country_code": "33",
+                "country_pinyin": "fa guo",
+                "country_name_en": "France",
+                "country_name_cn": "法国"
+            },
+            {
+                "country_code": "594",
+                "country_pinyin": "fa shu gui ya na",
+                "country_name_en": "French Guiana",
+                "country_name_cn": "法属圭亚那"
+            },
+            {
+                "country_code": "590",
+                "country_pinyin": "fa shu sheng ma ding",
+                "country_name_en": "St. Martin",
+                "country_name_cn": "法属圣马丁"
+            },
+            {
+                "country_code": "689",
+                "country_pinyin": "fa shu bo li ni xi ya",
+                "country_name_en": "French Polynesia",
+                "country_name_cn": "法属波利尼西亚"
+            },
+            {
+                "country_code": "63",
+                "country_pinyin": "fei lu bin",
+                "country_name_en": "Philippines",
+                "country_name_cn": "菲律宾"
+            },
+            {
+                "country_code": "379",
+                "country_pinyin": "fan di gang",
+                "country_name_en": "Vatican City",
+                "country_name_cn": "梵蒂冈"
+            }
+        ]
+    },
+    {
+        "groupName": "G",
+        "countryList": [
+            {
+                "country_code": "243",
+                "country_pinyin": "gang guo （jin）",
+                "country_name_en": "Congo - Kinshasa",
+                "country_name_cn": "刚果（金）"
+            },
+            {
+                "country_code": "242",
+                "country_pinyin": "gang guo （bu）",
+                "country_name_en": "Congo - Brazzaville",
+                "country_name_cn": "刚果（布）"
+            },
+            {
+                "country_code": "57",
+                "country_pinyin": "ge lun bi ya",
+                "country_name_en": "Colombia",
+                "country_name_cn": "哥伦比亚"
+            },
+            {
+                "country_code": "506",
+                "country_pinyin": "ge si da li jia",
+                "country_name_en": "Costa Rica",
+                "country_name_cn": "哥斯达黎加"
+            },
+            {
+                "country_code": "53",
+                "country_pinyin": "gu ba",
+                "country_name_en": "Cuba",
+                "country_name_cn": "古巴"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "ge lin na da",
+                "country_name_en": "Grenada",
+                "country_name_cn": "格林纳达"
+            },
+            {
+                "country_code": "995",
+                "country_pinyin": "ge lu ji ya",
+                "country_name_en": "Georgia",
+                "country_name_cn": "格鲁吉亚"
+            },
+            {
+                "country_code": "44",
+                "country_pinyin": "gen xi dao",
+                "country_name_en": "Guernsey",
+                "country_name_cn": "根西岛"
+            },
+            {
+                "country_code": "299",
+                "country_pinyin": "ge ling lan",
+                "country_name_en": "Greenland",
+                "country_name_cn": "格陵兰"
+            },
+            {
+                "country_code": "220",
+                "country_pinyin": "gang bi ya",
+                "country_name_en": "Gambia",
+                "country_name_cn": "冈比亚"
+            },
+            {
+                "country_code": "590",
+                "country_pinyin": "gua de luo pu",
+                "country_name_en": "Guadeloupe",
+                "country_name_cn": "瓜德罗普"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "guan dao",
+                "country_name_en": "Guam",
+                "country_name_cn": "关岛"
+            },
+            {
+                "country_code": "595",
+                "country_pinyin": "gui ya na",
+                "country_name_en": "Guyana",
+                "country_name_cn": "圭亚那"
+            }
+        ]
+    },
+    {
+        "groupName": "H",
+        "countryList": [
+            {
+                "country_code": "599",
+                "country_pinyin": "he lan jia lei bi qu",
+                "country_name_en": "Caribbean Netherlands",
+                "country_name_cn": "荷兰加勒比区"
+            },
+            {
+                "country_code": "504",
+                "country_pinyin": "hong dou la si",
+                "country_name_en": "Honduras",
+                "country_name_cn": "洪都拉斯"
+            },
+            {
+                "country_code": "509",
+                "country_pinyin": "hai de",
+                "country_name_en": "Haiti",
+                "country_name_cn": "海地"
+            },
+            {
+                "country_code": "82",
+                "country_pinyin": "han guo",
+                "country_name_en": "South Korea",
+                "country_name_cn": "韩国"
+            },
+            {
+                "country_code": "77",
+                "country_pinyin": "ha sa ke si tan",
+                "country_name_en": "Kazakhstan",
+                "country_name_cn": "哈萨克斯坦"
+            },
+            {
+                "country_code": "382",
+                "country_pinyin": "hei shan",
+                "country_name_en": "Montenegro",
+                "country_name_cn": "黑山"
+            },
+            {
+                "country_code": "31",
+                "country_pinyin": "he lan",
+                "country_name_en": "Netherlands",
+                "country_name_cn": "荷兰"
+            },
+            {
+                "country_code": "599",
+                "country_pinyin": "he shu sheng ma ding",
+                "country_name_en": "Sint Maarten",
+                "country_name_cn": "荷属圣马丁"
+            }
+        ]
+    },
+    {
+        "groupName": "J",
+        "countryList": [
+            {
+                "country_code": "1",
+                "country_pinyin": "jia na da",
+                "country_name_en": "Canada",
+                "country_name_cn": "加拿大"
+            },
+            {
+                "country_code": "420",
+                "country_pinyin": "jie ke gong he guo",
+                "country_name_en": "Czech Republic",
+                "country_name_cn": "捷克共和国"
+            },
+            {
+                "country_code": "253",
+                "country_pinyin": "ji bu ti",
+                "country_name_en": "Djibouti",
+                "country_name_cn": "吉布提"
+            },
+            {
+                "country_code": "241",
+                "country_pinyin": "jia peng",
+                "country_name_en": "Gabon",
+                "country_name_cn": "加蓬"
+            },
+            {
+                "country_code": "233",
+                "country_pinyin": "jia na",
+                "country_name_en": "Ghana",
+                "country_name_cn": "加纳"
+            },
+            {
+                "country_code": "224",
+                "country_pinyin": "ji nei ya",
+                "country_name_en": "Guinea",
+                "country_name_cn": "几内亚"
+            },
+            {
+                "country_code": "245",
+                "country_pinyin": "ji nei ya bi shao",
+                "country_name_en": "Guinea-Bissau",
+                "country_name_cn": "几内亚比绍"
+            },
+            {
+                "country_code": "996",
+                "country_pinyin": "ji er ji si si tan",
+                "country_name_en": "Kyrgyzstan",
+                "country_name_cn": "吉尔吉斯斯坦"
+            },
+            {
+                "country_code": "855",
+                "country_pinyin": "jian bu zhai",
+                "country_name_en": "Cambodia",
+                "country_name_cn": "柬埔寨"
+            },
+            {
+                "country_code": "686",
+                "country_pinyin": "ji li ba si",
+                "country_name_en": "Kiribati",
+                "country_name_cn": "基里巴斯"
+            },
+            {
+                "country_code": "263",
+                "country_pinyin": "jin ba bu wei",
+                "country_name_en": "Zimbabwe",
+                "country_name_cn": "津巴布韦"
+            }
+        ]
+    },
+    {
+        "groupName": "K",
+        "countryList": [
+            {
+                "country_code": "61",
+                "country_pinyin": "ke ke si （ji lin） qun dao",
+                "country_name_en": "Cocos (Keeling) Islands",
+                "country_name_cn": "科科斯（基林）群岛"
+            },
+            {
+                "country_code": "225",
+                "country_pinyin": "ke te di wa",
+                "country_name_en": "Côte d’Ivoire",
+                "country_name_cn": "科特迪瓦"
+            },
+            {
+                "country_code": "682",
+                "country_pinyin": "ku ke qun dao",
+                "country_name_en": "Cook Islands",
+                "country_name_cn": "库克群岛"
+            },
+            {
+                "country_code": "237",
+                "country_pinyin": "ka mai long",
+                "country_name_en": "Cameroon",
+                "country_name_cn": "喀麦隆"
+            },
+            {
+                "country_code": "5999",
+                "country_pinyin": "ku la suo",
+                "country_name_en": "Curaçao",
+                "country_name_cn": "库拉索"
+            },
+            {
+                "country_code": "385",
+                "country_pinyin": "ke luo de ya",
+                "country_name_en": "Croatia",
+                "country_name_cn": "克罗地亚"
+            },
+            {
+                "country_code": "254",
+                "country_pinyin": "ken ni ya",
+                "country_name_en": "Kenya",
+                "country_name_cn": "肯尼亚"
+            },
+            {
+                "country_code": "269",
+                "country_pinyin": "ke mo luo",
+                "country_name_en": "Comoros",
+                "country_name_cn": "科摩罗"
+            },
+            {
+                "country_code": "965",
+                "country_pinyin": "ke wei te",
+                "country_name_en": "Kuwait",
+                "country_name_cn": "科威特"
+            },
+            {
+                "country_code": "345",
+                "country_pinyin": "kai man qun dao",
+                "country_name_en": "Cayman Islands",
+                "country_name_cn": "开曼群岛"
+            },
+            {
+                "country_code": "974",
+                "country_pinyin": "ka ta er",
+                "country_name_en": "Qatar",
+                "country_name_cn": "卡塔尔"
+            }
+        ]
+    },
+    {
+        "groupName": "L",
+        "countryList": [
+            {
+                "country_code": "856",
+                "country_pinyin": "lao wo",
+                "country_name_en": "Laos",
+                "country_name_cn": "老挝"
+            },
+            {
+                "country_code": "961",
+                "country_pinyin": "li ba nen",
+                "country_name_en": "Lebanon",
+                "country_name_cn": "黎巴嫩"
+            },
+            {
+                "country_code": "423",
+                "country_pinyin": "lie zhi dun shi deng",
+                "country_name_en": "Liechtenstein",
+                "country_name_cn": "列支敦士登"
+            },
+            {
+                "country_code": "231",
+                "country_pinyin": "li bi li ya",
+                "country_name_en": "Liberia",
+                "country_name_cn": "利比里亚"
+            },
+            {
+                "country_code": "266",
+                "country_pinyin": "lai suo tuo",
+                "country_name_en": "Lesotho",
+                "country_name_cn": "莱索托"
+            },
+            {
+                "country_code": "370",
+                "country_pinyin": "li tao wan",
+                "country_name_en": "Lithuania",
+                "country_name_cn": "立陶宛"
+            },
+            {
+                "country_code": "352",
+                "country_pinyin": "lu sen bao",
+                "country_name_en": "Luxembourg",
+                "country_name_cn": "卢森堡"
+            },
+            {
+                "country_code": "371",
+                "country_pinyin": "la tuo wei ya",
+                "country_name_en": "Latvia",
+                "country_name_cn": "拉脱维亚"
+            },
+            {
+                "country_code": "218",
+                "country_pinyin": "li bi ya",
+                "country_name_en": "Libya",
+                "country_name_cn": "利比亚"
+            },
+            {
+                "country_code": "262",
+                "country_pinyin": "liu ni wang",
+                "country_name_en": "Réunion",
+                "country_name_cn": "留尼汪"
+            },
+            {
+                "country_code": "40",
+                "country_pinyin": "luo ma ni ya",
+                "country_name_en": "Romania",
+                "country_name_cn": "罗马尼亚"
+            },
+            {
+                "country_code": "250",
+                "country_pinyin": "lu wang da",
+                "country_name_en": "Rwanda",
+                "country_name_cn": "卢旺达"
+            }
+        ]
+    },
+    {
+        "groupName": "M",
+        "countryList": [
+            {
+                "country_code": "1",
+                "country_pinyin": "mei shu sa mo ya",
+                "country_name_en": "American Samoa",
+                "country_name_cn": "美属萨摩亚"
+            },
+            {
+                "country_code": "880",
+                "country_pinyin": "meng jia la guo",
+                "country_name_en": "Bangladesh",
+                "country_name_cn": "孟加拉国"
+            },
+            {
+                "country_code": "691",
+                "country_pinyin": "mi ke luo ni xi ya",
+                "country_name_en": "Micronesia",
+                "country_name_cn": "密克罗尼西亚"
+            },
+            {
+                "country_code": "44",
+                "country_pinyin": "man dao",
+                "country_name_en": "Isle of Man",
+                "country_name_cn": "曼岛"
+            },
+            {
+                "country_code": "212",
+                "country_pinyin": "mo luo ge",
+                "country_name_en": "Morocco",
+                "country_name_cn": "摩洛哥"
+            },
+            {
+                "country_code": "377",
+                "country_pinyin": "mo na ge",
+                "country_name_en": "Monaco",
+                "country_name_cn": "摩纳哥"
+            },
+            {
+                "country_code": "373",
+                "country_pinyin": "mo er duo wa",
+                "country_name_en": "Moldova",
+                "country_name_cn": "摩尔多瓦"
+            },
+            {
+                "country_code": "261",
+                "country_pinyin": "ma da jia si jia",
+                "country_name_en": "Madagascar",
+                "country_name_cn": "马达加斯加"
+            },
+            {
+                "country_code": "692",
+                "country_pinyin": "ma shao er qun dao",
+                "country_name_en": "Marshall Islands",
+                "country_name_cn": "马绍尔群岛"
+            },
+            {
+                "country_code": "389",
+                "country_pinyin": "ma qi dun",
+                "country_name_en": "Macedonia",
+                "country_name_cn": "马其顿"
+            },
+            {
+                "country_code": "223",
+                "country_pinyin": "ma li",
+                "country_name_en": "Mali",
+                "country_name_cn": "马里"
+            },
+            {
+                "country_code": "95",
+                "country_pinyin": "mian dian",
+                "country_name_en": "Myanmar (Burma)",
+                "country_name_cn": "缅甸"
+            },
+            {
+                "country_code": "976",
+                "country_pinyin": "meng gu",
+                "country_name_en": "Mongolia",
+                "country_name_cn": "蒙古"
+            },
+            {
+                "country_code": "596",
+                "country_pinyin": "ma ti ni ke",
+                "country_name_en": "Martinique",
+                "country_name_cn": "马提尼克"
+            },
+            {
+                "country_code": "222",
+                "country_pinyin": "mao li ta ni ya",
+                "country_name_en": "Mauritania",
+                "country_name_cn": "毛里塔尼亚"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "meng te sai la te",
+                "country_name_en": "Montserrat",
+                "country_name_cn": "蒙特塞拉特"
+            },
+            {
+                "country_code": "356",
+                "country_pinyin": "ma er ta",
+                "country_name_en": "Malta",
+                "country_name_cn": "马耳他"
+            },
+            {
+                "country_code": "230",
+                "country_pinyin": "mao li qiu si",
+                "country_name_en": "Mauritius",
+                "country_name_cn": "毛里求斯"
+            },
+            {
+                "country_code": "960",
+                "country_pinyin": "ma er dai fu",
+                "country_name_en": "Maldives",
+                "country_name_cn": "马尔代夫"
+            },
+            {
+                "country_code": "265",
+                "country_pinyin": "ma la wei",
+                "country_name_en": "Malawi",
+                "country_name_cn": "马拉维"
+            },
+            {
+                "country_code": "52",
+                "country_pinyin": "mo xi ge",
+                "country_name_en": "Mexico",
+                "country_name_cn": "墨西哥"
+            },
+            {
+                "country_code": "60",
+                "country_pinyin": "ma lai xi ya",
+                "country_name_en": "Malaysia",
+                "country_name_cn": "马来西亚"
+            },
+            {
+                "country_code": "258",
+                "country_pinyin": "mo sang bi ke",
+                "country_name_en": "Mozambique",
+                "country_name_cn": "莫桑比克"
+            },
+            {
+                "country_code": "51",
+                "country_pinyin": "mi lu",
+                "country_name_en": "Peru",
+                "country_name_cn": "秘鲁"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "mei guo",
+                "country_name_en": "United States",
+                "country_name_cn": "美国"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "mei shu wei jing qun dao",
+                "country_name_en": "U.S. Virgin Islands",
+                "country_name_cn": "美属维京群岛"
+            },
+            {
+                "country_code": "262",
+                "country_pinyin": "ma yue te",
+                "country_name_en": "Mayotte",
+                "country_name_cn": "马约特"
+            }
+        ]
+    },
+    {
+        "groupName": "N",
+        "countryList": [
+            {
+                "country_code": "672",
+                "country_pinyin": "nan ji zhou",
+                "country_name_en": "Antarctica",
+                "country_name_cn": "南极洲"
+            },
+            {
+                "country_code": "500",
+                "country_pinyin": "nan qiao zhi ya dao he nan sang wei qi qun dao",
+                "country_name_en": "So. Georgia & So. Sandwich Isl.",
+                "country_name_cn": "南乔治亚岛和南桑威齐群岛"
+            },
+            {
+                "country_code": "264",
+                "country_pinyin": "na mi bi ya",
+                "country_name_en": "Namibia",
+                "country_name_cn": "纳米比亚"
+            },
+            {
+                "country_code": "227",
+                "country_pinyin": "ni ri er",
+                "country_name_en": "Niger",
+                "country_name_cn": "尼日尔"
+            },
+            {
+                "country_code": "672",
+                "country_pinyin": "nuo fu ke dao",
+                "country_name_en": "Norfolk Island",
+                "country_name_cn": "诺福克岛"
+            },
+            {
+                "country_code": "234",
+                "country_pinyin": "ni ri li ya",
+                "country_name_en": "Nigeria",
+                "country_name_cn": "尼日利亚"
+            },
+            {
+                "country_code": "505",
+                "country_pinyin": "ni jia la gua",
+                "country_name_en": "Nicaragua",
+                "country_name_cn": "尼加拉瓜"
+            },
+            {
+                "country_code": "47",
+                "country_pinyin": "nuo wei",
+                "country_name_en": "Norway",
+                "country_name_cn": "挪威"
+            },
+            {
+                "country_code": "977",
+                "country_pinyin": "ni po er",
+                "country_name_en": "Nepal",
+                "country_name_cn": "尼泊尔"
+            },
+            {
+                "country_code": "674",
+                "country_pinyin": "nao lu",
+                "country_name_en": "Nauru",
+                "country_name_cn": "瑙鲁"
+            },
+            {
+                "country_code": "683",
+                "country_pinyin": "niu ai",
+                "country_name_en": "Niue",
+                "country_name_cn": "纽埃"
+            },
+            {
+                "country_code": "211",
+                "country_pinyin": "nan su dan",
+                "country_name_en": "South Sudan",
+                "country_name_cn": "南苏丹"
+            },
+            {
+                "country_code": "27",
+                "country_pinyin": "nan fei",
+                "country_name_en": "South Africa",
+                "country_name_cn": "南非"
+            }
+        ]
+    },
+    {
+        "groupName": "P",
+        "countryList": [
+            {
+                "country_code": "872",
+                "country_pinyin": "pi te kai en qun dao",
+                "country_name_en": "Pitcairn Islands",
+                "country_name_cn": "皮特凯恩群岛"
+            },
+            {
+                "country_code": "351",
+                "country_pinyin": "pu tao ya",
+                "country_name_en": "Portugal",
+                "country_name_cn": "葡萄牙"
+            },
+            {
+                "country_code": "680",
+                "country_pinyin": "pa lao",
+                "country_name_en": "Palau",
+                "country_name_cn": "帕劳"
+            }
+        ]
+    },
+    {
+        "groupName": "R",
+        "countryList": [
+            {
+                "country_code": "41",
+                "country_pinyin": "rui shi",
+                "country_name_en": "Switzerland",
+                "country_name_cn": "瑞士"
+            },
+            {
+                "country_code": "81",
+                "country_pinyin": "ri ben",
+                "country_name_en": "Japan",
+                "country_name_cn": "日本"
+            },
+            {
+                "country_code": "46",
+                "country_pinyin": "rui dian",
+                "country_name_en": "Sweden",
+                "country_name_cn": "瑞典"
+            }
+        ]
+    },
+    {
+        "groupName": "S",
+        "countryList": [
+            {
+                "country_code": "590",
+                "country_pinyin": "sheng ba tai lei mi",
+                "country_name_en": "St. Barthélemy",
+                "country_name_cn": "圣巴泰勒米"
+            },
+            {
+                "country_code": "61",
+                "country_pinyin": "sheng dan dao",
+                "country_name_en": "Christmas Island",
+                "country_name_cn": "圣诞岛"
+            },
+            {
+                "country_code": "537",
+                "country_pinyin": "sai pu lu si",
+                "country_name_en": "Cyprus",
+                "country_name_cn": "塞浦路斯"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "sheng ji ci he ni wei si",
+                "country_name_en": "St. Kitts & Nevis",
+                "country_name_cn": "圣基茨和尼维斯"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "sheng lu xi ya",
+                "country_name_en": "St. Lucia",
+                "country_name_cn": "圣卢西亚"
+            },
+            {
+                "country_code": "94",
+                "country_pinyin": "si li lan ka",
+                "country_name_en": "Sri Lanka",
+                "country_name_cn": "斯里兰卡"
+            },
+            {
+                "country_code": "508",
+                "country_pinyin": "sheng pi ai er he mi ke long qun dao",
+                "country_name_en": "St. Pierre & Miquelon",
+                "country_name_cn": "圣皮埃尔和密克隆群岛"
+            },
+            {
+                "country_code": "381",
+                "country_pinyin": "sai er wei ya",
+                "country_name_en": "Serbia",
+                "country_name_cn": "塞尔维亚"
+            },
+            {
+                "country_code": "966",
+                "country_pinyin": "sha te a la bo",
+                "country_name_en": "Saudi Arabia",
+                "country_name_cn": "沙特阿拉伯"
+            },
+            {
+                "country_code": "677",
+                "country_pinyin": "suo luo men qun dao",
+                "country_name_en": "Solomon Islands",
+                "country_name_cn": "所罗门群岛"
+            },
+            {
+                "country_code": "248",
+                "country_pinyin": "sai she er",
+                "country_name_en": "Seychelles",
+                "country_name_cn": "塞舌尔"
+            },
+            {
+                "country_code": "249",
+                "country_pinyin": "su dan",
+                "country_name_en": "Sudan",
+                "country_name_cn": "苏丹"
+            },
+            {
+                "country_code": "290",
+                "country_pinyin": "sheng he lei na",
+                "country_name_en": "St. Helena",
+                "country_name_cn": "圣赫勒拿"
+            },
+            {
+                "country_code": "386",
+                "country_pinyin": "si luo wen ni ya",
+                "country_name_en": "Slovenia",
+                "country_name_cn": "斯洛文尼亚"
+            },
+            {
+                "country_code": "47",
+                "country_pinyin": "si wa er ba te he yang ma yan",
+                "country_name_en": "Svalbard & Jan Mayen",
+                "country_name_cn": "斯瓦尔巴特和扬马延"
+            },
+            {
+                "country_code": "421",
+                "country_pinyin": "si luo fa ke",
+                "country_name_en": "Slovakia",
+                "country_name_cn": "斯洛伐克"
+            },
+            {
+                "country_code": "232",
+                "country_pinyin": "sai la li ang",
+                "country_name_en": "Sierra Leone",
+                "country_name_cn": "塞拉利昂"
+            },
+            {
+                "country_code": "378",
+                "country_pinyin": "sheng ma li nuo",
+                "country_name_en": "San Marino",
+                "country_name_cn": "圣马力诺"
+            },
+            {
+                "country_code": "221",
+                "country_pinyin": "sai nei jia er",
+                "country_name_en": "Senegal",
+                "country_name_cn": "塞内加尔"
+            },
+            {
+                "country_code": "252",
+                "country_pinyin": "suo ma li",
+                "country_name_en": "Somalia",
+                "country_name_cn": "索马里"
+            },
+            {
+                "country_code": "597",
+                "country_pinyin": "su li nan",
+                "country_name_en": "Suriname",
+                "country_name_cn": "苏里南"
+            },
+            {
+                "country_code": "239",
+                "country_pinyin": "sheng duo mei he pu lin xi bi",
+                "country_name_en": "São Tomé & Príncipe",
+                "country_name_cn": "圣多美和普林西比"
+            },
+            {
+                "country_code": "503",
+                "country_pinyin": "sa er wa duo",
+                "country_name_en": "El Salvador",
+                "country_name_cn": "萨尔瓦多"
+            },
+            {
+                "country_code": "268",
+                "country_pinyin": "si wei shi lan",
+                "country_name_en": "Swaziland",
+                "country_name_cn": "斯威士兰"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "sheng wen sen te he ge lin na ding si",
+                "country_name_en": "St. Vincent & Grenadines",
+                "country_name_cn": "圣文森特和格林纳丁斯"
+            },
+            {
+                "country_code": "685",
+                "country_pinyin": "sa mo ya",
+                "country_name_en": "Samoa",
+                "country_name_cn": "萨摩亚"
+            }
+        ]
+    },
+    {
+        "groupName": "T",
+        "countryList": [
+            {
+                "country_code": "1",
+                "country_pinyin": "te ke si he kai ke si qun dao",
+                "country_name_en": "Turks & Caicos Islands",
+                "country_name_cn": "特克斯和凯科斯群岛"
+            },
+            {
+                "country_code": "66",
+                "country_pinyin": "tai guo",
+                "country_name_en": "Thailand",
+                "country_name_cn": "泰国"
+            },
+            {
+                "country_code": "992",
+                "country_pinyin": "ta ji ke si tan",
+                "country_name_en": "Tajikistan",
+                "country_name_cn": "塔吉克斯坦"
+            },
+            {
+                "country_code": "690",
+                "country_pinyin": "tuo ke lao",
+                "country_name_en": "Tokelau",
+                "country_name_cn": "托克劳"
+            },
+            {
+                "country_code": "993",
+                "country_pinyin": "tu ku man si tan",
+                "country_name_en": "Turkmenistan",
+                "country_name_cn": "土库曼斯坦"
+            },
+            {
+                "country_code": "216",
+                "country_pinyin": "tu ni si",
+                "country_name_en": "Tunisia",
+                "country_name_cn": "突尼斯"
+            },
+            {
+                "country_code": "676",
+                "country_pinyin": "tang jia",
+                "country_name_en": "Tonga",
+                "country_name_cn": "汤加"
+            },
+            {
+                "country_code": "90",
+                "country_pinyin": "tu er qi",
+                "country_name_en": "Turkey",
+                "country_name_cn": "土耳其"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "te li ni da he duo ba ge",
+                "country_name_en": "Trinidad & Tobago",
+                "country_name_cn": "特立尼达和多巴哥"
+            },
+            {
+                "country_code": "688",
+                "country_pinyin": "tu wa lu",
+                "country_name_en": "Tuvalu",
+                "country_name_cn": "图瓦卢"
+            },
+            {
+                "country_code": "255",
+                "country_pinyin": "tan sang ni ya",
+                "country_name_en": "Tanzania",
+                "country_name_cn": "坦桑尼亚"
+            }
+        ]
+    },
+    {
+        "groupName": "W",
+        "countryList": [
+            {
+                "country_code": "673",
+                "country_pinyin": "wen lai",
+                "country_name_en": "Brunei",
+                "country_name_cn": "文莱"
+            },
+            {
+                "country_code": "502",
+                "country_pinyin": "wei de ma la",
+                "country_name_en": "Guatemala",
+                "country_name_cn": "危地马拉"
+            },
+            {
+                "country_code": "380",
+                "country_pinyin": "wu ke lan",
+                "country_name_en": "Ukraine",
+                "country_name_cn": "乌克兰"
+            },
+            {
+                "country_code": "256",
+                "country_pinyin": "wu gan da",
+                "country_name_en": "Uganda",
+                "country_name_cn": "乌干达"
+            },
+            {
+                "country_code": "598",
+                "country_pinyin": "wu la gui",
+                "country_name_en": "Uruguay",
+                "country_name_cn": "乌拉圭"
+            },
+            {
+                "country_code": "998",
+                "country_pinyin": "wu zi bie ke si tan",
+                "country_name_en": "Uzbekistan",
+                "country_name_cn": "乌兹别克斯坦"
+            },
+            {
+                "country_code": "58",
+                "country_pinyin": "wei nei rui la",
+                "country_name_en": "Venezuela",
+                "country_name_cn": "委内瑞拉"
+            },
+            {
+                "country_code": "678",
+                "country_pinyin": "wa nu a tu",
+                "country_name_en": "Vanuatu",
+                "country_name_cn": "瓦努阿图"
+            },
+            {
+                "country_code": "681",
+                "country_pinyin": "wa li si he fu tu na",
+                "country_name_en": "Wallis & Futuna",
+                "country_name_cn": "瓦利斯和富图纳"
+            }
+        ]
+    },
+    {
+        "groupName": "X",
+        "countryList": [
+            {
+                "country_code": "210",
+                "country_pinyin": "xi sa ha la",
+                "country_name_en": "Western Sahara",
+                "country_name_cn": "西撒哈拉"
+            },
+            {
+                "country_code": "34",
+                "country_pinyin": "xi ban ya",
+                "country_name_en": "Spain",
+                "country_name_cn": "西班牙"
+            },
+            {
+                "country_code": "30",
+                "country_pinyin": "xi la",
+                "country_name_en": "Greece",
+                "country_name_cn": "希腊"
+            },
+            {
+                "country_code": "36",
+                "country_pinyin": "xiong ya li",
+                "country_name_en": "Hungary",
+                "country_name_cn": "匈牙利"
+            },
+            {
+                "country_code": "687",
+                "country_pinyin": "xin ka li duo ni ya",
+                "country_name_en": "New Caledonia",
+                "country_name_cn": "新喀里多尼亚"
+            },
+            {
+                "country_code": "64",
+                "country_pinyin": "xin xi lan",
+                "country_name_en": "New Zealand",
+                "country_name_cn": "新西兰"
+            },
+            {
+                "country_code": "65",
+                "country_pinyin": "xin jia po",
+                "country_name_en": "Singapore",
+                "country_name_cn": "新加坡"
+            },
+            {
+                "country_code": "963",
+                "country_pinyin": "xu li ya",
+                "country_name_en": "Syria",
+                "country_name_cn": "叙利亚"
+            }
+        ]
+    },
+    {
+        "groupName": "Y",
+        "countryList": [
+            {
+                "country_code": "374",
+                "country_pinyin": "ya mei ni ya",
+                "country_name_en": "Armenia",
+                "country_name_cn": "亚美尼亚"
+            },
+            {
+                "country_code": "44",
+                "country_pinyin": "ying guo",
+                "country_name_en": "United Kingdom",
+                "country_name_cn": "英国"
+            },
+            {
+                "country_code": "62",
+                "country_pinyin": "yin du ni xi ya",
+                "country_name_en": "Indonesia",
+                "country_name_cn": "印度尼西亚"
+            },
+            {
+                "country_code": "972",
+                "country_pinyin": "yi se lie",
+                "country_name_en": "Israel",
+                "country_name_cn": "以色列"
+            },
+            {
+                "country_code": "91",
+                "country_pinyin": "yin du",
+                "country_name_en": "India",
+                "country_name_cn": "印度"
+            },
+            {
+                "country_code": "246",
+                "country_pinyin": "ying shu yin du yang ling de",
+                "country_name_en": "British Indian Ocean Territory",
+                "country_name_cn": "英属印度洋领地"
+            },
+            {
+                "country_code": "964",
+                "country_pinyin": "yi la ke",
+                "country_name_en": "Iraq",
+                "country_name_cn": "伊拉克"
+            },
+            {
+                "country_code": "98",
+                "country_pinyin": "yi lang",
+                "country_name_en": "Iran",
+                "country_name_cn": "伊朗"
+            },
+            {
+                "country_code": "39",
+                "country_pinyin": "yi da li",
+                "country_name_en": "Italy",
+                "country_name_cn": "意大利"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "ya mai jia",
+                "country_name_en": "Jamaica",
+                "country_name_cn": "牙买加"
+            },
+            {
+                "country_code": "962",
+                "country_pinyin": "yue dan",
+                "country_name_en": "Jordan",
+                "country_name_cn": "约旦"
+            },
+            {
+                "country_code": "1",
+                "country_pinyin": "ying shu wei jing qun dao",
+                "country_name_en": "British Virgin Islands",
+                "country_name_cn": "英属维京群岛"
+            },
+            {
+                "country_code": "84",
+                "country_pinyin": "yue nan",
+                "country_name_en": "Vietnam",
+                "country_name_cn": "越南"
+            },
+            {
+                "country_code": "967",
+                "country_pinyin": "ye men",
+                "country_name_en": "Yemen",
+                "country_name_cn": "也门"
+            }
+        ]
+    },
+    {
+        "groupName": "Z",
+        "countryList": [
+            {
+                "country_code": "236",
+                "country_pinyin": "zhong fei gong he guo",
+                "country_name_en": "Central African Republic",
+                "country_name_cn": "中非共和国"
+            },
+            {
+                "country_code": "56",
+                "country_pinyin": "zhi li",
+                "country_name_en": "Chile",
+                "country_name_cn": "智利"
+            },
+            {
+                "country_code": "350",
+                "country_pinyin": "zhi bu luo tuo",
+                "country_name_en": "Gibraltar",
+                "country_name_cn": "直布罗陀"
+            },
+            {
+                "country_code": "852",
+                "country_pinyin": "zhong guo xiang gang te bie xing zheng qu",
+                "country_name_en": "Hong Kong SAR China",
+                "country_name_cn": "中国香港"
+            },
+            {
+                "country_code": "44",
+                "country_pinyin": "ze xi dao",
+                "country_name_en": "Jersey",
+                "country_name_cn": "泽西岛"
+            },
+            {
+                "country_code": "86",
+                "country_pinyin": "zhong guo",
+                "country_name_en": "China",
+                "country_name_cn": "中国"
+            },
+            {
+                "country_code": "853",
+                "country_pinyin": "zhong guo ao men te bie xing zheng qu",
+                "country_name_en": "Macau SAR China",
+                "country_name_cn": "中国澳门"
+            },
+            {
+                "country_code": "235",
+                "country_pinyin": "zha de",
+                "country_name_en": "Chad",
+                "country_name_cn": "乍得"
+            },
+            {
+                "country_code": "886",
+                "country_pinyin": "zhong guo tai wan",
+                "country_name_en": "Taiwan",
+                "country_name_cn": "中国台湾"
+            },
+            {
+                "country_code": "260",
+                "country_pinyin": "zan bi ya",
+                "country_name_en": "Zambia",
+                "country_name_cn": "赞比亚"
+            }
+        ]
+    }
+]

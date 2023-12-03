@@ -1,0 +1,1280 @@
+[
+    {
+        "continent": "AS",
+        "name": "亚洲",
+        "list": [
+            {
+                "name": "阿富汗",
+                "value": "AF",
+                "prefix": "A",
+                "continent": "AS"
+            },
+            {
+                "name": "阿塞拜疆",
+                "value": "AZ",
+                "prefix": "A",
+                "continent": "AS"
+            },
+            {
+                "name": "阿曼",
+                "value": "OM",
+                "prefix": "A",
+                "continent": "AS"
+            },
+            {
+                "name": "阿联酋",
+                "value": "AE",
+                "prefix": "A",
+                "continent": "AS"
+            },
+            {
+                "name": "中国澳门",
+                "value": "MO",
+                "prefix": "A",
+                "continent": "AS"
+            },
+            {
+                "name": "巴林",
+                "value": "BH",
+                "prefix": "B",
+                "continent": "AS"
+            },
+            {
+                "name": "不丹",
+                "value": "BT",
+                "prefix": "B",
+                "continent": "AS"
+            },
+            {
+                "name": "巴勒斯坦",
+                "value": "PS",
+                "prefix": "B",
+                "continent": "AS"
+            },
+            {
+                "name": "巴基斯坦",
+                "value": "PK",
+                "prefix": "B",
+                "continent": "AS"
+            },
+            {
+                "name": "朝鲜",
+                "value": "KP",
+                "prefix": "C",
+                "continent": "AS"
+            },
+            {
+                "name": "菲律宾",
+                "value": "PH",
+                "prefix": "F",
+                "continent": "AS"
+            },
+            {
+                "name": "格鲁吉亚",
+                "value": "GE",
+                "prefix": "G",
+                "continent": "AS"
+            },
+            {
+                "name": "韩国",
+                "value": "KR",
+                "prefix": "H",
+                "continent": "AS"
+            },
+            {
+                "name": "哈萨克斯坦",
+                "value": "KZ",
+                "prefix": "H",
+                "continent": "AS"
+            },
+            {
+                "name": "吉尔吉斯斯坦",
+                "value": "KG",
+                "prefix": "J",
+                "continent": "AS"
+            },
+            {
+                "name": "柬埔寨",
+                "value": "KH",
+                "prefix": "J",
+                "continent": "AS"
+            },
+            {
+                "name": "卡塔尔",
+                "value": "QA",
+                "prefix": "K",
+                "continent": "AS"
+            },
+            {
+                "name": "科威特",
+                "value": "KW",
+                "prefix": "K",
+                "continent": "AS"
+            },
+            {
+                "name": "老挝",
+                "value": "LA",
+                "prefix": "L",
+                "continent": "AS"
+            },
+            {
+                "name": "黎巴嫩",
+                "value": "LB",
+                "prefix": "L",
+                "continent": "AS"
+            },
+            {
+                "name": "马来西亚",
+                "value": "MY",
+                "prefix": "M",
+                "continent": "AS"
+            },
+            {
+                "name": "马尔代夫",
+                "value": "MV",
+                "prefix": "M",
+                "continent": "AS"
+            },
+            {
+                "name": "孟加拉国",
+                "value": "BD",
+                "prefix": "M",
+                "continent": "AS"
+            },
+            {
+                "name": "蒙古",
+                "value": "MN",
+                "prefix": "M",
+                "continent": "AS"
+            },
+            {
+                "name": "缅甸",
+                "value": "MM",
+                "prefix": "M",
+                "continent": "AS"
+            },
+            {
+                "name": "尼泊尔",
+                "value": "NP",
+                "prefix": "N",
+                "continent": "AS"
+            },
+            {
+                "name": "日本",
+                "value": "JP",
+                "prefix": "R",
+                "continent": "AS"
+            },
+            {
+                "name": "斯里兰卡",
+                "value": "LK",
+                "prefix": "S",
+                "continent": "AS"
+            },
+            {
+                "name": "沙特阿拉伯",
+                "value": "SA",
+                "prefix": "S",
+                "continent": "AS"
+            },
+            {
+                "name": "中国台湾",
+                "value": "TW",
+                "prefix": "T",
+                "continent": "AS"
+            },
+            {
+                "name": "泰国",
+                "value": "TH",
+                "prefix": "T",
+                "continent": "AS"
+            },
+            {
+                "name": "塔吉克斯坦",
+                "value": "TJ",
+                "prefix": "T",
+                "continent": "AS"
+            },
+            {
+                "name": "土库曼斯坦",
+                "value": "TM",
+                "prefix": "T",
+                "continent": "AS"
+            },
+            {
+                "name": "土耳其",
+                "value": "TR",
+                "prefix": "T",
+                "continent": "AS"
+            },
+            {
+                "name": "乌兹别克斯坦",
+                "value": "UZ",
+                "prefix": "W",
+                "continent": "AS"
+            },
+            {
+                "name": "文莱",
+                "value": "BN",
+                "prefix": "W",
+                "continent": "AS"
+            },
+            {
+                "name": "新加坡",
+                "value": "SG",
+                "prefix": "X",
+                "continent": "AS"
+            },
+            {
+                "name": "叙利亚",
+                "value": "SY",
+                "prefix": "X",
+                "continent": "AS"
+            },
+            {
+                "name": "中国香港",
+                "value": "HK",
+                "prefix": "X",
+                "continent": "AS"
+            },
+            {
+                "name": "亚美尼亚",
+                "value": "AM",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "伊朗",
+                "value": "IR",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "伊拉克",
+                "value": "IQ",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "约旦",
+                "value": "JO",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "也门",
+                "value": "YE",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "以色列",
+                "value": "IL",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "印尼",
+                "value": "ID",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "印度",
+                "value": "IN",
+                "prefix": "Y",
+                "continent": "AS"
+            },
+            {
+                "name": "越南",
+                "value": "VN",
+                "prefix": "Y",
+                "continent": "AS"
+            }
+        ]
+    },
+    {
+        "continent": "AF",
+        "name": "非洲",
+        "list": [
+            {
+                "name": "安哥拉",
+                "value": "AO",
+                "prefix": "A",
+                "continent": "AF"
+            },
+            {
+                "name": "埃塞俄比亚",
+                "value": "ET",
+                "prefix": "A",
+                "continent": "AF"
+            },
+            {
+                "name": "阿尔及利亚",
+                "value": "DZ",
+                "prefix": "A",
+                "continent": "AF"
+            },
+            {
+                "name": "埃及",
+                "value": "EG",
+                "prefix": "A",
+                "continent": "AF"
+            },
+            {
+                "name": "布基纳法索",
+                "value": "BF",
+                "prefix": "B",
+                "continent": "AF"
+            },
+            {
+                "name": "博茨瓦纳",
+                "value": "BW",
+                "prefix": "B",
+                "continent": "AF"
+            },
+            {
+                "name": "布隆迪",
+                "value": "BI",
+                "prefix": "B",
+                "continent": "AF"
+            },
+            {
+                "name": "贝宁",
+                "value": "BJ",
+                "prefix": "B",
+                "continent": "AF"
+            },
+            {
+                "name": "赤道几内亚",
+                "value": "GQ",
+                "prefix": "C",
+                "continent": "AF"
+            },
+            {
+                "name": "多哥",
+                "value": "TG",
+                "prefix": "D",
+                "continent": "AF"
+            },
+            {
+                "name": "厄立特里亚",
+                "value": "ER",
+                "prefix": "E",
+                "continent": "AF"
+            },
+            {
+                "name": "佛得角",
+                "value": "CV",
+                "prefix": "F",
+                "continent": "AF"
+            },
+            {
+                "name": "刚果（金）",
+                "value": "CD",
+                "prefix": "G",
+                "continent": "AF"
+            },
+            {
+                "name": "刚果（布）",
+                "value": "CG",
+                "prefix": "G",
+                "continent": "AF"
+            },
+            {
+                "name": "冈比亚",
+                "value": "GM",
+                "prefix": "G",
+                "continent": "AF"
+            },
+            {
+                "name": "吉布提",
+                "value": "DJ",
+                "prefix": "J",
+                "continent": "AF"
+            },
+            {
+                "name": "津巴布韦",
+                "value": "ZW",
+                "prefix": "J",
+                "continent": "AF"
+            },
+            {
+                "name": "加纳",
+                "value": "GH",
+                "prefix": "J",
+                "continent": "AF"
+            },
+            {
+                "name": "几内亚",
+                "value": "GN",
+                "prefix": "J",
+                "continent": "AF"
+            },
+            {
+                "name": "几内亚比绍",
+                "value": "GW",
+                "prefix": "J",
+                "continent": "AF"
+            },
+            {
+                "name": "加蓬",
+                "value": "GA",
+                "prefix": "J",
+                "continent": "AF"
+            },
+            {
+                "name": "科特迪瓦",
+                "value": "CI",
+                "prefix": "K",
+                "continent": "AF"
+            },
+            {
+                "name": "肯尼亚",
+                "value": "KE",
+                "prefix": "K",
+                "continent": "AF"
+            },
+            {
+                "name": "喀麦隆",
+                "value": "CM",
+                "prefix": "K",
+                "continent": "AF"
+            },
+            {
+                "name": "科摩罗",
+                "value": "KM",
+                "prefix": "K",
+                "continent": "AF"
+            },
+            {
+                "name": "卢旺达",
+                "value": "RW",
+                "prefix": "L",
+                "continent": "AF"
+            },
+            {
+                "name": "利比里亚",
+                "value": "LR",
+                "prefix": "L",
+                "continent": "AF"
+            },
+            {
+                "name": "留尼汪",
+                "value": "RE",
+                "prefix": "L",
+                "continent": "AF"
+            },
+            {
+                "name": "利比亚",
+                "value": "LY",
+                "prefix": "L",
+                "continent": "AF"
+            },
+            {
+                "name": "莱索托",
+                "value": "LS",
+                "prefix": "L",
+                "continent": "AF"
+            },
+            {
+                "name": "摩洛哥",
+                "value": "MA",
+                "prefix": "M",
+                "continent": "AF"
+            },
+            {
+                "name": "莫桑比克",
+                "value": "MZ",
+                "prefix": "M",
+                "continent": "AF"
+            },
+            {
+                "name": "马达加斯加",
+                "value": "MG",
+                "prefix": "M",
+                "continent": "AF"
+            },
+            {
+                "name": "马里",
+                "value": "ML",
+                "prefix": "M",
+                "continent": "AF"
+            },
+            {
+                "name": "毛里塔尼亚",
+                "value": "MR",
+                "prefix": "M",
+                "continent": "AF"
+            },
+            {
+                "name": "毛里求斯",
+                "value": "MU",
+                "prefix": "M",
+                "continent": "AF"
+            },
+            {
+                "name": "马拉维",
+                "value": "MW",
+                "prefix": "M",
+                "continent": "AF"
+            },
+            {
+                "name": "南非",
+                "value": "ZA",
+                "prefix": "N",
+                "continent": "AF"
+            },
+            {
+                "name": "尼日利亚",
+                "value": "NG",
+                "prefix": "N",
+                "continent": "AF"
+            },
+            {
+                "name": "纳米比亚",
+                "value": "NA",
+                "prefix": "N",
+                "continent": "AF"
+            },
+            {
+                "name": "南苏丹",
+                "value": "SS",
+                "prefix": "N",
+                "continent": "AF"
+            },
+            {
+                "name": "尼日尔",
+                "value": "NE",
+                "prefix": "N",
+                "continent": "AF"
+            },
+            {
+                "name": "苏丹",
+                "value": "SD",
+                "prefix": "S",
+                "continent": "AF"
+            },
+            {
+                "name": "塞舌尔",
+                "value": "SC",
+                "prefix": "S",
+                "continent": "AF"
+            },
+            {
+                "name": "斯威士兰",
+                "value": "SZ",
+                "prefix": "S",
+                "continent": "AF"
+            },
+            {
+                "name": "塞拉利昂",
+                "value": "SL",
+                "prefix": "S",
+                "continent": "AF"
+            },
+            {
+                "name": "塞内加尔",
+                "value": "SN",
+                "prefix": "S",
+                "continent": "AF"
+            },
+            {
+                "name": "索马里",
+                "value": "SO",
+                "prefix": "S",
+                "continent": "AF"
+            },
+            {
+                "name": "坦桑尼亚",
+                "value": "TZ",
+                "prefix": "T",
+                "continent": "AF"
+            },
+            {
+                "name": "突尼斯",
+                "value": "TN",
+                "prefix": "T",
+                "continent": "AF"
+            },
+            {
+                "name": "乌干达",
+                "value": "UG",
+                "prefix": "W",
+                "continent": "AF"
+            },
+            {
+                "name": "赞比亚",
+                "value": "ZM",
+                "prefix": "Z",
+                "continent": "AF"
+            },
+            {
+                "name": "中非",
+                "value": "CF",
+                "prefix": "Z",
+                "continent": "AF"
+            },
+            {
+                "name": "乍得",
+                "value": "TD",
+                "prefix": "Z",
+                "continent": "AF"
+            }
+        ]
+    },
+    {
+        "continent": "EU",
+        "name": "欧洲",
+        "list": [
+            {
+                "name": "爱沙尼亚",
+                "value": "EE",
+                "prefix": "A",
+                "continent": "EU"
+            },
+            {
+                "name": "爱尔兰",
+                "value": "IE",
+                "prefix": "A",
+                "continent": "EU"
+            },
+            {
+                "name": "安道尔",
+                "value": "AD",
+                "prefix": "A",
+                "continent": "EU"
+            },
+            {
+                "name": "阿尔巴尼亚",
+                "value": "AL",
+                "prefix": "A",
+                "continent": "EU"
+            },
+            {
+                "name": "奥地利",
+                "value": "AT",
+                "prefix": "A",
+                "continent": "EU"
+            },
+            {
+                "name": "冰岛",
+                "value": "IS",
+                "prefix": "B",
+                "continent": "EU"
+            },
+            {
+                "name": "保加利亚",
+                "value": "BG",
+                "prefix": "B",
+                "continent": "EU"
+            },
+            {
+                "name": "波黑",
+                "value": "BA",
+                "prefix": "B",
+                "continent": "EU"
+            },
+            {
+                "name": "白俄罗斯",
+                "value": "BY",
+                "prefix": "B",
+                "continent": "EU"
+            },
+            {
+                "name": "波兰",
+                "value": "PL",
+                "prefix": "B",
+                "continent": "EU"
+            },
+            {
+                "name": "比利时",
+                "value": "BE",
+                "prefix": "B",
+                "continent": "EU"
+            },
+            {
+                "name": "北马其顿",
+                "value": "MK",
+                "prefix": "B",
+                "continent": "EU"
+            },
+            {
+                "name": "德国",
+                "value": "DE",
+                "prefix": "D",
+                "continent": "EU"
+            },
+            {
+                "name": "丹麦",
+                "value": "DK",
+                "prefix": "D",
+                "continent": "EU"
+            },
+            {
+                "name": "俄罗斯",
+                "value": "RU",
+                "prefix": "E",
+                "continent": "EU"
+            },
+            {
+                "name": "法国",
+                "value": "FR",
+                "prefix": "F",
+                "continent": "EU"
+            },
+            {
+                "name": "芬兰",
+                "value": "FI",
+                "prefix": "F",
+                "continent": "EU"
+            },
+            {
+                "name": "荷兰",
+                "value": "NL",
+                "prefix": "H",
+                "continent": "EU"
+            },
+            {
+                "name": "黑山",
+                "value": "ME",
+                "prefix": "H",
+                "continent": "EU"
+            },
+            {
+                "name": "捷克",
+                "value": "CZ",
+                "prefix": "J",
+                "continent": "EU"
+            },
+            {
+                "name": "克罗地亚",
+                "value": "HR",
+                "prefix": "K",
+                "continent": "EU"
+            },
+            {
+                "name": "列支敦士登",
+                "value": "LI",
+                "prefix": "L",
+                "continent": "EU"
+            },
+            {
+                "name": "卢森堡",
+                "value": "LU",
+                "prefix": "L",
+                "continent": "EU"
+            },
+            {
+                "name": "拉脱维亚",
+                "value": "LV",
+                "prefix": "L",
+                "continent": "EU"
+            },
+            {
+                "name": "立陶宛",
+                "value": "LT",
+                "prefix": "L",
+                "continent": "EU"
+            },
+            {
+                "name": "罗马尼亚",
+                "value": "RO",
+                "prefix": "L",
+                "continent": "EU"
+            },
+            {
+                "name": "马耳他",
+                "value": "MT",
+                "prefix": "M",
+                "continent": "EU"
+            },
+            {
+                "name": "摩尔多瓦",
+                "value": "MD",
+                "prefix": "M",
+                "continent": "EU"
+            },
+            {
+                "name": "摩纳哥",
+                "value": "MC",
+                "prefix": "M",
+                "continent": "EU"
+            },
+            {
+                "name": "挪威",
+                "value": "NO",
+                "prefix": "N",
+                "continent": "EU"
+            },
+            {
+                "name": "葡萄牙",
+                "value": "PT",
+                "prefix": "P",
+                "continent": "EU"
+            },
+            {
+                "name": "瑞士",
+                "value": "CH",
+                "prefix": "R",
+                "continent": "EU"
+            },
+            {
+                "name": "瑞典",
+                "value": "SE",
+                "prefix": "R",
+                "continent": "EU"
+            },
+            {
+                "name": "斯洛伐克",
+                "value": "SK",
+                "prefix": "S",
+                "continent": "EU"
+            },
+            {
+                "name": "圣马力诺",
+                "value": "SM",
+                "prefix": "S",
+                "continent": "EU"
+            },
+            {
+                "name": "塞尔维亚",
+                "value": "RS",
+                "prefix": "S",
+                "continent": "EU"
+            },
+            {
+                "name": "塞浦路斯",
+                "value": "CY",
+                "prefix": "S",
+                "continent": "EU"
+            },
+            {
+                "name": "斯洛文尼亚",
+                "value": "SI",
+                "prefix": "S",
+                "continent": "EU"
+            },
+            {
+                "name": "乌克兰",
+                "value": "UA",
+                "prefix": "W",
+                "continent": "EU"
+            },
+            {
+                "name": "西班牙",
+                "value": "ES",
+                "prefix": "X",
+                "continent": "EU"
+            },
+            {
+                "name": "匈牙利",
+                "value": "HU",
+                "prefix": "X",
+                "continent": "EU"
+            },
+            {
+                "name": "希腊",
+                "value": "GR",
+                "prefix": "X",
+                "continent": "EU"
+            },
+            {
+                "name": "英国",
+                "value": "GB",
+                "prefix": "Y",
+                "continent": "EU"
+            },
+            {
+                "name": "意大利",
+                "value": "IT",
+                "prefix": "Y",
+                "continent": "EU"
+            },
+            {
+                "name": "直布罗陀",
+                "value": "GI",
+                "prefix": "Z",
+                "continent": "EU"
+            }
+        ]
+    },
+    {
+        "continent": "SA",
+        "name": "南美洲",
+        "list": [
+            {
+                "name": "阿根廷",
+                "value": "AR",
+                "prefix": "A",
+                "continent": "SA"
+            },
+            {
+                "name": "巴拉圭",
+                "value": "PY",
+                "prefix": "B",
+                "continent": "SA"
+            },
+            {
+                "name": "巴西",
+                "value": "BR",
+                "prefix": "B",
+                "continent": "SA"
+            },
+            {
+                "name": "秘鲁",
+                "value": "PE",
+                "prefix": "B",
+                "continent": "SA"
+            },
+            {
+                "name": "玻利维亚",
+                "value": "BO",
+                "prefix": "B",
+                "continent": "SA"
+            },
+            {
+                "name": "厄瓜多尔",
+                "value": "EC",
+                "prefix": "E",
+                "continent": "SA"
+            },
+            {
+                "name": "法属圭亚那",
+                "value": "GF",
+                "prefix": "F",
+                "continent": "SA"
+            },
+            {
+                "name": "圭亚那",
+                "value": "GY",
+                "prefix": "G",
+                "continent": "SA"
+            },
+            {
+                "name": "哥伦比亚",
+                "value": "CO",
+                "prefix": "G",
+                "continent": "SA"
+            },
+            {
+                "name": "苏里南",
+                "value": "SR",
+                "prefix": "S",
+                "continent": "SA"
+            },
+            {
+                "name": "乌拉圭",
+                "value": "UY",
+                "prefix": "W",
+                "continent": "SA"
+            },
+            {
+                "name": "委内瑞拉",
+                "value": "VE",
+                "prefix": "W",
+                "continent": "SA"
+            },
+            {
+                "name": "智利",
+                "value": "CL",
+                "prefix": "Z",
+                "continent": "SA"
+            }
+        ]
+    },
+    {
+        "continent": "NA",
+        "name": "北美洲",
+        "list": [
+            {
+                "name": "阿鲁巴",
+                "value": "AW",
+                "prefix": "A",
+                "continent": "NA"
+            },
+            {
+                "name": "安提瓜和巴布达",
+                "value": "AG",
+                "prefix": "A",
+                "continent": "NA"
+            },
+            {
+                "name": "巴拿马",
+                "value": "PA",
+                "prefix": "B",
+                "continent": "NA"
+            },
+            {
+                "name": "波多黎各",
+                "value": "PR",
+                "prefix": "B",
+                "continent": "NA"
+            },
+            {
+                "name": "百慕大",
+                "value": "BM",
+                "prefix": "B",
+                "continent": "NA"
+            },
+            {
+                "name": "巴哈马",
+                "value": "BS",
+                "prefix": "B",
+                "continent": "NA"
+            },
+            {
+                "name": "巴巴多斯",
+                "value": "BB",
+                "prefix": "B",
+                "continent": "NA"
+            },
+            {
+                "name": "伯利兹",
+                "value": "BZ",
+                "prefix": "B",
+                "continent": "NA"
+            },
+            {
+                "name": "多米尼克",
+                "value": "DM",
+                "prefix": "D",
+                "continent": "NA"
+            },
+            {
+                "name": "多米尼加",
+                "value": "DO",
+                "prefix": "D",
+                "continent": "NA"
+            },
+            {
+                "name": "哥斯达黎加",
+                "value": "CR",
+                "prefix": "G",
+                "continent": "NA"
+            },
+            {
+                "name": "格林纳达",
+                "value": "GD",
+                "prefix": "G",
+                "continent": "NA"
+            },
+            {
+                "name": "古巴",
+                "value": "CU",
+                "prefix": "G",
+                "continent": "NA"
+            },
+            {
+                "name": "海地",
+                "value": "HT",
+                "prefix": "H",
+                "continent": "NA"
+            },
+            {
+                "name": "洪都拉斯",
+                "value": "HN",
+                "prefix": "H",
+                "continent": "NA"
+            },
+            {
+                "name": "加拿大",
+                "value": "CA",
+                "prefix": "J",
+                "continent": "NA"
+            },
+            {
+                "name": "开曼群岛",
+                "value": "KY",
+                "prefix": "K",
+                "continent": "NA"
+            },
+            {
+                "name": "墨西哥",
+                "value": "MX",
+                "prefix": "M",
+                "continent": "NA"
+            },
+            {
+                "name": "马提尼克",
+                "value": "MQ",
+                "prefix": "M",
+                "continent": "NA"
+            },
+            {
+                "name": "美国",
+                "value": "US",
+                "prefix": "M",
+                "continent": "NA"
+            },
+            {
+                "name": "蒙特塞拉特",
+                "value": "MS",
+                "prefix": "M",
+                "continent": "NA"
+            },
+            {
+                "name": "尼加拉瓜",
+                "value": "NI",
+                "prefix": "N",
+                "continent": "NA"
+            },
+            {
+                "name": "圣基茨和尼维斯",
+                "value": "KN",
+                "prefix": "S",
+                "continent": "NA"
+            },
+            {
+                "name": "圣文森特和格林纳丁斯",
+                "value": "VC",
+                "prefix": "S",
+                "continent": "NA"
+            },
+            {
+                "name": "萨尔瓦多",
+                "value": "SV",
+                "prefix": "S",
+                "continent": "NA"
+            },
+            {
+                "name": "特立尼达和多巴哥",
+                "value": "TT",
+                "prefix": "T",
+                "continent": "NA"
+            },
+            {
+                "name": "特克斯和凯科斯群岛",
+                "value": "TC",
+                "prefix": "T",
+                "continent": "NA"
+            },
+            {
+                "name": "危地马拉",
+                "value": "GT",
+                "prefix": "W",
+                "continent": "NA"
+            },
+            {
+                "name": "英属维尔京群岛",
+                "value": "VG",
+                "prefix": "Y",
+                "continent": "NA"
+            },
+            {
+                "name": "牙买加",
+                "value": "JM",
+                "prefix": "Y",
+                "continent": "NA"
+            }
+        ]
+    },
+    {
+        "continent": "OA",
+        "name": "大洋洲",
+        "list": [
+            {
+                "name": "澳大利亚",
+                "value": "AU",
+                "prefix": "A",
+                "continent": "OA"
+            },
+            {
+                "name": "巴布亚新几内亚",
+                "value": "PG",
+                "prefix": "B",
+                "continent": "OA"
+            },
+            {
+                "name": "斐济",
+                "value": "FJ",
+                "prefix": "F",
+                "continent": "OA"
+            },
+            {
+                "name": "基里巴斯",
+                "value": "KI",
+                "prefix": "J",
+                "continent": "OA"
+            },
+            {
+                "name": "库克群岛",
+                "value": "CK",
+                "prefix": "K",
+                "continent": "OA"
+            },
+            {
+                "name": "马绍尔群岛",
+                "value": "MH",
+                "prefix": "M",
+                "continent": "OA"
+            },
+            {
+                "name": "美属萨摩亚",
+                "value": "AS",
+                "prefix": "M",
+                "continent": "OA"
+            },
+            {
+                "name": "密克罗尼西亚联邦",
+                "value": "FM",
+                "prefix": "M",
+                "continent": "OA"
+            },
+            {
+                "name": "瑙鲁",
+                "value": "NR",
+                "prefix": "N",
+                "continent": "OA"
+            },
+            {
+                "name": "帕劳",
+                "value": "PW",
+                "prefix": "P",
+                "continent": "OA"
+            },
+            {
+                "name": "萨摩亚",
+                "value": "WS",
+                "prefix": "S",
+                "continent": "OA"
+            },
+            {
+                "name": "所罗门群岛",
+                "value": "SB",
+                "prefix": "S",
+                "continent": "OA"
+            },
+            {
+                "name": "图瓦卢",
+                "value": "TV",
+                "prefix": "T",
+                "continent": "OA"
+            },
+            {
+                "name": "汤加",
+                "value": "TO",
+                "prefix": "T",
+                "continent": "OA"
+            },
+            {
+                "name": "瓦努阿图",
+                "value": "VU",
+                "prefix": "W",
+                "continent": "OA"
+            },
+            {
+                "name": "新西兰",
+                "value": "NZ",
+                "prefix": "X",
+                "continent": "OA"
+            },
+            {
+                "name": "新喀里多尼亚",
+                "value": "NC",
+                "prefix": "X",
+                "continent": "OA"
+            }
+        ]
+    }
+]

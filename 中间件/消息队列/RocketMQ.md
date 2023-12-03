@@ -1,9 +1,68 @@
-# RocketMQ入门
+# RocketMQ
 
-## 基本概念
+## 安装运行
 
-> 发布订阅（Pub/Sub）消息范式，消息的推送者（发布者、生产者、Producer）将消息发送给特定的接收者（订阅者、消费者、Comsumer）
-> 生产者：负责生产消息，将生产的消息发送到broker服务器；同步发送、异步发送、顺序发送、单向发送
-> 消费者：负责异步消费，从Broker服务器拉取消息；拉取式消费、推动式消费
-> 主题：
+### 1.解压安装
+
+```bash
+$ unzip rocketmq-all-5.1.4-source-release.zip
+$ cd rocketmq-all-5.1.4-source-release/
+$ mvn -Prelease-all -DskipTest -Dspotbugs.skip=true clean install -U
+$ cd distribution/target/rocketmq-5.1.4/rocketmq-5.1.4
+```
+
+### 2.启动NameServer
+
+```bash
+## 启动namesrv
+$ nohup sh bin/mqnamesrv &
+
+## 验证namesrv是否成功启动
+
+$ tail -f ~/logs/rocketmqlogs/namesrc.log
+2023-11-17 09:28:16 INFO main - The Name Server boot success. serializeType=JSON
+```
+
+### 3.启动Broker+Proxy
+
+NameServer成功启动后，启动Broker和Proxy
+
+```bash
+## 先启动broker
+$ nohup sh bin/mqbroker -n localhost:9876 --enable-proxy &
+
+## 验证broker启动成功，
+$ tail -f ~/logs/rocketmqlogs/proxy.log
+```
+
+### 4.消息收发
+
+```bash
+$ export NAMESRV_ADDR=localhost:9876
+$ sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer
+ SendResult [sendStatus=SEND_OK, msgId= ...
+ 
+$ sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer
+ ConsumeMessageThread_%d Receive New Messages: [MessageExt...
+```
+
+### 5.关闭
+
+```bash
+# 关闭broker
+$ sh bin/mqshutdown broker
+
+# 关闭nameserver
+$ sh bin/mqshutdown namesrv
+```
+
+## 消息
+
+消息的属性包括：
+
+Topic：消息的主题
+
+Body：消息的存储内容
+
+Tags：标签，每个消息只有一个；方便服务器过滤
 

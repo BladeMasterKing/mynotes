@@ -88,7 +88,7 @@ curl -X PUT "localhost:9200/test?pretty" -H 'Content-Type: application/json' -d'
 ```
 
 ```bash
-curl -X PUT "localhost:9292/dingban_product?pretty" -H 'Content-Type: application/json' -d'
+curl -X PUT "root:talent@localhost:9292/dingban_product?pretty" -H 'Content-Type: application/json' -d'
 {
   "mappings": {
     "properties": {
