@@ -5,14 +5,8 @@
 ## 目录
 
 * 程序设计语言
-
   * Java
-
   * JavaScript
-
-  * Mybatis
-
-  * Spring
 * 分布式存储
 * 工具
   * 笔记
@@ -23,6 +17,7 @@
   * MySQl
   * SQlite
 * 网络
+* 分布式存储
 * 中间件
   * 消息队列
   * Elasticsearch
@@ -30,3 +25,9 @@
   * OCR
   * Redis
 * Linux
+* 框架
+  * Activiti7
+  * Mybatis
+  * Netty
+  * OpenOffice
+  * String
