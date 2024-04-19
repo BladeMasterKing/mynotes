@@ -4,30 +4,27 @@
 
 ## 目录
 
+* 操作系统
+  * Linux
 * 程序设计语言
   * Java
   * JavaScript
-* 分布式存储
-* 工具
+* 开发工具
   * 笔记
   * Git
-* 企查查分类
-* 数据结构
+* 开发框架
+  * Activiti7
+  * Mybatis
+  * Spring
+* 开发数据
+  * 企查查分类
 * 数据库
   * MySQl
   * SQlite
-* 网络
-* 分布式存储
 * 中间件
   * 消息队列
   * Elasticsearch
   * Nginx
   * OCR
   * Redis
-* Linux
-* 框架
-  * Activiti7
-  * Mybatis
-  * Netty
-  * OpenOffice
-  * String
+  

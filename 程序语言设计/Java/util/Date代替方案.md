@@ -2,8 +2,8 @@
 
 - 转载自公众号 https://mp.weixin.qq.com/s/v-Va_GuSUGr9HVAW84kloQ[CodeSheep的文章"什么？你项目还在用Date表示时间？！"]
 
-
 ## 替换Date工具类的原因
+
 Date用法的例子：
 
 * 新建当前日期
@@ -31,6 +31,7 @@ Date beforeDate = new Date(2019,12,12);
 方法过时了，而且很多方法都过时了。
 
 ## LocalDateTime
+
 自 Java8开始， JDK中其实就增加了一系列表示日期和时间的新类，最典型的就是 LocalDateTime。直言不讳，这玩意的出现就是为了干掉之前 JDK版本中的 Date老哥！
 同样，我们也先来感受一下用法！
 
@@ -57,6 +58,7 @@ System.out.println("当前秒：" + rightNow.getSecond());
 ```
 
 ### 构造指定时间
+
 比如，想构造：2019年10月12月12日9时21分32秒
 
 ```java
@@ -92,6 +94,7 @@ System.out.println("格式化后的日期(自定义样式举例)：" + result3);
 ```
 
 ### 时间反解析
+
 给你一个陌生的字符串，你可以按照你需要的格式把时间给反解出来
 
 ```java
@@ -103,6 +106,7 @@ System.out.println("字符串反解析后的时间为：" + time);
 ```
 
 ## 线程安全问题
+
 其实上面讲来讲去只讲了两者在用法上的差别，这其实倒还好，并不致命，可是接下来要讨论的线程安全性问题才是致命的！
 其实以前我们惯用的 Date时间类是可变类，这就意味着在多线程环境下对共享 Date变量进行操作时，必须由程序员自己来保证线程安全！否则极有可能翻车。
 而自 Java8开始推出的 LocalDateTime却是线程安全的，开发人员不用再考虑并发问题，这点我们从 LocalDateTime的官方源码中即可看出:
@@ -112,6 +116,7 @@ This class is immutable and thread-safe.（不可变、线程安全！）
 ```
 
 ## 日期格式化选择
+
 大家除了惯用 Date来表示时间之外，还有一个用于和 Date连用的 SimpleDateFormat 时间格式化类大家可能也戒不掉了!
 SimpleDateFormat最主要的致命问题也是在于它本身并不线程安全，这在它的源码注释里已然告知过了：
 

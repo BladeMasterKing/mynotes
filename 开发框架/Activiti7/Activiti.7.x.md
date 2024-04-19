@@ -1,14 +1,10 @@
-# 概览 #
+# 概览
 
-
-
-
-
-## 12因子应用 ##
+## 12因子应用
 
 要构建云端应用和服务，仅将旧的整体封装在 _Docker Image_ 中并在 _Kubernetes_ 中运行是不够的。 我们重视 __Heroku__ 定义的称为 “[十二要素应用程序](https://12factor.net)” 的原则：[从透视角度看](https://content.pivotal.io/ebooks/beyond-the-12-factor-app)。 没有这些指导，就很难在分布式环境中进行扩展。 __Activiti Cloud__ 重新定位流程引擎，以更好地与分布式环境中的其他组件进行交互。衡量 __Activiti Cloud__ 成功的标准是与其他微服务及其设计，构建和部署方式的低阻抗失配。
 
-### 1. 一个代码库，一个应用程序 ###
+### 1. 一个代码库，一个应用程序
 
 __Activiti__ 的示例服务都位于不同的存储库中，并且每个服务代表一个单独的Spring Boot应用程序，该应用程序也已通过 __Spring Cloud__ 库启用。 这些服务存储库中的每一个都包含一组工件，这些工件使它们适合于 _CI/CD_ 管道：
 
@@ -20,88 +16,90 @@ __Activiti__ 的示例服务都位于不同的存储库中，并且每个服务�
 __Activiti__ 为每个构建块提供一个 _Spring Boot Starter_ ，可以根据特定领域要求对其进行自定义和扩展。
 
 * [Activiti Cloud Runtime Bundle](https://github.com/Activiti/activiti-cloud-runtime-bundle-service)
+
 * [Activiti Cloud Query Service](https://github.com/Activiti/activiti-cloud-query-service)
 
 * [Activiti Cloud Audit Service](https://github.com/Activiti/activiti-cloud-audit-service)
+
 * [Activiti Cloud Connectors Service](https://github.com/Activiti/activiti-cloud-connectors)
 
-### 2.API优先 ###
+### 2.API优先
 
 为每个服务定义了REST和消息驱动API，并且可以在组件文档中找到每个API的规范。 我们要确保合同定义明确，以便可以支持不同的实现。 支持不同实现（基于不同技术）的目标使 _Activiti_ 能够支持更广泛的场景（低延迟，数据密集型，自定义要求等）
 
-### 3.依赖管理 ###
+### 3.依赖管理
 
 _Activiti Core_ 和 _Activiti Cloud_ 依赖关系使用物料清单（BoMs）进行管理，这些物料清单集中了服务和库的依赖关系。 这些 _BoMs_ 可以在以下两个存储库中找到：
 
 * [Activiti Core Dependencies](https://github.com/Activiti/activiti-dependencies)
 * [Activiti Cloud Dependencies](https://github.com/Activiti/activiti-cloud-dependencies)
 
-### 4.设计、构建、发布、运行 ###
+### 4.设计、构建、发布、运行
 
 * __设计__：我们在设计，RFC和编码之间保持闭环，以确保我们快速构建可改善服务的小功能，并且可以频繁发布（至少每月一次）。
 * __构建__ ：我们的 _CI_ 服务器构建我们的每项服务，并发布到 _Alfresco Nexus_ 和 _Maven Central_，因此可以依赖经常发布的版本。 可以使用环境变量来配置我们所有的服务，因此可以使它们保持不变，并且可以使用标准容器实践来更改其配置。
 * __发布__ ：针对特定于领域的模块/服务，我们提供了机制，以确保您可以复制发布版本，以便在出现问题时进行审核和故障排除
 * __运行__ ：我们提供分层的 _HELM图表_ ，使您可以轻松部署基础架构和应用程序。 可以在[入门指南]()中找到如何开始使用这些HELM图表。
 
-### 5.配置 、凭证和编码 ###
+### 5.配置 、凭证和编码
 
 所有 _Activiti Cloud_ 服务的配置均由 _env_ 变量提供，并且 _Spring Cloud_ 配置服务可用于系统/平台范围的配置。 这些配置可以按环境划分，通过使用 _Kubernetes_ 的 _Secrets_ ，我们可以与其他 _Secret provider_ 集成。
 
-### 6.日志 ###
+### 6.日志
 
 _Activiti Cloud_ 服务的日志将委派给基础架构。 可以连接 _ELK技术栈_ 来分析和监视日志。 环境变量用于配置日志的写入位置。 我们希望依靠通用工具进行监视和记录，而不是为此提供我们自己的自定义解决方案。
 
-### 7.一次性 ###
+### 7.一次性
 
 _Activiti Cloud_ 服务旨在在30秒内快速启动，因此可以根据需要快速扩展。 这些服务不存储状态，因此基础架构可以随时对其进行处理和重新创建。 Activiti Cloud团队致力于缩短启动时间，并确保将前期操作保持在最低限度。
 
-### 8.支持服务 ###
+### 8.支持服务
 
 _Activiti Cloud_ 服务将受限资源的概念用于安全性，电子邮件，数据源，存储和其他资源。 它还使用服务注册表来抽象其他服务的位置以及它们之间的通信方式。
 
-### 9.环境均势 ###
+### 9.环境均势
 
 _Activiti Cloud_ 为用户和实施者提供了类似于生产的环境，以生产其特定于域的人工制品，这些人工制品随后可以发布到生产环境中。 _Activiti Cloud_ 依靠行业标准来确保尽可能轻松，真实地处理用于开发，测试/质量保证和生产的多个环境。 我们依靠诸如 _HELM_ 和 _GitOps_ 实践之类的技术来确保可以在不同集群之间轻松再现这些环境。
 
-### 10.管理流程 ###
+### 10.管理流程
 
 在 _Activiti Cloud_ 中，最初与流程引擎捆绑在一起的管理流程正在外部重构，以重用基础架构提供的服务。 在大多数开源BPM项目中，管理流程是主要问题之一。 因此，我们正在努力使每个流程都脱离_Process Engine_ 范围。
 
-### 11.端口绑定 ###
+### 11.端口绑定
 
 所有 _Activiti Cloud_ 服务都是 _Spring Boot_ 应用程序，它们允许环境变量配置其名称（用于自动发现）及其端口（将在这些端口上运行）以用作其他应用程序和服务的后备服务。 我们所有的服务都在同一端口上运行，它们利用 _Kubernetes_ 网络进行映射和绑定。
 
-### 12. 无状态进程 ###
+### 12. 无状态进程
 
 _Activiti Cloud_ 服务在设计上是无状态的，并且如果它们需要存储状态，它们将绑定到数据源以进行存储。 缓存机制（例如Redis）将在需要时用于共享状态。
 
-### 13.并发 ###
+### 13.并发
 
 运行时捆绑包的设计具有扩展流程执行的想法-如果创建一个类型的流程实例的请求太多或与一组特定的流程实例的交互过多，则可以根据需要创建新的运行时捆绑包实例以处理负载 。 无需额外配置即可在_Activiti Cloud_ 中实现此可伸缩性-这是平台的固有功能。
 
-### 14.遥测 ###
+### 14.遥测
 
 _Activiti Cloud_ 服务通过标准的 _Spring Boot_（千分尺）执行器和运行状况指示器提供遥测功能，但它还提供业务级别的遥测功能，从而发出暴露运行时操作的标准化事件集。 所有这些信息都可以用于数据仓库，报告和预测目的。
 
-### 15.认证与授权 ###
+### 15.认证与授权
 
 _Activiti Cloud_ 依靠 _SSO_ 和 _IDM_ 来提供所有服务。 RBAC（基于角色的访问控制）是我们所有服务的固有组成部分。 _Activiti Cloud_ 组件将为特定于域的扩展提供挂钩点，以构建更复杂的用例。
 
-## 角色 ##
+## 角色
 
 重要的是要了解我们使用不同工具集所针对的角色。 因此，下图显示了我们将定位的主要角色，以及他们将用来执行工作的功能。
 
 _Activiti Cloud_ 将首先针对 _Activiti_ 开发人员和 _Activiti DevOps_，后者负责设置基础架构并确保可将_Activiti_ 应用程序部署到云提供商。
 
-### Activiti Cloud 开发者 ###
+### Activiti Cloud 开发者
 
 _Activiti Cloud_ 开发人员负责构建系统到系统的连接器，这些连接器将用作与现有内部/外部系统的集成点。 Process Engine（在我们的Runtime Bundle中）将不了解这些连接器，并且集成将通过Events进行。 这些云连接器将在运行时发现，它们将使用基础结构提供故障转移和回退机制。 开发人员将负责测试这些连接器，打包和发布它们（Maven / Docker）。 除了所需的连接器之外，开发人员还负责测试业务流程定义。 经过测试后，开发人员将负责发布这些运行时包和连接器。
 
-### Activiti Cloud DevOps ###
+### Activiti Cloud DevOps
 
 _Activiti Cloud DevOps_ 负责获取已发布的运行时捆绑包和云连接器，并将其部署到我们的基础架构实例中。 DevOps将只能访问并能够获取开发人员已经测试并发布到特定存储库（Maven/Docker）的发行版本。
 
-### 工具和集成 ###
+### 工具和集成
 
 对于开发人员和DevOps角色而言，_Activiti Cloud_ 团队一直在寻找可简化日常工作的工具。 我们发现以下工具非常有用：
 
@@ -112,7 +110,7 @@ _Activiti Cloud DevOps_ 负责获取已发布的运行时捆绑包和云连接�
 * __[Istio](https://istio.io/)__ ：K8之上的Service Mesh
 * __KNative__ ：在K8之上充当服务层
 
-## 之前的版本（5.x & 6.x） ###
+## 之前的版本（5.x & 6.x）
 
 _Activiti Cloud_ 的核心是 _Activiti 7.x_，它是 _Activiti 6.x_ 的演进。 但是，如前所述，_Activiti 7.x_ 将带来一些我们建议做事方式的变化。 其中大部分更改都是为了简化操作，以确保该框架本身不会促进公认的做法，这些做法会给现实生活中的实施带来极大的麻烦。 所有这些更改和简化都考虑到了云环境。 如果您使用的是 _Activiti 6.x_ 或 _5.x_ ，并且运转很好，请不要担心 _Activiti 7.x_ 会为您服务。 但是，如果您正在研究微服务和云环境，并且正遭受采用BPM工具和框架的困扰，那么 _Activiti Cloud_ 将为您解决大多数此类问题。 还需要注意的是，_Activiti Cloud_ 建立在行业广泛使用的屡获殊荣的框架之上，因此，您无需雇用专门的开发人员来扩展和改进 _Activiti Cloud Services_。
 
@@ -132,7 +130,7 @@ _Activiti Cloud_ 由来自不同BPM供应商和行业背景的工程师构建，
 
 _Activiti Cloud_ 背后的团队非常致力于开源实践，我们将采用我们的服务并将其与我们认为社区将从中受益的其他开源项目整合。 我们还将与其他以开放协作方式共享我们兴趣的开放源代码项目并进行协作。 如果您正在另一个开源项目中工作，并且有兴趣与我们集成或合作，请与我们取得联系。
 
-## 参考文献 ##
+## 参考文献
 
 如果您想了解项目的未来发展方向，建议阅读以下书籍和PDF列表。 我们将这些书用作基准共享语言，以讨论我们的体系结构决策和计划。
 
@@ -152,7 +150,7 @@ _Activiti Cloud_ 背后的团队非常致力于开源实践，我们将采用我
 
 * [Kubernetes in Action](https://www.amazon.co.uk/Kubernetes-Action-Marko-Luksa/dp/1617293725/ref=sr_1_1?s=books&ie=UTF8&qid=1531487409&sr=1-1&keywords=kubernetes+in+action)
 
-## Cloud Native BPMN支持 ##
+## Cloud Native BPMN支持
 
 BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。 虽然在 _Activiti 5.x_ 和 _6.x_ 中都由流程引擎来支持，但是在 _Activiti Cloud（Activiti Core 7.x）_ 中，由于我们现在正在处理分布式且高度可扩展的基础结构，因此所支持的元素更少。 计时器，信号和消息等元素现在涉及与基础架构和其他服务的交互，以使其正常工作。 因此，_Activiti Cloud_ 的第一个版本选择了这些元素的子集来构建坚实的基础，该基础可以确保分布式环境中一组组件之间的执行能够按预期运行，并在出现问题时可以进行监视和跟踪 。
 
@@ -173,7 +171,7 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
 
 其余的BPMN元素将在将来的版本中涵盖。 我们重视社区的反馈，我们将根据社区认为首先应得到支持的优先级进行排序。 您可以在此处找到路线图和为支持这些元素而创建的问题。 如果找不到您要查找的内容，请创建一个新的期刊，我们将对它们进行相应分类。 如果发现描述您要使用的BPMN元素的问题，请在github中将其投票（通过添加反应或评论），以便我们可以根据此反馈确定优先级。
 
-## BPMN  ##
+## BPMN
 
 本部分的目的是逐步描述 _Activiti Core_ 和 _Activiti Cloud_ 版本需要涵盖的方案。 这些测试是自动化的，以确保在将来的版本中，我们不会引入可能破坏其中某些/全部情况的回归分析。
 
@@ -214,7 +212,7 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
 
 这些方案用于确定我们的发布。 这意味着仅在这些一致性测试为绿色时才发布Activiti依赖关系和Activiti云依赖关系。
 
-### BPMN Comformance Set 0 ###
+### BPMN Comformance Set 0
 
 这些场景测试了基本流程的构造，例如BPMN的开始/结束事件，并且应该测试这些元素生成的事件。 它还可以在没有配置的情况下测试基本任务的行为。 您可以在此处找到这些性能测试的源代码。
 
@@ -292,7 +290,7 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
   - 恢复流程操作
     - PROCESS_RESUMED
 
-### BPMN Comformance Set 1 ###
+### BPMN Comformance Set 1
 
 这些场景涵盖了BPMN Service任务的使用以及由包括此类任务的流程生成的事件。 为了涵盖可能由外部（第三方集成）引起的副作用，这些方案涵盖并验证了过程变量的变化。 这些测试的源代码可以在[这里]()找到。
 
@@ -333,7 +331,7 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
   - 检查VARIABLE_UPDATED事件是否包含修改后的值
 * 没有实现的服务任务
 
-### BPMN Comformance Set 2 ###
+### BPMN Comformance Set 2
 
 此业务情景检查用户任务和基本分配属性。 它还检查任务运行时生成的事件。 任务操作用于与任务资源进行交互。 这些测试的源代码可以在[这里]()找到。
 
@@ -482,7 +480,7 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
 * 用户任务详细信息待定
 * 用户任务，带数据/变量待定
 
-### BPMN Comformance Set 3 ###
+### BPMN Comformance Set 3
 
 当提供了具有不同配置的用户任务时，此方案将更深入地进行分配并检查API是否返回了正确的数据。
 
@@ -504,9 +502,7 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
   - 用户1应释放任务
   - 用户2应该能够将任务视为候选者
 
-
-
-### BPMN Comformance Set 4 ###
+### BPMN Comformance Set 4
 
 * 排他网关，具有分配给用户1和用户2的两个用户任务
   - 由于一个简单的表达式，用户1应该看到在独占网关之后创建的任务
@@ -522,16 +518,12 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
   - 用户2应该看到在并行网关之后创建的任务
   - 用户3应该将两个任务都视为候选者
 
-
-
-### BPMN Comformance Set 5 ###
+### BPMN Comformance Set 5
 
 * 子流程的父流程包含一个带有受让人User1的用户任务
 * 带有包含服务任务及其实现的子流程的父流程
 
-
-
-### BPMN Comformance Set 6 ###
+### BPMN Comformance Set 6
 
 此方案涵盖了不同组合中的信号事件。 这些测试的源代码可以在[这里]()找到。
 
@@ -595,7 +587,7 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
     - ACTIVITY_COMPLETED
     - PROCESS_COMPLETED
 
-# 入门 #
+# 入门
 
 欢迎使用本教程，了解如何开始使用Activiti。 有两种部署选项，您可以尝试两种选择，也可以选择最适合您的需求的一种。 享受您的Activiti动手课程，现在该练习了！
 
@@ -611,9 +603,9 @@ BPMN规范描述了业务流程定义中允许的大量构造（bpmn元素）。
 
 Activiti Core入门：学习如何在Spring Boot应用程序中使用新的Java Runtime API。 这种Spring启动方法是将Activiti Core用作Java应用程序内部的库。
 
-### Activiti Cloud 入门 ###
+### Activiti Cloud 入门
 
-#### Activiti Cloud入门 ####
+#### Activiti Cloud入门
 
 Activiti Cloud是一组从头开始设计的Cloud Native组件，可在分布式环境中使用。 我们选择了Kubernetes作为我们的主要部署基础架构，并且我们将Spring Cloud / Spring Boot与Docker一起用于这些组件的容器化。
 
@@ -640,7 +632,7 @@ Activiti Cloud包括5个基本构建基块：
 
 让我们开始使用Kubernetes，HELM和Activiti Cloud。
 
-#### 先决条件 ####
+#### 先决条件
 
 将事物部署到Kubernetes的最快，最简单的方法是使用HELM图表。 如官方文档中所述，HELM是：“_一种简化安装和管理Kubernetes应用程序的工具。 可以把它想成Kubernetes的apt / yum / homebrew。_”
 
@@ -664,20 +656,20 @@ Query - [https://github.com/Activiti/activiti-cloud-query/tree/master/charts/act
 
 需要注意的重要一件事是，每个Activiti Cloud组件都可以独立使用。 此示例旨在显示大规模部署方案。 您可以从一个Runtime Bundle（提供流程和任务运行时）开始，但是如果您想扩大规模，则需要知道您的目标，并且此图表准确地显示了这一点。
 
-#### 安装Kubectl和HELM ####
+#### 安装Kubectl和HELM
 
 * Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * HELM: [https://github.com/helm/helm/releases/tag/v2.16.1](https://github.com/helm/helm/releases/tag/v2.16.1) 请使用HELM版本2。
 
 在下一部分中，我们将向您展示如何使用Amazon Web Services EKS或Google Cloud Platform GKE创建Kubernetes集群。 我们让您决定最适合您的云平台。 您还可以使用例如Docker Desktop在本地计算机上部署Activiti Cloud full示例。 我们建议您使用云基础架构以获得更快，更流畅的体验，但是如果您需要本地安装，则可以在[此处](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process)查看我们的博客文章系列。
 
-#### 步骤1和2：创建K8集群并进行配置 ####
+#### 步骤1和2：创建K8集群并进行配置
 
 [选项 A:  使用 Amazon EKS ](https://activiti.gitbook.io/activiti-7-developers-guide/getting-started/getting-started-activiti-cloud/amazon-eks)
 
 [选项 B:  使用 Google Cloud - GKE](https://activiti.gitbook.io/activiti-7-developers-guide/getting-started/getting-started-activiti-cloud/google-cloud-gke)
 
-#### 步骤3：部署Activiti Cloud Full示例 ####
+#### 步骤3：部署Activiti Cloud Full示例
 
 第一步是运行以下命令将Activiti Cloud HELM图表注册到HELM中：
 
@@ -688,17 +680,17 @@ helm repo update
 
 可以自定义Activiti Cloud完整示例图表以打开和关闭不同的功能，但是需要提供一个强制性参数，该参数是此安装将使用的外部域名：
 
-##### 1-a）为AWS配置部署 #####
+##### 1-a）为AWS配置部署
 
 > 对于此步骤，您需要一个公共域名。 如果您没有，请使用Route 53注册一个新的公共域名。
 
 转到AWS管理控制台，然后打开Route 53控制台。 转到“托管区域”，然后选择一个公共托管区域并创建一个新的记录集。 使用“ *”字符将其命名，以创建通配符。 在“别名目标”中，选择我们之前部署的Ingress控制器（ELB）的DNS名称。
 
-##### 1-b）为GCP配置部署 #####
+##### 1-b）为GCP配置部署
 
 对于GCP，请使用“ <EXTERNAL-IP> .nip.io”部署Activiti Helm图表。 在我们的案例中：35.194.42.164.nip.io
 
-##### 2) 部署HELM图 ####
+##### 2) 部署HELM图
 
 解析域名后，请通过使用公用域名运行Helm install命令来设置Helm图表来设置global.gateway.domain密钥。 在我们的情况下，将字符串“ REPLACEME”替换为上一步中的域。
 
@@ -750,7 +742,7 @@ raphaels-mbp-1:development raphaelallegre$
 
 有关BPMN建模应用程序的更多信息，请查看以下博客文章。
 
-#### 步骤4：使用部署的服务 ####
+#### 步骤4：使用部署的服务
 
 如果尚未安装，请在计算机上安装Postman客户端。
 
@@ -786,7 +778,7 @@ curl -o Activiti_v7_REST_API.postman_collection.json https://raw.githubuserconte
 
 我们所有的服务都使用SpringFox生成此文档并为其提供UI。
 
-#### 总结 ####
+#### 总结
 
 在本教程中，我们了解了如何创建Kubernetes集群（使用GKE或EKS）以及如何使用Activiti Cloud HELM图表部署Activiti Cloud应用程序。 如果您不熟悉Kubernetes，Docker和GKE或AWS，这可能看起来像很多新信息，我们的任务是简化这些入门指南中涵盖的所有步骤。 因此，我们建议您检出Jenkins X项目，该项目大大简化了有关为项目创建集群和配置基本基础结构的前两部分。
 
@@ -794,11 +786,11 @@ curl -o Activiti_v7_REST_API.postman_collection.json https://raw.githubuserconte
 
 如果您对本教程有任何疑问或反馈，请随时通过专用的Gitter渠道与Activiti团队联系。
 
-### Amazon EKS ###
+### Amazon EKS
 
-#### 步骤1：创建一个Kubernetes集群 ####
+#### 步骤1：创建一个Kubernetes集群
 
-##### 1）为Amazon EKS安装 aws-iam-authenticator #####
+##### 1）为Amazon EKS安装 aws-iam-authenticator
 
 Amazon EKS集群需要Kubernetes的AWS IAM身份验证器才能对Kubernetes集群进行IAM身份验证。 使用go get安装aws-iam-authenticator二进制文件：
 
@@ -811,13 +803,13 @@ go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authen
 将 `$HOME/go/bin` 添加到PATH环境变量中：
 
 * macOS
-
+  
   ```bash
   export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bash_profile
   ```
 
 * Linux
-
+  
   ```bash
    export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bashrc
   ```
@@ -828,7 +820,7 @@ go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authen
 aws-iam-authenticator help
 ```
 
-##### 2) 安装AWS CLI #####
+##### 2) 安装AWS CLI
 
 要安装 aws cli，请查看用户指南：[https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
@@ -856,11 +848,11 @@ Default region name [None]: <your-region>
 Default output format [None]: json
 ```
 
-##### 3) 创建一个EKS集群 #####
+##### 3) 创建一个EKS集群
 
-### Activiti Core 入门 ###
+### Activiti Core 入门
 
-#### Activiti Core Runtime API 入门 ####
+#### Activiti Core Runtime API 入门
 
 创建新API的明确目的是满足以下要求：
 
@@ -879,7 +871,7 @@ Default output format [None]: json
 
 是时候让我们看几个示例项目了。
 
-#### TaskRuntime API ####
+#### TaskRuntime API
 
 如果要构建业务应用程序，那么为组织中的用户和组创建任务可能会很方便。
 
@@ -981,7 +973,7 @@ public TaskRuntimeEventListener taskAssignedListener() {
 
 您可以根据需要注册任意多个TaskRuntimeEventListeners。 当服务触发运行时事件时，这将使您的应用程序得到通知。
 
-#### ProcessRuntime API ####
+#### ProcessRuntime API
 
 以类似的方式，如果要开始使用ProcessRuntime API，则需要包括与以前相同的依赖项。 我们的目标是在将来提供更大的灵活性和单独的运行时，但是目前，相同的Spring Boot Starter同时提供TaskRuntime和ProcessRuntime API。
 
@@ -1101,7 +1093,7 @@ public interface Connector {
 
 查看Maven模块activiti-api-spring-integration-example以获取更高级的示例，该示例使用Spring Integrations基于文件轮询器启动进程。
 
-#### 全部实例 ####
+#### 全部实例
 
 您可以找到使用ProcessRuntime和TaskRuntime API来自动执行以下过程的示例：
 
@@ -1127,7 +1119,7 @@ public interface Connector {
 
 我们鼓励您运行这些示例并进行实验，如果有疑问或发现问题，请与我们联系。
 
-#### 总结 ####
+#### 总结
 
 在本教程中，我们已经了解了如何从新的Activiti Core Beta项目开始使用新的ProcessRuntime和TaskRuntime API。
 
@@ -1137,7 +1129,7 @@ public interface Connector {
 
 即将有更多博客文章介绍Runtime Admin API，以及如何将这些示例修改为可以在我们的新Activiti Cloud方法中执行。
 
-## 组件 ##
+## 组件
 
 Activiti Cloud提供了一组基本的构建基块，可以将其分为3个独立的组：
 
@@ -1153,7 +1145,7 @@ Activiti Cloud应用程序是动态的，可以在运行时在现有基础架构
 
 最后，Activiti Cloud Modeler提供了一个环境，您可以在其中生成业务资产。 这些将包括所有业务模型定义，例如业务流程，决策表，连接器定义（系统到系统交互的接口）等。
 
-### Spring Cloud ###
+### Spring Cloud
 
 从Activiti框架的角度来看，我们依赖于Spring Boot / Spring Cloud / Spring Cloud Kubernetes的3个关键方面，这些方面使我们的组件（例如Process Runtime）能够与其余基础架构很好地集成。
 
@@ -1165,7 +1157,7 @@ Activiti Cloud应用程序是动态的，可以在运行时在现有基础架构
 
 我们利用所有组件来确保我们在Kubernetes内部使用Docker等技术在分布式环境中良好运行。 我们还确保Activiti Cloud不会与此类技术提供的任何功能重叠，以免引起任何摩擦。
 
-### Activiti云基础架构 ###
+### Activiti云基础架构
 
 Activiti Cloud旨在在Kubernetes内部运行。 这意味着Activiti Cloud将与Kubernetes本机服务（例如Kubernetes服务注册表，用于配置的配置映射，机密，作业/ CronJobs等）进行交互。
 
@@ -1174,4 +1166,3 @@ Activiti Cloud旨在在Kubernetes内部运行。 这意味着Activiti Cloud将�
 * **网关** : 从客户端（用户界面，其他应用程序）角度来看，公开单个入口点与所有服务进行交互是很常见的。 网关组件提供了该单一入口点，以访问所有已启动并正在运行的服务。 网关配置为注册默认情况下部署网关的名称空间中所有可用的服务，但是我们建议使用应用程序服务操作员将应用程序公开为逻辑单元。
 * **身份管理/单点登录** : 为所有正在运行的服务提供单点登录功能，因此我们可以传播JWT以进行授权和身份验证。 该服务还提供了身份管理功能，使我们能够同步来自LPAD或AD服务器的用户。
 * **分布式日志记录/跟踪/监视** : 
-

@@ -1,8 +1,6 @@
+## 整合Activiti
 
-
-## 整合Activiti ##
-
-### springboot 配置 ##
+### springboot 配置
 
 **pom.xml文件*
 
@@ -207,7 +205,6 @@ logging:
     </loggers>
 
 </configuration>
-
 ```
 
 **数据源**
@@ -243,13 +240,13 @@ logging:
 
 启动后将会生成25张表
 
-## 绘制流程图 ##
+## 绘制流程图
 
-### 1 安装actiBPM插件 ###
+### 1 安装actiBPM插件
 
 [插件下载地址](https://plugins.jetbrains.com/plugin/7429-actibpm/versions)
 
-### 2 新建流程文件 ###
+### 2 新建流程文件
 
 * 在项目 **resources** 目录下新建 _process_ 目录
 * 在 _process_ 目录新建 bpmn文件
@@ -258,15 +255,12 @@ logging:
 
 0racle db2 mysql
 
-
-
-## 部署业务流程 ##
+## 部署业务流程
 
 ## 启动流程实例
 
-## 用户查询待办 ##
+## 用户查询待办
 
-## 处理待办任务 ##
+## 处理待办任务
 
-## 结束流程 ##
-
+## 结束流程

@@ -1,6 +1,5 @@
 # FastDFS源码编译安装
 
-
 ## 安装libfastcommon
 
 在 [Github余庆大神的仓库](https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz) 上下载libfastcommon包
@@ -103,6 +102,7 @@ make: *** [build] Error 2
 ```
 
 确定是因为高版本出现的问题,需要修改源码:
+
 ```bash
 ## fastdfs-nginx-module-1.20/src/config
 
@@ -150,11 +150,11 @@ $ vim /etc/fdfs/tracker.conf
 #需要修改的内容如下
 port=22122  # tracker服务器端口（默认22122,一般不修改）
 base_path=/home/dfs  # 存储日志和数据的根目录
-    
+
 # 启动tracker
 $ service fdfs_trackerd start
 $ /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf
-    
+
 # ARM架构启动tracker会报错：
 [2018-04-25 23:37:36] ERROR - file: pthread_func.c, line: 121, call pthread_attr_setstacksize fail, errno: 22, error info: Invalid argument
 [2018-04-25 23:37:36] ERROR - file: tracker_service.c, line: 78, init_pthread_attr fail, program exit!
@@ -162,25 +162,28 @@ $ /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf
 # 需要修改配置文件 /etc/fdfs/tracker.conf :
 thread_statck_size=1024KB  # 原 64KB 改为 1024KB 即可
 ```
-    
+
 * storage配置:
-```bash
-# ./etc/fdfs/storage.conf
+  
+  ```bash
+  # ./etc/fdfs/storage.conf
+  ```
 
 $ vim /etc/fdfs/storage.conf
+
 # 需要修改的内容如下
+
 port=23000  # storage服务端口（默认23000,一般不修改）
 base_path=/mnt/e/DevelopKit/fastdfs_storage  # 数据和日志文件存储根目录
 store_path0=/mnt/e/DevelopKit/fastdfs_storage_data  # 第一个存储目录
 tracker_server=192.167.3.8:22122  # tracker服务器IP和端口,不能是127.0.0.1
 http.server_port=8888  # http访问文件的端口(默认8888,看情况修改,和nginx中保持一致)
 
-
 # 检验storage是否注册到tracker中
+
 $ /usr/bin/fdfs_monitor /etc/fdfs/storage.conf
+
 ```
-
-
 # 启动storage
 ```bash
 $ service fdfs_storaged start
@@ -225,23 +228,22 @@ server {
         root   html;
         index  index.html index.htm;
     } 
-    
+
     ...
-    
+
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
         root   html;
     }
-    
+
     ...
-    
+
     location ~/group[0-9]/ {
         # root /mnt/e/DevelopKit/fastdfs_storage_data/data;  
         ngx_fastdfs_module;
     }
 }
 ```
-
 
 # 启动nginx,脚本在编译完自动创建在/usr/local/nginx/sbin目录
 
