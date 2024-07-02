@@ -1,0 +1,261 @@
+[
+    {
+        "name": "机构类型",
+        "key": "organization",
+        "list": [
+            {
+                "name": "有限责任公司",
+                "value": "001001001",
+                "key": "organization",
+                "list": [
+                    {
+                        "name": "一人有限责任公司",
+                        "value": "001001001001",
+                        "key": "organization"
+                    },
+                    {
+                        "name": "其他有限责任公司",
+                        "value": "001001001002",
+                        "key": "organization"
+                    }
+                ]
+            },
+            {
+                "name": "股份有限公司",
+                "value": "001001002",
+                "key": "organization"
+            },
+            {
+                "name": "个体工商户",
+                "value": "001009",
+                "key": "organization"
+            },
+            {
+                "name": "合伙企业",
+                "value": "001007",
+                "key": "organization",
+                "list": [
+                    {
+                        "name": "普通合伙",
+                        "value": "001007001",
+                        "key": "organization"
+                    },
+                    {
+                        "name": "有限合伙",
+                        "value": "001007002",
+                        "key": "organization"
+                    }
+                ]
+            },
+            {
+                "name": "全民所有制",
+                "value": "001002001",
+                "key": "organization"
+            },
+            {
+                "name": "集体所有制",
+                "value": "001002002",
+                "key": "organization"
+            },
+            {
+                "name": "联营企业",
+                "value": "001002003",
+                "key": "organization"
+            },
+            {
+                "name": "股份合作企业",
+                "value": "001002004",
+                "key": "organization"
+            },
+            {
+                "name": "个人独资企业",
+                "value": "001006",
+                "key": "organization"
+            },
+            {
+                "name": "农民专业合作社（联合社）",
+                "value": "001008",
+                "key": "organization"
+            },
+            {
+                "name": "机关单位",
+                "value": "001003",
+                "key": "organization"
+            },
+            {
+                "name": "事业单位",
+                "value": "001004",
+                "key": "organization"
+            },
+            {
+                "name": "社会组织",
+                "value": "001005",
+                "key": "organization",
+                "list": [
+                    {
+                        "name": "社会团体",
+                        "value": "001005001",
+                        "key": "organization"
+                    },
+                    {
+                        "name": "民办非企业单位",
+                        "value": "001005002",
+                        "key": "organization"
+                    },
+                    {
+                        "name": "基金会",
+                        "value": "001005003",
+                        "key": "organization"
+                    },
+                    {
+                        "name": "其他社会组织",
+                        "value": "001005004",
+                        "key": "organization"
+                    }
+                ]
+            },
+            {
+                "name": "律师事务所",
+                "value": "001011",
+                "key": "organization"
+            },
+            {
+                "name": "学校",
+                "value": "001016",
+                "key": "organization"
+            },
+            {
+                "name": "医疗机构",
+                "value": "001015",
+                "key": "organization"
+            },
+            {
+                "name": "中国香港企业",
+                "value": "001013",
+                "key": "organization"
+            },
+            {
+                "name": "中国台湾企业",
+                "value": "001014",
+                "key": "organization"
+            }
+        ]
+    },
+    {
+        "name": "经济类型",
+        "key": "economics",
+        "list": [
+            {
+                "name": "国有企业",
+                "value": "002001001",
+                "key": "economics",
+                "list": [
+                    {
+                        "name": "央企",
+                        "value": "002001001001",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "央企子公司",
+                        "value": "002001001002",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "省管国企",
+                        "value": "002001001003",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "市管国企",
+                        "value": "002001001004",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "国有全资企业",
+                        "value": "002001001005",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "国有独资企业",
+                        "value": "002001001006",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "国有控股企业",
+                        "value": "002001001007",
+                        "key": "economics"
+                    }
+                ]
+            },
+            {
+                "name": "民营企业",
+                "value": "002006",
+                "key": "economics"
+            },
+            {
+                "name": "港澳台投资企业",
+                "value": "002002",
+                "key": "economics",
+                "list": [
+                    {
+                        "name": "港澳台合资经营企业",
+                        "value": "002002001",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "港澳台合作经营企业",
+                        "value": "002002002",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "港澳台独资企业",
+                        "value": "002002003",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "港澳台投资股份有限公司",
+                        "value": "002002005",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "其他港澳台投资企业",
+                        "value": "002002004",
+                        "key": "economics"
+                    }
+                ]
+            },
+            {
+                "name": "外商投资企业",
+                "value": "002003",
+                "key": "economics",
+                "list": [
+                    {
+                        "name": "中外合资经营企业",
+                        "value": "002003001",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "中外合作经营企业",
+                        "value": "002003002",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "外资企业（独资）",
+                        "value": "002003003",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "外商投资股份有限公司",
+                        "value": "002003005",
+                        "key": "economics"
+                    },
+                    {
+                        "name": "其他外商投资企业",
+                        "value": "002003004",
+                        "key": "economics"
+                    }
+                ]
+            }
+        ]
+    }
+]

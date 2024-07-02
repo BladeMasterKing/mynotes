@@ -4,7 +4,7 @@
 ## 问题描述
 登录功能中验证码的实现，图片的src是一个请求地址
 
-```xml
+```html
 <img id="yzm" src=""src", "../admin/getValidateCode"/>
 ```
 
@@ -35,18 +35,18 @@ $("#yzm").attr("src", "../admin/getValidateCode?type=image&&deviceId=" + localSt
 ## Firefox中事件不可用问题
 ```javascript
 /**
-     * 处理Firefox中window.event不可用问题
-     */
-    if(typeof(window.event) == "undefined")
-    {
-        var $E = function(){
-            var c = $E.caller;
-            console.log(c.caller);
-            while(c.caller) {
-                c = c.caller;
-            }
-            return c.arguments[0]
-        };
-        window.__defineGetter__("event", $E);
-    }
+ * 处理Firefox中window.event不可用问题
+ */
+if(typeof(window.event) == "undefined")
+{
+    var $E = function(){
+        var c = $E.caller;
+        console.log(c.caller);
+        while(c.caller) {
+            c = c.caller;
+        }
+        return c.arguments[0]
+    };
+    window.__defineGetter__("event", $E);
+}
 ```

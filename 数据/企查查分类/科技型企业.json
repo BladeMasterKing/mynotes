@@ -1,0 +1,62 @@
+[
+    {
+    "name": "高新技术企业",
+    "value": "HT001"
+    },
+    {
+    "name": "科技型中小企业",
+    "value": "T_TSMES"
+    },
+    {
+    "name": "专精特新小巨人企业",
+    "value": "T_SSTE"
+    },
+    {
+    "name": "专精特新中小企业",
+    "value": "SSE"
+    },
+    {
+    "name": "创新型中小企业",
+    "value": "T_INNMS"
+    },
+    {
+    "name": "制造业单项冠军企业",
+    "value": "M_CP"
+    },
+    {
+    "name": "制造业单项冠军产品企业",
+    "value": "M_SCPE"
+    },
+    {
+    "name": "独角兽企业",
+    "value": "UE"
+    },
+    {
+    "name": "瞪羚企业",
+    "value": "GE"
+    },
+    {
+    "name": "企业技术中心",
+    "value": "T_TC"
+    },
+    {
+    "name": "重点实验室",
+    "value": "M_KL"
+    },
+    {
+    "name": "技术创新示范企业",
+    "value": "T_TD"
+    },
+    {
+    "name": "技术先进型服务企业",
+    "value": "T_ATS"
+    },
+    {
+    "name": "众创空间",
+    "value": "T_MS"
+    },
+    {
+    "name": "隐形冠军企业",
+    "value": "T_IC"
+    }
+]

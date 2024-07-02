@@ -1,0 +1,3503 @@
+[
+    {
+        "name": "能源",
+        "code": "QCC01",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "石油石化",
+                "code": "QCC0101",
+                "parentCode": "QCC01",
+                "list": [
+                    {
+                        "name": "油气开采与油服",
+                        "code": "QCC010101",
+                        "parentCode": "QCC0101",
+                        "list": [
+                            {
+                                "name": "油气开采",
+                                "code": "QCC01010101",
+                                "parentCode": "QCC010101",
+                                "list": []
+                            },
+                            {
+                                "name": "油田服务",
+                                "code": "QCC01010102",
+                                "parentCode": "QCC010101",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "油气加工",
+                        "code": "QCC010102",
+                        "parentCode": "QCC0101",
+                        "list": [
+                            {
+                                "name": "炼油化工",
+                                "code": "QCC01010201",
+                                "parentCode": "QCC010102",
+                                "list": []
+                            },
+                            {
+                                "name": "天然气加工",
+                                "code": "QCC01010202",
+                                "parentCode": "QCC010102",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "油气贸易流通",
+                        "code": "QCC010103",
+                        "parentCode": "QCC0101",
+                        "list": [
+                            {
+                                "name": "油品石化贸易",
+                                "code": "QCC01010301",
+                                "parentCode": "QCC010103",
+                                "list": []
+                            },
+                            {
+                                "name": "油气储运及其他",
+                                "code": "QCC01010302",
+                                "parentCode": "QCC010103",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "煤炭",
+                "code": "QCC0102",
+                "parentCode": "QCC01",
+                "list": [
+                    {
+                        "name": "煤炭采选",
+                        "code": "QCC010201",
+                        "parentCode": "QCC0102",
+                        "list": [
+                            {
+                                "name": "动力煤",
+                                "code": "QCC01020101",
+                                "parentCode": "QCC010201",
+                                "list": []
+                            },
+                            {
+                                "name": "焦煤",
+                                "code": "QCC01020102",
+                                "parentCode": "QCC010201",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "煤炭加工",
+                        "code": "QCC010202",
+                        "parentCode": "QCC0102",
+                        "list": [
+                            {
+                                "name": "焦炭",
+                                "code": "QCC01020201",
+                                "parentCode": "QCC010202",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "煤炭销售",
+                        "code": "QCC010203",
+                        "parentCode": "QCC0102",
+                        "list": [
+                            {
+                                "name": "煤炭及制品贸易代理",
+                                "code": "QCC01020301",
+                                "parentCode": "QCC010203",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "原材料",
+        "code": "QCC02",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "化工",
+                "code": "QCC0201",
+                "parentCode": "QCC02",
+                "list": [
+                    {
+                        "name": "化学原料",
+                        "code": "QCC020101",
+                        "parentCode": "QCC0201",
+                        "list": [
+                            {
+                                "name": "无机酸",
+                                "code": "QCC02010101",
+                                "parentCode": "QCC020101",
+                                "list": []
+                            },
+                            {
+                                "name": "无机碱",
+                                "code": "QCC02010102",
+                                "parentCode": "QCC020101",
+                                "list": []
+                            },
+                            {
+                                "name": "无机盐",
+                                "code": "QCC02010103",
+                                "parentCode": "QCC020101",
+                                "list": []
+                            },
+                            {
+                                "name": "煤化工",
+                                "code": "QCC02010104",
+                                "parentCode": "QCC020101",
+                                "list": []
+                            },
+                            {
+                                "name": "钛白粉",
+                                "code": "QCC02010105",
+                                "parentCode": "QCC020101",
+                                "list": []
+                            },
+                            {
+                                "name": "有机化学原料",
+                                "code": "QCC02010106",
+                                "parentCode": "QCC020101",
+                                "list": []
+                            },
+                            {
+                                "name": "其他化学原料",
+                                "code": "QCC02010107",
+                                "parentCode": "QCC020101",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "化学制品",
+                        "code": "QCC020102",
+                        "parentCode": "QCC0201",
+                        "list": [
+                            {
+                                "name": "涂料油墨及颜料",
+                                "code": "QCC02010201",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "印染化学品",
+                                "code": "QCC02010202",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "氟化工",
+                                "code": "QCC02010203",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "聚氨酯",
+                                "code": "QCC02010204",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "有机硅",
+                                "code": "QCC02010205",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "胶黏剂及胶带",
+                                "code": "QCC02010206",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "民爆制品",
+                                "code": "QCC02010207",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "香料香精",
+                                "code": "QCC02010208",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "专用化学产品",
+                                "code": "QCC02010209",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            },
+                            {
+                                "name": "其他化学制品",
+                                "code": "QCC02010210",
+                                "parentCode": "QCC020102",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "化学纤维",
+                        "code": "QCC020103",
+                        "parentCode": "QCC0201",
+                        "list": [
+                            {
+                                "name": "涤纶",
+                                "code": "QCC02010301",
+                                "parentCode": "QCC020103",
+                                "list": []
+                            },
+                            {
+                                "name": "锦纶",
+                                "code": "QCC02010302",
+                                "parentCode": "QCC020103",
+                                "list": []
+                            },
+                            {
+                                "name": "粘胶",
+                                "code": "QCC02010303",
+                                "parentCode": "QCC020103",
+                                "list": []
+                            },
+                            {
+                                "name": "氨纶",
+                                "code": "QCC02010304",
+                                "parentCode": "QCC020103",
+                                "list": []
+                            },
+                            {
+                                "name": "其他化学纤维",
+                                "code": "QCC02010305",
+                                "parentCode": "QCC020103",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "塑料",
+                        "code": "QCC020104",
+                        "parentCode": "QCC0201",
+                        "list": [
+                            {
+                                "name": "改性塑料",
+                                "code": "QCC02010401",
+                                "parentCode": "QCC020104",
+                                "list": []
+                            },
+                            {
+                                "name": "合成树脂",
+                                "code": "QCC02010402",
+                                "parentCode": "QCC020104",
+                                "list": []
+                            },
+                            {
+                                "name": "膜材料",
+                                "code": "QCC02010403",
+                                "parentCode": "QCC020104",
+                                "list": []
+                            },
+                            {
+                                "name": "其他塑料制品",
+                                "code": "QCC02010404",
+                                "parentCode": "QCC020104",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "橡胶",
+                        "code": "QCC020105",
+                        "parentCode": "QCC0201",
+                        "list": [
+                            {
+                                "name": "橡胶助剂",
+                                "code": "QCC02010501",
+                                "parentCode": "QCC020105",
+                                "list": []
+                            },
+                            {
+                                "name": "橡胶制品",
+                                "code": "QCC02010502",
+                                "parentCode": "QCC020105",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "农用化工",
+                        "code": "QCC020106",
+                        "parentCode": "QCC0201",
+                        "list": [
+                            {
+                                "name": "氮肥",
+                                "code": "QCC02010601",
+                                "parentCode": "QCC020106",
+                                "list": []
+                            },
+                            {
+                                "name": "磷肥及磷化工",
+                                "code": "QCC02010602",
+                                "parentCode": "QCC020106",
+                                "list": []
+                            },
+                            {
+                                "name": "农药",
+                                "code": "QCC02010603",
+                                "parentCode": "QCC020106",
+                                "list": []
+                            },
+                            {
+                                "name": "钾肥",
+                                "code": "QCC02010604",
+                                "parentCode": "QCC020106",
+                                "list": []
+                            },
+                            {
+                                "name": "复合肥",
+                                "code": "QCC02010605",
+                                "parentCode": "QCC020106",
+                                "list": []
+                            },
+                            {
+                                "name": "有机肥料及微生物肥料",
+                                "code": "QCC02010606",
+                                "parentCode": "QCC020106",
+                                "list": []
+                            },
+                            {
+                                "name": "其他肥料",
+                                "code": "QCC02010607",
+                                "parentCode": "QCC020106",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "化工产品销售",
+                        "code": "QCC020107",
+                        "parentCode": "QCC0201",
+                        "list": [
+                            {
+                                "name": "化工产品贸易代理",
+                                "code": "QCC02010701",
+                                "parentCode": "QCC020107",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "钢铁",
+                "code": "QCC0202",
+                "parentCode": "QCC02",
+                "list": [
+                    {
+                        "name": "冶钢原料",
+                        "code": "QCC020201",
+                        "parentCode": "QCC0202",
+                        "list": [
+                            {
+                                "name": "黑色金属",
+                                "code": "QCC02020101",
+                                "parentCode": "QCC020201",
+                                "list": []
+                            },
+                            {
+                                "name": "冶钢辅料",
+                                "code": "QCC02020102",
+                                "parentCode": "QCC020201",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "普钢",
+                        "code": "QCC020202",
+                        "parentCode": "QCC0202",
+                        "list": [
+                            {
+                                "name": "长材",
+                                "code": "QCC02020201",
+                                "parentCode": "QCC020202",
+                                "list": []
+                            },
+                            {
+                                "name": "板材",
+                                "code": "QCC02020202",
+                                "parentCode": "QCC020202",
+                                "list": []
+                            },
+                            {
+                                "name": "钢铁管材",
+                                "code": "QCC02020203",
+                                "parentCode": "QCC020202",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "特钢",
+                        "code": "QCC020203",
+                        "parentCode": "QCC0202",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "金属",
+                "code": "QCC0203",
+                "parentCode": "QCC02",
+                "list": [
+                    {
+                        "name": "工业金属",
+                        "code": "QCC020301",
+                        "parentCode": "QCC0203",
+                        "list": [
+                            {
+                                "name": "铝",
+                                "code": "QCC02030101",
+                                "parentCode": "QCC020301",
+                                "list": []
+                            },
+                            {
+                                "name": "铜",
+                                "code": "QCC02030102",
+                                "parentCode": "QCC020301",
+                                "list": []
+                            },
+                            {
+                                "name": "铅锌",
+                                "code": "QCC02030103",
+                                "parentCode": "QCC020301",
+                                "list": []
+                            },
+                            {
+                                "name": "钴镍",
+                                "code": "QCC02030104",
+                                "parentCode": "QCC020301",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "贵金属",
+                        "code": "QCC020302",
+                        "parentCode": "QCC0203",
+                        "list": [
+                            {
+                                "name": "黄金",
+                                "code": "QCC02030201",
+                                "parentCode": "QCC020302",
+                                "list": []
+                            },
+                            {
+                                "name": "其他贵金属",
+                                "code": "QCC02030202",
+                                "parentCode": "QCC020302",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "稀有金属",
+                        "code": "QCC020303",
+                        "parentCode": "QCC0203",
+                        "list": [
+                            {
+                                "name": "稀土金属",
+                                "code": "QCC02030301",
+                                "parentCode": "QCC020303",
+                                "list": []
+                            },
+                            {
+                                "name": "钨钼",
+                                "code": "QCC02030302",
+                                "parentCode": "QCC020303",
+                                "list": []
+                            },
+                            {
+                                "name": "锂",
+                                "code": "QCC02030303",
+                                "parentCode": "QCC020303",
+                                "list": []
+                            },
+                            {
+                                "name": "其他稀有金属",
+                                "code": "QCC02030304",
+                                "parentCode": "QCC020303",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "其他金属及合金",
+                        "code": "QCC020304",
+                        "parentCode": "QCC0203",
+                        "list": []
+                    },
+                    {
+                        "name": "金属及加工品销售",
+                        "code": "QCC020305",
+                        "parentCode": "QCC0203",
+                        "list": [
+                            {
+                                "name": "金属及加工品贸易代理",
+                                "code": "QCC02030501",
+                                "parentCode": "QCC020305",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "非金属材料",
+                "code": "QCC0204",
+                "parentCode": "QCC02",
+                "list": [
+                    {
+                        "name": "建筑材料",
+                        "code": "QCC020401",
+                        "parentCode": "QCC0204",
+                        "list": [
+                            {
+                                "name": "水泥与混凝土",
+                                "code": "QCC02040101",
+                                "parentCode": "QCC020401",
+                                "list": []
+                            },
+                            {
+                                "name": "玻璃玻纤",
+                                "code": "QCC02040102",
+                                "parentCode": "QCC020401",
+                                "list": []
+                            },
+                            {
+                                "name": "其他建筑材料",
+                                "code": "QCC02040103",
+                                "parentCode": "QCC020401",
+                                "list": []
+                            },
+                            {
+                                "name": "建材贸易代理",
+                                "code": "QCC02040104",
+                                "parentCode": "QCC020401",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "其他非金属材料",
+                        "code": "QCC020402",
+                        "parentCode": "QCC0204",
+                        "list": []
+                    },
+                    {
+                        "name": "非金属材料制品",
+                        "code": "QCC020403",
+                        "parentCode": "QCC0204",
+                        "list": [
+                            {
+                                "name": "陶瓷制品",
+                                "code": "QCC02040301",
+                                "parentCode": "QCC020403",
+                                "list": []
+                            },
+                            {
+                                "name": "耐火材料制品",
+                                "code": "QCC02040302",
+                                "parentCode": "QCC020403",
+                                "list": []
+                            },
+                            {
+                                "name": "石墨及其他非金属材料制品",
+                                "code": "QCC02040303",
+                                "parentCode": "QCC020403",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "非金属及加工品销售",
+                        "code": "QCC020404",
+                        "parentCode": "QCC0204",
+                        "list": [
+                            {
+                                "name": "非金属及加工品贸易代理",
+                                "code": "QCC02040401",
+                                "parentCode": "QCC020404",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "造纸与容器包装",
+                "code": "QCC0205",
+                "parentCode": "QCC02",
+                "list": [
+                    {
+                        "name": "纸类和林业产品",
+                        "code": "QCC020501",
+                        "parentCode": "QCC0205",
+                        "list": [
+                            {
+                                "name": "林业产品",
+                                "code": "QCC02050101",
+                                "parentCode": "QCC020501",
+                                "list": []
+                            },
+                            {
+                                "name": "纸制品",
+                                "code": "QCC02050102",
+                                "parentCode": "QCC020501",
+                                "list": []
+                            },
+                            {
+                                "name": "纸类和林业产品贸易代理",
+                                "code": "QCC02050103",
+                                "parentCode": "QCC020501",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "容器与包装",
+                        "code": "QCC020502",
+                        "parentCode": "QCC0205",
+                        "list": [
+                            {
+                                "name": "金属、玻璃与塑料容器",
+                                "code": "QCC02050201",
+                                "parentCode": "QCC020502",
+                                "list": []
+                            },
+                            {
+                                "name": "纸材料包装",
+                                "code": "QCC02050202",
+                                "parentCode": "QCC020502",
+                                "list": []
+                            },
+                            {
+                                "name": "综合包装",
+                                "code": "QCC02050203",
+                                "parentCode": "QCC020502",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "工业与商业服务",
+        "code": "QCC03",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "航空航天与国防军工",
+                "code": "QCC0301",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "航空航天",
+                        "code": "QCC030101",
+                        "parentCode": "QCC0301",
+                        "list": [
+                            {
+                                "name": "航空装备",
+                                "code": "QCC03010101",
+                                "parentCode": "QCC030101",
+                                "list": []
+                            },
+                            {
+                                "name": "航天装备",
+                                "code": "QCC03010102",
+                                "parentCode": "QCC030101",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "国防装备",
+                        "code": "QCC030102",
+                        "parentCode": "QCC0301",
+                        "list": [
+                            {
+                                "name": "航海装备",
+                                "code": "QCC03010201",
+                                "parentCode": "QCC030102",
+                                "list": []
+                            },
+                            {
+                                "name": "地面兵装",
+                                "code": "QCC03010202",
+                                "parentCode": "QCC030102",
+                                "list": []
+                            },
+                            {
+                                "name": "军工电子",
+                                "code": "QCC03010203",
+                                "parentCode": "QCC030102",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "机械制造",
+                "code": "QCC0302",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "通用机械",
+                        "code": "QCC030201",
+                        "parentCode": "QCC0302",
+                        "list": [
+                            {
+                                "name": "加工机械",
+                                "code": "QCC03020101",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "动力机械",
+                                "code": "QCC03020102",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "气液机械",
+                                "code": "QCC03020103",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "制冷空调设备",
+                                "code": "QCC03020104",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "锅炉",
+                                "code": "QCC03020105",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "磨具磨料",
+                                "code": "QCC03020106",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "仪器仪表",
+                                "code": "QCC03020107",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "金属制品",
+                                "code": "QCC03020108",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            },
+                            {
+                                "name": "其他通用机械",
+                                "code": "QCC03020109",
+                                "parentCode": "QCC030201",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "专用设备",
+                        "code": "QCC030202",
+                        "parentCode": "QCC0302",
+                        "list": [
+                            {
+                                "name": "采矿采石冶金机械",
+                                "code": "QCC03020201",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "能源及重型设备",
+                                "code": "QCC03020202",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "化工机械",
+                                "code": "QCC03020203",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "工程机械",
+                                "code": "QCC03020204",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "印刷包装设备",
+                                "code": "QCC03020205",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "农用机械",
+                                "code": "QCC03020206",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "纺织服装设备",
+                                "code": "QCC03020207",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "楼宇设备",
+                                "code": "QCC03020208",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "环保设备",
+                                "code": "QCC03020209",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            },
+                            {
+                                "name": "其他专用设备",
+                                "code": "QCC03020210",
+                                "parentCode": "QCC030202",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "交通运输设备",
+                        "code": "QCC030203",
+                        "parentCode": "QCC0302",
+                        "list": [
+                            {
+                                "name": "轨交设备",
+                                "code": "QCC03020301",
+                                "parentCode": "QCC030203",
+                                "list": []
+                            },
+                            {
+                                "name": "船舶及其他航运设备",
+                                "code": "QCC03020302",
+                                "parentCode": "QCC030203",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "电动机与自动化设备",
+                        "code": "QCC030204",
+                        "parentCode": "QCC0302",
+                        "list": [
+                            {
+                                "name": "机器人",
+                                "code": "QCC03020401",
+                                "parentCode": "QCC030204",
+                                "list": []
+                            },
+                            {
+                                "name": "工控设备",
+                                "code": "QCC03020402",
+                                "parentCode": "QCC030204",
+                                "list": []
+                            },
+                            {
+                                "name": "激光设备",
+                                "code": "QCC03020403",
+                                "parentCode": "QCC030204",
+                                "list": []
+                            },
+                            {
+                                "name": "其他自动化设备",
+                                "code": "QCC03020404",
+                                "parentCode": "QCC030204",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "机械设备销售",
+                        "code": "QCC030205",
+                        "parentCode": "QCC0302",
+                        "list": [
+                            {
+                                "name": "机械设备贸易代理",
+                                "code": "QCC03020501",
+                                "parentCode": "QCC030205",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "电力设备",
+                "code": "QCC0303",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "发电设备",
+                        "code": "QCC030301",
+                        "parentCode": "QCC0303",
+                        "list": [
+                            {
+                                "name": "火电设备",
+                                "code": "QCC03030101",
+                                "parentCode": "QCC030301",
+                                "list": []
+                            },
+                            {
+                                "name": "风电设备",
+                                "code": "QCC03030102",
+                                "parentCode": "QCC030301",
+                                "list": []
+                            },
+                            {
+                                "name": "光伏设备",
+                                "code": "QCC03030103",
+                                "parentCode": "QCC030301",
+                                "list": []
+                            },
+                            {
+                                "name": "综合电力设备商",
+                                "code": "QCC03030104",
+                                "parentCode": "QCC030301",
+                                "list": []
+                            },
+                            {
+                                "name": "其他发电设备",
+                                "code": "QCC03030105",
+                                "parentCode": "QCC030301",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "电网设备",
+                        "code": "QCC030302",
+                        "parentCode": "QCC0303",
+                        "list": [
+                            {
+                                "name": "输变电设备",
+                                "code": "QCC03030201",
+                                "parentCode": "QCC030302",
+                                "list": []
+                            },
+                            {
+                                "name": "配电设备",
+                                "code": "QCC03030202",
+                                "parentCode": "QCC030302",
+                                "list": []
+                            },
+                            {
+                                "name": "电网自动化设备",
+                                "code": "QCC03030203",
+                                "parentCode": "QCC030302",
+                                "list": []
+                            },
+                            {
+                                "name": "电工仪器仪表",
+                                "code": "QCC03030204",
+                                "parentCode": "QCC030302",
+                                "list": []
+                            },
+                            {
+                                "name": "线缆部件及其他",
+                                "code": "QCC03030205",
+                                "parentCode": "QCC030302",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "储能设备",
+                        "code": "QCC030303",
+                        "parentCode": "QCC0303",
+                        "list": [
+                            {
+                                "name": "电池",
+                                "code": "QCC03030301",
+                                "parentCode": "QCC030303",
+                                "list": []
+                            },
+                            {
+                                "name": "电池部件",
+                                "code": "QCC03030302",
+                                "parentCode": "QCC030303",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "电力设备销售",
+                        "code": "QCC030304",
+                        "parentCode": "QCC0303",
+                        "list": [
+                            {
+                                "name": "电力设备贸易代理",
+                                "code": "QCC03030401",
+                                "parentCode": "QCC030304",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "建筑装饰",
+                "code": "QCC0304",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "建筑与工程",
+                        "code": "QCC030401",
+                        "parentCode": "QCC0304",
+                        "list": [
+                            {
+                                "name": "房屋建设",
+                                "code": "QCC03040101",
+                                "parentCode": "QCC030401",
+                                "list": []
+                            },
+                            {
+                                "name": "基础设施建设",
+                                "code": "QCC03040102",
+                                "parentCode": "QCC030401",
+                                "list": []
+                            },
+                            {
+                                "name": "园林工程",
+                                "code": "QCC03040103",
+                                "parentCode": "QCC030401",
+                                "list": []
+                            },
+                            {
+                                "name": "专业工程",
+                                "code": "QCC03040104",
+                                "parentCode": "QCC030401",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "建筑装修装饰服务",
+                        "code": "QCC030402",
+                        "parentCode": "QCC0304",
+                        "list": [
+                            {
+                                "name": "建筑装饰装修",
+                                "code": "QCC03040201",
+                                "parentCode": "QCC030402",
+                                "list": []
+                            },
+                            {
+                                "name": "建筑设计及工程咨询服务",
+                                "code": "QCC03040202",
+                                "parentCode": "QCC030402",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "建筑产品",
+                        "code": "QCC030403",
+                        "parentCode": "QCC0304",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "交通运输",
+                "code": "QCC0305",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "运输业",
+                        "code": "QCC030501",
+                        "parentCode": "QCC0305",
+                        "list": [
+                            {
+                                "name": "快递",
+                                "code": "QCC03050101",
+                                "parentCode": "QCC030501",
+                                "list": []
+                            },
+                            {
+                                "name": "物流仓储综合",
+                                "code": "QCC03050102",
+                                "parentCode": "QCC030501",
+                                "list": []
+                            },
+                            {
+                                "name": "航空运输",
+                                "code": "QCC03050103",
+                                "parentCode": "QCC030501",
+                                "list": []
+                            },
+                            {
+                                "name": "航运",
+                                "code": "QCC03050104",
+                                "parentCode": "QCC030501",
+                                "list": []
+                            },
+                            {
+                                "name": "铁路运输",
+                                "code": "QCC03050105",
+                                "parentCode": "QCC030501",
+                                "list": []
+                            },
+                            {
+                                "name": "公路运输",
+                                "code": "QCC03050106",
+                                "parentCode": "QCC030501",
+                                "list": []
+                            },
+                            {
+                                "name": "城市客运",
+                                "code": "QCC03050107",
+                                "parentCode": "QCC030501",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "交通基本设施",
+                        "code": "QCC030502",
+                        "parentCode": "QCC0305",
+                        "list": [
+                            {
+                                "name": "机场",
+                                "code": "QCC03050201",
+                                "parentCode": "QCC030502",
+                                "list": []
+                            },
+                            {
+                                "name": "港口",
+                                "code": "QCC03050202",
+                                "parentCode": "QCC030502",
+                                "list": []
+                            },
+                            {
+                                "name": "公路",
+                                "code": "QCC03050203",
+                                "parentCode": "QCC030502",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "环保",
+                "code": "QCC0306",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "环境治理",
+                        "code": "QCC030601",
+                        "parentCode": "QCC0306",
+                        "list": [
+                            {
+                                "name": "大气治理",
+                                "code": "QCC03060101",
+                                "parentCode": "QCC030601",
+                                "list": []
+                            },
+                            {
+                                "name": "污水处理",
+                                "code": "QCC03060102",
+                                "parentCode": "QCC030601",
+                                "list": []
+                            },
+                            {
+                                "name": "固废治理",
+                                "code": "QCC03060103",
+                                "parentCode": "QCC030601",
+                                "list": []
+                            },
+                            {
+                                "name": "综合环境治理",
+                                "code": "QCC03060104",
+                                "parentCode": "QCC030601",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "环境监测修复",
+                        "code": "QCC030602",
+                        "parentCode": "QCC0306",
+                        "list": [
+                            {
+                                "name": "环境监测",
+                                "code": "QCC03060201",
+                                "parentCode": "QCC030602",
+                                "list": []
+                            },
+                            {
+                                "name": "资源回收利用",
+                                "code": "QCC03060202",
+                                "parentCode": "QCC030602",
+                                "list": []
+                            },
+                            {
+                                "name": "生态环境修复",
+                                "code": "QCC03060203",
+                                "parentCode": "QCC030602",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "商贸服务",
+                "code": "QCC0307",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "商业贸易",
+                        "code": "QCC030701",
+                        "parentCode": "QCC0307",
+                        "list": []
+                    },
+                    {
+                        "name": "商业服务与用品",
+                        "code": "QCC030702",
+                        "parentCode": "QCC0307",
+                        "list": [
+                            {
+                                "name": "商业印刷",
+                                "code": "QCC03070201",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "办公服务与用品",
+                                "code": "QCC03070202",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "人力资源与就业服务",
+                                "code": "QCC03070203",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "检验检测服务",
+                                "code": "QCC03070204",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "会展服务",
+                                "code": "QCC03070205",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "安保服务",
+                                "code": "QCC03070206",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "设备维修服务",
+                                "code": "QCC03070207",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "律师和公证服务",
+                                "code": "QCC03070208",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "咨询服务",
+                                "code": "QCC03070209",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "会计、审计及税务服务",
+                                "code": "QCC03070210",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            },
+                            {
+                                "name": "其他商业服务",
+                                "code": "QCC03070211",
+                                "parentCode": "QCC030702",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "科学研究和技术服务",
+                "code": "QCC0308",
+                "parentCode": "QCC03",
+                "list": [
+                    {
+                        "name": "研究和实验发展",
+                        "code": "QCC030801",
+                        "parentCode": "QCC0308",
+                        "list": []
+                    },
+                    {
+                        "name": "专业技术服务",
+                        "code": "QCC030802",
+                        "parentCode": "QCC0308",
+                        "list": [
+                            {
+                                "name": "气象地震海洋服务",
+                                "code": "QCC03080201",
+                                "parentCode": "QCC030802",
+                                "list": []
+                            },
+                            {
+                                "name": "测绘地理信息服务",
+                                "code": "QCC03080202",
+                                "parentCode": "QCC030802",
+                                "list": []
+                            },
+                            {
+                                "name": "地质勘探服务",
+                                "code": "QCC03080203",
+                                "parentCode": "QCC030802",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "消费",
+        "code": "QCC04",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "汽车",
+                "code": "QCC0401",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "汽车零部件与轮胎",
+                        "code": "QCC040101",
+                        "parentCode": "QCC0401",
+                        "list": [
+                            {
+                                "name": "汽车系统部件",
+                                "code": "QCC04010101",
+                                "parentCode": "QCC040101",
+                                "list": []
+                            },
+                            {
+                                "name": "汽车内饰与外饰",
+                                "code": "QCC04010102",
+                                "parentCode": "QCC040101",
+                                "list": []
+                            },
+                            {
+                                "name": "汽车电子",
+                                "code": "QCC04010103",
+                                "parentCode": "QCC040101",
+                                "list": []
+                            },
+                            {
+                                "name": "轮胎轮毂",
+                                "code": "QCC04010104",
+                                "parentCode": "QCC040101",
+                                "list": []
+                            },
+                            {
+                                "name": "其他汽车零部件",
+                                "code": "QCC04010105",
+                                "parentCode": "QCC040101",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "汽车整车",
+                        "code": "QCC040102",
+                        "parentCode": "QCC0401",
+                        "list": [
+                            {
+                                "name": "汽柴油车",
+                                "code": "QCC04010201",
+                                "parentCode": "QCC040102",
+                                "list": []
+                            },
+                            {
+                                "name": "新能源车",
+                                "code": "QCC04010203",
+                                "parentCode": "QCC040102",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "摩托车及其他",
+                        "code": "QCC040103",
+                        "parentCode": "QCC0401",
+                        "list": [
+                            {
+                                "name": "摩托车",
+                                "code": "QCC04010301",
+                                "parentCode": "QCC040103",
+                                "list": []
+                            },
+                            {
+                                "name": "电瓶车及其他",
+                                "code": "QCC04010302",
+                                "parentCode": "QCC040103",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "汽车服务",
+                        "code": "QCC040104",
+                        "parentCode": "QCC0401",
+                        "list": [
+                            {
+                                "name": "汽车经销商",
+                                "code": "QCC04010401",
+                                "parentCode": "QCC040104",
+                                "list": []
+                            },
+                            {
+                                "name": "汽车综合服务",
+                                "code": "QCC04010402",
+                                "parentCode": "QCC040104",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "耐用消费品",
+                "code": "QCC0402",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "家用电器",
+                        "code": "QCC040201",
+                        "parentCode": "QCC0402",
+                        "list": [
+                            {
+                                "name": "白色家电",
+                                "code": "QCC04020101",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            },
+                            {
+                                "name": "黑色家电",
+                                "code": "QCC04020102",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            },
+                            {
+                                "name": "小家电",
+                                "code": "QCC04020103",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            },
+                            {
+                                "name": "厨卫电器",
+                                "code": "QCC04020104",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            },
+                            {
+                                "name": "照明电器",
+                                "code": "QCC04020105",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            },
+                            {
+                                "name": "家电零部件",
+                                "code": "QCC04020106",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            },
+                            {
+                                "name": "其他家电",
+                                "code": "QCC04020107",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            },
+                            {
+                                "name": "家用电器贸易代理",
+                                "code": "QCC04020108",
+                                "parentCode": "QCC040201",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "家居",
+                        "code": "QCC040202",
+                        "parentCode": "QCC0402",
+                        "list": [
+                            {
+                                "name": "家具",
+                                "code": "QCC04020201",
+                                "parentCode": "QCC040202",
+                                "list": []
+                            },
+                            {
+                                "name": "家居用品",
+                                "code": "QCC04020202",
+                                "parentCode": "QCC040202",
+                                "list": []
+                            },
+                            {
+                                "name": "家具及家居用品贸易代理",
+                                "code": "QCC04020203",
+                                "parentCode": "QCC040202",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "休闲设备与用品",
+                        "code": "QCC040203",
+                        "parentCode": "QCC0402",
+                        "list": [
+                            {
+                                "name": "自行车",
+                                "code": "QCC04020301",
+                                "parentCode": "QCC040203",
+                                "list": []
+                            },
+                            {
+                                "name": "玩具",
+                                "code": "QCC04020302",
+                                "parentCode": "QCC040203",
+                                "list": []
+                            },
+                            {
+                                "name": "乐器",
+                                "code": "QCC04020303",
+                                "parentCode": "QCC040203",
+                                "list": []
+                            },
+                            {
+                                "name": "工艺美术品",
+                                "code": "QCC04020304",
+                                "parentCode": "QCC040203",
+                                "list": []
+                            },
+                            {
+                                "name": "游艺器材设备",
+                                "code": "QCC04020305",
+                                "parentCode": "QCC040203",
+                                "list": []
+                            },
+                            {
+                                "name": "其他休闲设备",
+                                "code": "QCC04020306",
+                                "parentCode": "QCC040203",
+                                "list": []
+                            },
+                            {
+                                "name": "休闲设备与用品贸易代理",
+                                "code": "QCC04020307",
+                                "parentCode": "QCC040203",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "纺织服饰与珠宝",
+                "code": "QCC0403",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "纺织品",
+                        "code": "QCC040301",
+                        "parentCode": "QCC0403",
+                        "list": [
+                            {
+                                "name": "棉纺",
+                                "code": "QCC04030101",
+                                "parentCode": "QCC040301",
+                                "list": []
+                            },
+                            {
+                                "name": "毛纺",
+                                "code": "QCC04030102",
+                                "parentCode": "QCC040301",
+                                "list": []
+                            },
+                            {
+                                "name": "印染织物",
+                                "code": "QCC04030103",
+                                "parentCode": "QCC040301",
+                                "list": []
+                            },
+                            {
+                                "name": "辅料",
+                                "code": "QCC04030104",
+                                "parentCode": "QCC040301",
+                                "list": []
+                            },
+                            {
+                                "name": "其他纺织品",
+                                "code": "QCC04030105",
+                                "parentCode": "QCC040301",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "服装家纺",
+                        "code": "QCC040302",
+                        "parentCode": "QCC0403",
+                        "list": [
+                            {
+                                "name": "服装",
+                                "code": "QCC04030201",
+                                "parentCode": "QCC040302",
+                                "list": []
+                            },
+                            {
+                                "name": "鞋帽与配饰",
+                                "code": "QCC04030202",
+                                "parentCode": "QCC040302",
+                                "list": []
+                            },
+                            {
+                                "name": "家纺",
+                                "code": "QCC04030203",
+                                "parentCode": "QCC040302",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "珠宝与皮革制品",
+                        "code": "QCC040303",
+                        "parentCode": "QCC0403",
+                        "list": [
+                            {
+                                "name": "珠宝",
+                                "code": "QCC04030301",
+                                "parentCode": "QCC040303",
+                                "list": []
+                            },
+                            {
+                                "name": "皮革毛皮制品",
+                                "code": "QCC04030302",
+                                "parentCode": "QCC040303",
+                                "list": []
+                            },
+                            {
+                                "name": "钟表",
+                                "code": "QCC04030303",
+                                "parentCode": "QCC040303",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "纺织服饰与珠宝销售",
+                        "code": "QCC040304",
+                        "parentCode": "QCC0403",
+                        "list": [
+                            {
+                                "name": "纺织服装贸易代理",
+                                "code": "QCC04030401",
+                                "parentCode": "QCC040304",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "消费者服务",
+                "code": "QCC0404",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "休闲服务",
+                        "code": "QCC040401",
+                        "parentCode": "QCC0404",
+                        "list": [
+                            {
+                                "name": "景点",
+                                "code": "QCC04040101",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            },
+                            {
+                                "name": "旅游服务",
+                                "code": "QCC04040102",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            },
+                            {
+                                "name": "博彩与赌场",
+                                "code": "QCC04040103",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            },
+                            {
+                                "name": "酒店住宿",
+                                "code": "QCC04040104",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            },
+                            {
+                                "name": "餐饮服务",
+                                "code": "QCC04040105",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            },
+                            {
+                                "name": "动植物园及水族馆",
+                                "code": "QCC04040106",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            },
+                            {
+                                "name": "民宿服务",
+                                "code": "QCC04040107",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            },
+                            {
+                                "name": "其他休闲服务",
+                                "code": "QCC04040108",
+                                "parentCode": "QCC040401",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "体育",
+                        "code": "QCC040402",
+                        "parentCode": "QCC0404",
+                        "list": [
+                            {
+                                "name": "体育赛事运营",
+                                "code": "QCC04040201",
+                                "parentCode": "QCC040402",
+                                "list": []
+                            },
+                            {
+                                "name": "体育场所运营",
+                                "code": "QCC04040202",
+                                "parentCode": "QCC040402",
+                                "list": []
+                            },
+                            {
+                                "name": "体育用品与健身器材",
+                                "code": "QCC04040203",
+                                "parentCode": "QCC040402",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "其他消费者服务",
+                        "code": "QCC040403",
+                        "parentCode": "QCC0404",
+                        "list": [
+                            {
+                                "name": "康养护理服务",
+                                "code": "QCC04040301",
+                                "parentCode": "QCC040403",
+                                "list": []
+                            },
+                            {
+                                "name": "文体设备和用品出租",
+                                "code": "QCC04040302",
+                                "parentCode": "QCC040403",
+                                "list": []
+                            },
+                            {
+                                "name": "理发美容服务",
+                                "code": "QCC04040303",
+                                "parentCode": "QCC040403",
+                                "list": []
+                            },
+                            {
+                                "name": "洗浴和保健养生服务",
+                                "code": "QCC04040304",
+                                "parentCode": "QCC040403",
+                                "list": []
+                            },
+                            {
+                                "name": "婚葬服务",
+                                "code": "QCC04040305",
+                                "parentCode": "QCC040403",
+                                "list": []
+                            },
+                            {
+                                "name": "宠物服务",
+                                "code": "QCC04040306",
+                                "parentCode": "QCC040403",
+                                "list": []
+                            },
+                            {
+                                "name": "其他消费服务",
+                                "code": "QCC04040307",
+                                "parentCode": "QCC040403",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "教育",
+                "code": "QCC0405",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "母婴教育",
+                        "code": "QCC040501",
+                        "parentCode": "QCC0405",
+                        "list": []
+                    },
+                    {
+                        "name": "学前教育",
+                        "code": "QCC040502",
+                        "parentCode": "QCC0405",
+                        "list": [
+                            {
+                                "name": "幼儿园教育",
+                                "code": "QCC04050201",
+                                "parentCode": "QCC040502",
+                                "list": []
+                            },
+                            {
+                                "name": "早教培训机构",
+                                "code": "QCC04050202",
+                                "parentCode": "QCC040502",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "K12教育",
+                        "code": "QCC040503",
+                        "parentCode": "QCC0405",
+                        "list": [
+                            {
+                                "name": "中小学校内教育",
+                                "code": "QCC04050301",
+                                "parentCode": "QCC040503",
+                                "list": []
+                            },
+                            {
+                                "name": "中小学课外教培",
+                                "code": "QCC04050302",
+                                "parentCode": "QCC040503",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "高等教育",
+                        "code": "QCC040504",
+                        "parentCode": "QCC0405",
+                        "list": [
+                            {
+                                "name": "大专教育",
+                                "code": "QCC04050401",
+                                "parentCode": "QCC040504",
+                                "list": []
+                            },
+                            {
+                                "name": "大学教育",
+                                "code": "QCC04050402",
+                                "parentCode": "QCC040504",
+                                "list": []
+                            },
+                            {
+                                "name": "研究生教育",
+                                "code": "QCC04050403",
+                                "parentCode": "QCC040504",
+                                "list": []
+                            },
+                            {
+                                "name": "成人教育",
+                                "code": "QCC04050404",
+                                "parentCode": "QCC040504",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "技能职业教育",
+                        "code": "QCC040505",
+                        "parentCode": "QCC0405",
+                        "list": [
+                            {
+                                "name": "学历技能职业教育",
+                                "code": "QCC04050501",
+                                "parentCode": "QCC040505",
+                                "list": []
+                            },
+                            {
+                                "name": "非学历技能职业教育",
+                                "code": "QCC04050502",
+                                "parentCode": "QCC040505",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "国际教育",
+                        "code": "QCC040506",
+                        "parentCode": "QCC0405",
+                        "list": [
+                            {
+                                "name": "国际学校",
+                                "code": "QCC04050601",
+                                "parentCode": "QCC040506",
+                                "list": []
+                            },
+                            {
+                                "name": "留学教育",
+                                "code": "QCC04050602",
+                                "parentCode": "QCC040506",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "特殊教育",
+                        "code": "QCC040507",
+                        "parentCode": "QCC0405",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "零售",
+                "code": "QCC0406",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "一般零售",
+                        "code": "QCC040601",
+                        "parentCode": "QCC0406",
+                        "list": [
+                            {
+                                "name": "百货",
+                                "code": "QCC04060101",
+                                "parentCode": "QCC040601",
+                                "list": []
+                            },
+                            {
+                                "name": "超市与便利店",
+                                "code": "QCC04060102",
+                                "parentCode": "QCC040601",
+                                "list": []
+                            },
+                            {
+                                "name": "多业态零售",
+                                "code": "QCC04060103",
+                                "parentCode": "QCC040601",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "专营零售",
+                        "code": "QCC040602",
+                        "parentCode": "QCC0406",
+                        "list": []
+                    },
+                    {
+                        "name": "旅游零售",
+                        "code": "QCC040603",
+                        "parentCode": "QCC0406",
+                        "list": []
+                    },
+                    {
+                        "name": "互联网电商",
+                        "code": "QCC040604",
+                        "parentCode": "QCC0406",
+                        "list": [
+                            {
+                                "name": "综合电商",
+                                "code": "QCC04060401",
+                                "parentCode": "QCC040604",
+                                "list": []
+                            },
+                            {
+                                "name": "垂直电商",
+                                "code": "QCC04060402",
+                                "parentCode": "QCC040604",
+                                "list": []
+                            },
+                            {
+                                "name": "跨境电商",
+                                "code": "QCC04060403",
+                                "parentCode": "QCC040604",
+                                "list": []
+                            },
+                            {
+                                "name": "电商服务",
+                                "code": "QCC04060404",
+                                "parentCode": "QCC040604",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "食品饮料与烟草",
+                "code": "QCC0407",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "食品",
+                        "code": "QCC040701",
+                        "parentCode": "QCC0407",
+                        "list": [
+                            {
+                                "name": "肉制品",
+                                "code": "QCC04070101",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            },
+                            {
+                                "name": "调味品及食用油",
+                                "code": "QCC04070102",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            },
+                            {
+                                "name": "乳制品",
+                                "code": "QCC04070103",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            },
+                            {
+                                "name": "预加工食品",
+                                "code": "QCC04070104",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            },
+                            {
+                                "name": "休闲食品",
+                                "code": "QCC04070105",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            },
+                            {
+                                "name": "保健品",
+                                "code": "QCC04070106",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            },
+                            {
+                                "name": "食品添加剂",
+                                "code": "QCC04070107",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            },
+                            {
+                                "name": "其他食品",
+                                "code": "QCC04070108",
+                                "parentCode": "QCC040701",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "饮料和茶",
+                        "code": "QCC040702",
+                        "parentCode": "QCC0407",
+                        "list": [
+                            {
+                                "name": "软饮料",
+                                "code": "QCC04070201",
+                                "parentCode": "QCC040702",
+                                "list": []
+                            },
+                            {
+                                "name": "精制茶及茶饮",
+                                "code": "QCC04070202",
+                                "parentCode": "QCC040702",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "酒",
+                        "code": "QCC040703",
+                        "parentCode": "QCC0407",
+                        "list": [
+                            {
+                                "name": "白酒",
+                                "code": "QCC04070301",
+                                "parentCode": "QCC040703",
+                                "list": []
+                            },
+                            {
+                                "name": "啤酒",
+                                "code": "QCC04070302",
+                                "parentCode": "QCC040703",
+                                "list": []
+                            },
+                            {
+                                "name": "黄酒",
+                                "code": "QCC04070303",
+                                "parentCode": "QCC040703",
+                                "list": []
+                            },
+                            {
+                                "name": "葡萄酒",
+                                "code": "QCC04070304",
+                                "parentCode": "QCC040703",
+                                "list": []
+                            },
+                            {
+                                "name": "其他酒类",
+                                "code": "QCC04070305",
+                                "parentCode": "QCC040703",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "烟草",
+                        "code": "QCC040704",
+                        "parentCode": "QCC0407",
+                        "list": []
+                    },
+                    {
+                        "name": "食品饮料与烟草销售",
+                        "code": "QCC040705",
+                        "parentCode": "QCC0407",
+                        "list": [
+                            {
+                                "name": "食品饮料与烟草贸易代理",
+                                "code": "QCC04070501",
+                                "parentCode": "QCC040705",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "农牧渔",
+                "code": "QCC0408",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "种植",
+                        "code": "QCC040801",
+                        "parentCode": "QCC0408",
+                        "list": [
+                            {
+                                "name": "农产品",
+                                "code": "QCC04080101",
+                                "parentCode": "QCC040801",
+                                "list": []
+                            },
+                            {
+                                "name": "种业",
+                                "code": "QCC04080102",
+                                "parentCode": "QCC040801",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "养殖",
+                        "code": "QCC040802",
+                        "parentCode": "QCC0408",
+                        "list": [
+                            {
+                                "name": "饲料",
+                                "code": "QCC04080201",
+                                "parentCode": "QCC040802",
+                                "list": []
+                            },
+                            {
+                                "name": "动物保健与育种",
+                                "code": "QCC04080202",
+                                "parentCode": "QCC040802",
+                                "list": []
+                            },
+                            {
+                                "name": "畜牧产品",
+                                "code": "QCC04080203",
+                                "parentCode": "QCC040802",
+                                "list": []
+                            },
+                            {
+                                "name": "渔业产品",
+                                "code": "QCC04080204",
+                                "parentCode": "QCC040802",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "农牧渔产品销售",
+                        "code": "QCC040803",
+                        "parentCode": "QCC0408",
+                        "list": [
+                            {
+                                "name": "农牧渔产品贸易代理",
+                                "code": "QCC04080301",
+                                "parentCode": "QCC040803",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "家庭和个人用品",
+                "code": "QCC0409",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "家庭和个护用品",
+                        "code": "QCC040901",
+                        "parentCode": "QCC0409",
+                        "list": [
+                            {
+                                "name": "日化用品",
+                                "code": "QCC04090101",
+                                "parentCode": "QCC040901",
+                                "list": []
+                            },
+                            {
+                                "name": "生活用纸",
+                                "code": "QCC04090102",
+                                "parentCode": "QCC040901",
+                                "list": []
+                            },
+                            {
+                                "name": "宠物食品",
+                                "code": "QCC04090103",
+                                "parentCode": "QCC040901",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "家庭和个护用品销售",
+                        "code": "QCC040902",
+                        "parentCode": "QCC0409",
+                        "list": [
+                            {
+                                "name": "家庭和个护用品贸易代理",
+                                "code": "QCC04090201",
+                                "parentCode": "QCC040902",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "文娱传媒",
+                "code": "QCC0410",
+                "parentCode": "QCC04",
+                "list": [
+                    {
+                        "name": "文化娱乐",
+                        "code": "QCC041001",
+                        "parentCode": "QCC0410",
+                        "list": [
+                            {
+                                "name": "影视",
+                                "code": "QCC04100101",
+                                "parentCode": "QCC041001",
+                                "list": []
+                            },
+                            {
+                                "name": "动漫",
+                                "code": "QCC04100102",
+                                "parentCode": "QCC041001",
+                                "list": []
+                            },
+                            {
+                                "name": "游戏",
+                                "code": "QCC04100103",
+                                "parentCode": "QCC041001",
+                                "list": []
+                            },
+                            {
+                                "name": "演出",
+                                "code": "QCC04100105",
+                                "parentCode": "QCC041001",
+                                "list": []
+                            },
+                            {
+                                "name": "艺人经纪",
+                                "code": "QCC04100106",
+                                "parentCode": "QCC041001",
+                                "list": []
+                            },
+                            {
+                                "name": "艺术品经营",
+                                "code": "QCC04100107",
+                                "parentCode": "QCC041001",
+                                "list": []
+                            },
+                            {
+                                "name": "院线",
+                                "code": "QCC04100108",
+                                "parentCode": "QCC041001",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "电视广播",
+                        "code": "QCC041002",
+                        "parentCode": "QCC0410",
+                        "list": [
+                            {
+                                "name": "电视",
+                                "code": "QCC04100201",
+                                "parentCode": "QCC041002",
+                                "list": []
+                            },
+                            {
+                                "name": "广播",
+                                "code": "QCC04100202",
+                                "parentCode": "QCC041002",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "出版",
+                        "code": "QCC041003",
+                        "parentCode": "QCC0410",
+                        "list": [
+                            {
+                                "name": "报纸杂志",
+                                "code": "QCC04100301",
+                                "parentCode": "QCC041003",
+                                "list": []
+                            },
+                            {
+                                "name": "书籍",
+                                "code": "QCC04100302",
+                                "parentCode": "QCC041003",
+                                "list": []
+                            },
+                            {
+                                "name": "数字出版",
+                                "code": "QCC04100303",
+                                "parentCode": "QCC041003",
+                                "list": []
+                            },
+                            {
+                                "name": "音像制品出版",
+                                "code": "QCC04100304",
+                                "parentCode": "QCC041003",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "数字媒体",
+                        "code": "QCC041004",
+                        "parentCode": "QCC0410",
+                        "list": [
+                            {
+                                "name": "视频媒体",
+                                "code": "QCC04100401",
+                                "parentCode": "QCC041004",
+                                "list": []
+                            },
+                            {
+                                "name": "音频媒体",
+                                "code": "QCC04100402",
+                                "parentCode": "QCC041004",
+                                "list": []
+                            },
+                            {
+                                "name": "图文媒体",
+                                "code": "QCC04100403",
+                                "parentCode": "QCC041004",
+                                "list": []
+                            },
+                            {
+                                "name": "门户网站",
+                                "code": "QCC04100404",
+                                "parentCode": "QCC041004",
+                                "list": []
+                            },
+                            {
+                                "name": "互动媒体",
+                                "code": "QCC04100405",
+                                "parentCode": "QCC041004",
+                                "list": []
+                            },
+                            {
+                                "name": "其他数字媒体",
+                                "code": "QCC04100406",
+                                "parentCode": "QCC041004",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "广告营销",
+                        "code": "QCC041005",
+                        "parentCode": "QCC0410",
+                        "list": [
+                            {
+                                "name": "数字营销",
+                                "code": "QCC04100501",
+                                "parentCode": "QCC041005",
+                                "list": []
+                            },
+                            {
+                                "name": "营销代理",
+                                "code": "QCC04100502",
+                                "parentCode": "QCC041005",
+                                "list": []
+                            },
+                            {
+                                "name": "广告媒体",
+                                "code": "QCC04100503",
+                                "parentCode": "QCC041005",
+                                "list": []
+                            },
+                            {
+                                "name": "公关服务",
+                                "code": "QCC04100504",
+                                "parentCode": "QCC041005",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "医药生物",
+        "code": "QCC05",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "医疗器械",
+                "code": "QCC0501",
+                "parentCode": "QCC05",
+                "list": [
+                    {
+                        "name": "医疗设备",
+                        "code": "QCC050101",
+                        "parentCode": "QCC0501",
+                        "list": []
+                    },
+                    {
+                        "name": "医疗耗材",
+                        "code": "QCC050102",
+                        "parentCode": "QCC0501",
+                        "list": []
+                    },
+                    {
+                        "name": "体外诊断产品",
+                        "code": "QCC050103",
+                        "parentCode": "QCC0501",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "医疗商业与服务",
+                "code": "QCC0502",
+                "parentCode": "QCC05",
+                "list": [
+                    {
+                        "name": "医疗服务",
+                        "code": "QCC050201",
+                        "parentCode": "QCC0502",
+                        "list": [
+                            {
+                                "name": "医院",
+                                "code": "QCC05020101",
+                                "parentCode": "QCC050201",
+                                "list": []
+                            },
+                            {
+                                "name": "疗养院及康复中心",
+                                "code": "QCC05020102",
+                                "parentCode": "QCC050201",
+                                "list": []
+                            },
+                            {
+                                "name": "体外诊断服务",
+                                "code": "QCC05020103",
+                                "parentCode": "QCC050201",
+                                "list": []
+                            },
+                            {
+                                "name": "医药研发与生产外包服务",
+                                "code": "QCC05020104",
+                                "parentCode": "QCC050201",
+                                "list": []
+                            },
+                            {
+                                "name": "医美服务",
+                                "code": "QCC05020105",
+                                "parentCode": "QCC050201",
+                                "list": []
+                            },
+                            {
+                                "name": "其他医疗服务",
+                                "code": "QCC05020106",
+                                "parentCode": "QCC050201",
+                                "list": []
+                            },
+                            {
+                                "name": "基层医疗和专业公共卫生服务",
+                                "code": "QCC05020107",
+                                "parentCode": "QCC050201",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "医药流通与零售",
+                        "code": "QCC050202",
+                        "parentCode": "QCC0502",
+                        "list": [
+                            {
+                                "name": "医药流通",
+                                "code": "QCC05020201",
+                                "parentCode": "QCC050202",
+                                "list": []
+                            },
+                            {
+                                "name": "线下药店",
+                                "code": "QCC05020202",
+                                "parentCode": "QCC050202",
+                                "list": []
+                            },
+                            {
+                                "name": "互联网药店",
+                                "code": "QCC05020203",
+                                "parentCode": "QCC050202",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "医药制品",
+                "code": "QCC0503",
+                "parentCode": "QCC05",
+                "list": [
+                    {
+                        "name": "化学药",
+                        "code": "QCC050301",
+                        "parentCode": "QCC0503",
+                        "list": [
+                            {
+                                "name": "原料药",
+                                "code": "QCC05030101",
+                                "parentCode": "QCC050301",
+                                "list": []
+                            },
+                            {
+                                "name": "化学制剂",
+                                "code": "QCC05030102",
+                                "parentCode": "QCC050301",
+                                "list": []
+                            },
+                            {
+                                "name": "医药中间体",
+                                "code": "QCC05030103",
+                                "parentCode": "QCC050301",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "生物药品",
+                        "code": "QCC050302",
+                        "parentCode": "QCC0503",
+                        "list": [
+                            {
+                                "name": "血液制品",
+                                "code": "QCC05030201",
+                                "parentCode": "QCC050302",
+                                "list": []
+                            },
+                            {
+                                "name": "疫苗",
+                                "code": "QCC05030202",
+                                "parentCode": "QCC050302",
+                                "list": []
+                            },
+                            {
+                                "name": "其他生物药品",
+                                "code": "QCC05030203",
+                                "parentCode": "QCC050302",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "中药",
+                        "code": "QCC050303",
+                        "parentCode": "QCC0503",
+                        "list": [
+                            {
+                                "name": "中成药",
+                                "code": "QCC05030301",
+                                "parentCode": "QCC050303",
+                                "list": []
+                            },
+                            {
+                                "name": "中药饮片",
+                                "code": "QCC05030302",
+                                "parentCode": "QCC050303",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "药用辅料",
+                        "code": "QCC050304",
+                        "parentCode": "QCC0503",
+                        "list": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "金融",
+        "code": "QCC06",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "银行",
+                "code": "QCC0601",
+                "parentCode": "QCC06",
+                "list": [
+                    {
+                        "name": "国有大型银行",
+                        "code": "QCC060101",
+                        "parentCode": "QCC0601",
+                        "list": []
+                    },
+                    {
+                        "name": "股份制银行",
+                        "code": "QCC060102",
+                        "parentCode": "QCC0601",
+                        "list": []
+                    },
+                    {
+                        "name": "城商行",
+                        "code": "QCC060103",
+                        "parentCode": "QCC0601",
+                        "list": []
+                    },
+                    {
+                        "name": "农商行",
+                        "code": "QCC060104",
+                        "parentCode": "QCC0601",
+                        "list": []
+                    },
+                    {
+                        "name": "其他银行",
+                        "code": "QCC060105",
+                        "parentCode": "QCC0601",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "证劵",
+                "code": "QCC0602",
+                "parentCode": "QCC06",
+                "list": [
+                    {
+                        "name": "证券公司",
+                        "code": "QCC060201",
+                        "parentCode": "QCC0602",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "保险",
+                "code": "QCC0603",
+                "parentCode": "QCC06",
+                "list": [
+                    {
+                        "name": "保险公司",
+                        "code": "QCC060301",
+                        "parentCode": "QCC0603",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "多元金融",
+                "code": "QCC0604",
+                "parentCode": "QCC06",
+                "list": [
+                    {
+                        "name": "金融控股",
+                        "code": "QCC060401",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "消费金融",
+                        "code": "QCC060402",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "资产管理",
+                        "code": "QCC060403",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "期货",
+                        "code": "QCC060404",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "信托",
+                        "code": "QCC060405",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "租赁",
+                        "code": "QCC060406",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "私募基金",
+                        "code": "QCC060407",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "公募基金",
+                        "code": "QCC060408",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "征信",
+                        "code": "QCC060409",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "支付",
+                        "code": "QCC060410",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "典当拍卖",
+                        "code": "QCC060411",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "金融信息服务",
+                        "code": "QCC060412",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "信用合作社",
+                        "code": "QCC060413",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "农村资金互助社",
+                        "code": "QCC060414",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "财务公司",
+                        "code": "QCC060415",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "汽车金融",
+                        "code": "QCC060416",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "小额贷款",
+                        "code": "QCC060417",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "网络借贷",
+                        "code": "QCC060418",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    },
+                    {
+                        "name": "其他金融机构",
+                        "code": "QCC060419",
+                        "parentCode": "QCC0604",
+                        "list": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "信息技术",
+        "code": "QCC07",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "计算机运用",
+                "code": "QCC0701",
+                "parentCode": "QCC07",
+                "list": [
+                    {
+                        "name": "软件开发",
+                        "code": "QCC070101",
+                        "parentCode": "QCC0701",
+                        "list": [
+                            {
+                                "name": "通用软件",
+                                "code": "QCC07010101",
+                                "parentCode": "QCC070101",
+                                "list": []
+                            },
+                            {
+                                "name": "行业应用软件",
+                                "code": "QCC07010102",
+                                "parentCode": "QCC070101",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "信息技术服务",
+                        "code": "QCC070102",
+                        "parentCode": "QCC0701",
+                        "list": [
+                            {
+                                "name": "系统集成服务",
+                                "code": "QCC07010201",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "人工智能",
+                                "code": "QCC07010203",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "大数据",
+                                "code": "QCC07010204",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "VR/AR",
+                                "code": "QCC07010205",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "物联网",
+                                "code": "QCC07010206",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "区块链",
+                                "code": "QCC07010207",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "金融科技",
+                                "code": "QCC07010208",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "智能制造",
+                                "code": "QCC07010209",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "信息安全",
+                                "code": "QCC07010211",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "自动驾驶",
+                                "code": "QCC07010212",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "地理遥感信息服务",
+                                "code": "QCC07010213",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "互联网搜索服务",
+                                "code": "QCC07010214",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "互联网平台服务",
+                                "code": "QCC07010215",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            },
+                            {
+                                "name": "其他IT与互联网服务",
+                                "code": "QCC07010216",
+                                "parentCode": "QCC070102",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "电子设备及计算机硬件",
+                "code": "QCC0702",
+                "parentCode": "QCC07",
+                "list": [
+                    {
+                        "name": "电子终端及组件",
+                        "code": "QCC070201",
+                        "parentCode": "QCC0702",
+                        "list": [
+                            {
+                                "name": "计算机与外围设备",
+                                "code": "QCC07020101",
+                                "parentCode": "QCC070201",
+                                "list": []
+                            },
+                            {
+                                "name": "消费电子终端",
+                                "code": "QCC07020102",
+                                "parentCode": "QCC070201",
+                                "list": []
+                            },
+                            {
+                                "name": "消费电子零部件及组件",
+                                "code": "QCC07020103",
+                                "parentCode": "QCC070201",
+                                "list": []
+                            },
+                            {
+                                "name": "安防设备及其他",
+                                "code": "QCC07020104",
+                                "parentCode": "QCC070201",
+                                "list": []
+                            },
+                            {
+                                "name": "智能消费设备",
+                                "code": "QCC07020105",
+                                "parentCode": "QCC070201",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "电子元件",
+                        "code": "QCC070202",
+                        "parentCode": "QCC0702",
+                        "list": [
+                            {
+                                "name": "印制电路板",
+                                "code": "QCC07020201",
+                                "parentCode": "QCC070202",
+                                "list": []
+                            },
+                            {
+                                "name": "被动元件",
+                                "code": "QCC07020202",
+                                "parentCode": "QCC070202",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "光学光电子",
+                        "code": "QCC070203",
+                        "parentCode": "QCC0702",
+                        "list": [
+                            {
+                                "name": "面板",
+                                "code": "QCC07020301",
+                                "parentCode": "QCC070203",
+                                "list": []
+                            },
+                            {
+                                "name": "LED",
+                                "code": "QCC07020302",
+                                "parentCode": "QCC070203",
+                                "list": []
+                            },
+                            {
+                                "name": "光学元件",
+                                "code": "QCC07020303",
+                                "parentCode": "QCC070203",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "电子化学品",
+                        "code": "QCC070204",
+                        "parentCode": "QCC0702",
+                        "list": []
+                    },
+                    {
+                        "name": "其他电子",
+                        "code": "QCC070205",
+                        "parentCode": "QCC0702",
+                        "list": []
+                    },
+                    {
+                        "name": "电子设备及计算机软硬件销售",
+                        "code": "QCC070206",
+                        "parentCode": "QCC0702",
+                        "list": [
+                            {
+                                "name": "电子设备及计算机软硬件贸易代理",
+                                "code": "QCC07020601",
+                                "parentCode": "QCC070206",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "半导体",
+                "code": "QCC0703",
+                "parentCode": "QCC07",
+                "list": [
+                    {
+                        "name": "集成电路",
+                        "code": "QCC070301",
+                        "parentCode": "QCC0703",
+                        "list": [
+                            {
+                                "name": "集成电路设计",
+                                "code": "QCC07030101",
+                                "parentCode": "QCC070301",
+                                "list": []
+                            },
+                            {
+                                "name": "集成电路制造",
+                                "code": "QCC07030102",
+                                "parentCode": "QCC070301",
+                                "list": []
+                            },
+                            {
+                                "name": "集成电路封测",
+                                "code": "QCC07030103",
+                                "parentCode": "QCC070301",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "半导体材料与设备",
+                        "code": "QCC070302",
+                        "parentCode": "QCC0703",
+                        "list": [
+                            {
+                                "name": "半导体设备",
+                                "code": "QCC07030201",
+                                "parentCode": "QCC070302",
+                                "list": []
+                            },
+                            {
+                                "name": "半导体材料",
+                                "code": "QCC07030202",
+                                "parentCode": "QCC070302",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "分立器件",
+                        "code": "QCC070303",
+                        "parentCode": "QCC0703",
+                        "list": []
+                    },
+                    {
+                        "name": "传感器",
+                        "code": "QCC070304",
+                        "parentCode": "QCC0703",
+                        "list": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "通讯服务",
+        "code": "QCC08",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "电信服务",
+                "code": "QCC0801",
+                "parentCode": "QCC08",
+                "list": [
+                    {
+                        "name": "电信运营服务",
+                        "code": "QCC080101",
+                        "parentCode": "QCC0801",
+                        "list": []
+                    },
+                    {
+                        "name": "电信增值服务",
+                        "code": "QCC080102",
+                        "parentCode": "QCC0801",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "通信设备及技术服务",
+                "code": "QCC0802",
+                "parentCode": "QCC08",
+                "list": [
+                    {
+                        "name": "通信设备",
+                        "code": "QCC080201",
+                        "parentCode": "QCC0802",
+                        "list": [
+                            {
+                                "name": "通信网络设备及器件",
+                                "code": "QCC08020101",
+                                "parentCode": "QCC080201",
+                                "list": []
+                            },
+                            {
+                                "name": "通信线缆及配套",
+                                "code": "QCC08020102",
+                                "parentCode": "QCC080201",
+                                "list": []
+                            },
+                            {
+                                "name": "通信终端及配件",
+                                "code": "QCC08020103",
+                                "parentCode": "QCC080201",
+                                "list": []
+                            },
+                            {
+                                "name": "其它通信设备",
+                                "code": "QCC08020104",
+                                "parentCode": "QCC080201",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "数据中心",
+                        "code": "QCC080202",
+                        "parentCode": "QCC0802",
+                        "list": []
+                    },
+                    {
+                        "name": "通信技术服务",
+                        "code": "QCC080203",
+                        "parentCode": "QCC0802",
+                        "list": [
+                            {
+                                "name": "通信工程及技术服务",
+                                "code": "QCC08020301",
+                                "parentCode": "QCC080203",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "通讯设备销售",
+                        "code": "QCC080204",
+                        "parentCode": "QCC0802",
+                        "list": [
+                            {
+                                "name": "通讯设备贸易代理",
+                                "code": "QCC08020401",
+                                "parentCode": "QCC080204",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "广播电视传输服务及设备",
+                "code": "QCC0803",
+                "parentCode": "QCC08",
+                "list": [
+                    {
+                        "name": "广播电视和卫星传输服务",
+                        "code": "QCC080301",
+                        "parentCode": "QCC0803",
+                        "list": [
+                            {
+                                "name": "广播电视传输服务",
+                                "code": "QCC08030101",
+                                "parentCode": "QCC080301",
+                                "list": []
+                            },
+                            {
+                                "name": "卫星传输服务",
+                                "code": "QCC08030102",
+                                "parentCode": "QCC080301",
+                                "list": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "广播电视设备及贸易代理",
+                        "code": "QCC080302",
+                        "parentCode": "QCC0803",
+                        "list": [
+                            {
+                                "name": "广播电视设备",
+                                "code": "QCC08030201",
+                                "parentCode": "QCC080302",
+                                "list": []
+                            },
+                            {
+                                "name": "广播影视设备贸易代理",
+                                "code": "QCC08030202",
+                                "parentCode": "QCC080302",
+                                "list": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "公用事业",
+        "code": "QCC09",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "电力电网",
+                "code": "QCC0901",
+                "parentCode": "QCC09",
+                "list": [
+                    {
+                        "name": "火力发电",
+                        "code": "QCC090101",
+                        "parentCode": "QCC0901",
+                        "list": []
+                    },
+                    {
+                        "name": "水力发电",
+                        "code": "QCC090102",
+                        "parentCode": "QCC0901",
+                        "list": []
+                    },
+                    {
+                        "name": "风力发电",
+                        "code": "QCC090103",
+                        "parentCode": "QCC0901",
+                        "list": []
+                    },
+                    {
+                        "name": "核力发电",
+                        "code": "QCC090104",
+                        "parentCode": "QCC0901",
+                        "list": []
+                    },
+                    {
+                        "name": "太阳能发电",
+                        "code": "QCC090105",
+                        "parentCode": "QCC0901",
+                        "list": []
+                    },
+                    {
+                        "name": "其他能源发电",
+                        "code": "QCC090106",
+                        "parentCode": "QCC0901",
+                        "list": []
+                    },
+                    {
+                        "name": "电网",
+                        "code": "QCC090107",
+                        "parentCode": "QCC0901",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "燃气",
+                "code": "QCC0902",
+                "parentCode": "QCC09",
+                "list": []
+            },
+            {
+                "name": "水务",
+                "code": "QCC0903",
+                "parentCode": "QCC09",
+                "list": []
+            },
+            {
+                "name": "市政环卫",
+                "code": "QCC0904",
+                "parentCode": "QCC09",
+                "list": []
+            },
+            {
+                "name": "供热及其他",
+                "code": "QCC0905",
+                "parentCode": "QCC09",
+                "list": []
+            }
+        ]
+    },
+    {
+        "name": "房地产",
+        "code": "QCC10",
+        "parentCode": "",
+        "list": [
+            {
+                "name": "房地产开发",
+                "code": "QCC1001",
+                "parentCode": "QCC10",
+                "list": [
+                    {
+                        "name": "住宅开发",
+                        "code": "QCC100101",
+                        "parentCode": "QCC1001",
+                        "list": []
+                    },
+                    {
+                        "name": "商业地产",
+                        "code": "QCC100102",
+                        "parentCode": "QCC1001",
+                        "list": []
+                    },
+                    {
+                        "name": "产业地产",
+                        "code": "QCC100103",
+                        "parentCode": "QCC1001",
+                        "list": []
+                    },
+                    {
+                        "name": "园区",
+                        "code": "QCC100104",
+                        "parentCode": "QCC1001",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "房地产服务",
+                "code": "QCC1002",
+                "parentCode": "QCC10",
+                "list": [
+                    {
+                        "name": "物业管理",
+                        "code": "QCC100201",
+                        "parentCode": "QCC1002",
+                        "list": []
+                    },
+                    {
+                        "name": "房产和租赁经纪",
+                        "code": "QCC100202",
+                        "parentCode": "QCC1002",
+                        "list": []
+                    },
+                    {
+                        "name": "房地产综合服务",
+                        "code": "QCC100203",
+                        "parentCode": "QCC1002",
+                        "list": []
+                    }
+                ]
+            },
+            {
+                "name": "房地产投资信托",
+                "code": "QCC1003",
+                "parentCode": "QCC10",
+                "list": []
+            }
+        ]
+    }
+]
